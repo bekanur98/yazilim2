@@ -1,0 +1,12 @@
+## Ignore stack directories
+.env
+
+## vscode folder
+.vscode
+
+## idea folder
+.idea
+.DS_Store
+
+package-lock.json
+*.project
