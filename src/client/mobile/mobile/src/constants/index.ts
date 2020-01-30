@@ -1,0 +1,15 @@
+// constants
+
+export * from './common'
+
+export const DUMMY_COUNTER_CHANGE = 'DUMMY_COUNTER_CHANGE'
+
+export const LANG_CHANGE = 'LANG_CHANGE'
+
+export const BOTTOM_NAV_BADGE_CHANGE = 'BOTTOM_NAV_BADGE_CHANGE'
+
+export const TERMS_CONFIRM_CHECK = 'TERMS_CONFIRM_CHECK'
+
+export const USER_TEL_NUM = 'USER_TEL_NUM'
+
+export const PAGE_COUNTER_CHANGE = 'PAGE_COUNTER_CHANGE'
