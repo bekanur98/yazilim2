@@ -1,0 +1,16 @@
+## Ignore stack directories
+.env
+
+## vscode folder
+.vscode
+
+## idea folder
+.idea
+.DS_Store
+
+package-lock.json
+*.project
+src/client/mobile/android/.settings/org.eclipse.buildship.core.prefs
+*.classpath
+*.prefs
+src/server/global.json
