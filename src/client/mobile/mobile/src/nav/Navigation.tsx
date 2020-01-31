@@ -1,19 +1,55 @@
 // Navigation
 
 import React from 'react';
+import { Icon, Button, Text } from "native-base";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from 'react-navigation-stack';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
+import { createDrawerNavigator } from 'react-navigation-drawer'
+import { createSwitchNavigator } from "react-navigation";
 import { trans } from '../helper';
 import DummyPage from "../pages/DummyPage";
+import HomePage from '../pages/HomePage';
+import { defaultOpts } from './common'
+
+const HomeStack = createStackNavigator({
+    Home: {
+      screen:HomePage,
+    }
+  },
+  {
+    initialRouteName: 'Home',
+    defaultNavigationOptions: ({navigation}) => {
+      return {
+        headerLeft:()=>(
+            <Icon
+              type='Entypo'
+              name="add-user"
+              onPress={() => navigation.openDrawer()}
+              fontSize={30}
+            />
+        ) 
+      }
+    }
+  }
+)
+
+const drawerNav = createDrawerNavigator({
+    HomePage: HomeStack,
+    DummyPage: DummyPage
+  },
+  {
+    initialRouteName: 'HomePage',
+    
+
+  }
+)
 
 
+const appSwitchNavigator = createSwitchNavigator({
+  Dashboard: {screen: drawerNav},
+  Dummy: {screen: DummyPage}
+})
 
-const dummyNav = createStackNavigator({
-  DummyPage: DummyPage,
-});
-
-
-export default createAppContainer(dummyNav);
+export default createAppContainer(appSwitchNavigator);
 
 
