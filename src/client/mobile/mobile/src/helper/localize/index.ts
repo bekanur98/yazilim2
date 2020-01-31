@@ -16,10 +16,11 @@ const translationGetters: any = {
   // lazy requires (metro bundler does not support symlinks)
   en: (): any => require("./lan-en.json"),
   ru: (): any => require("./lan-ru.json"),
-  kg: (): any => require("./lan-kg.json")
+  kg: (): any => require("./lan-kg.json"),
+  tr: (): any => require("./lan-tr.json")
 };
 
-export const getLocale = ():('en' | 'ru' | 'kg') => {
+export const getLocale = ():("en" | "ru" | "kg" | "tr") => {
   return i18n.locale
 }
 

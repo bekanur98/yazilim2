@@ -76,19 +76,8 @@ class DummyPage extends React.Component<Props, State> {
             <Button small onPress={() => this.changeLang('kg')}><Text>kg</Text></Button><Text> </Text>
             <Button small onPress={() => this.changeLang('en')}><Text>en</Text></Button><Text> </Text>
             <Button small onPress={() => this.changeLang('ru')}><Text>ru</Text></Button><Text> </Text>
+            <Button small onPress={() => this.changeLang('tr')}><Text>tr</Text></Button><Text> </Text>
           </View>
-        </View>
-
-        <View style={{paddingTop: 40, flexDirection: 'row'}}>
-          <Text style={styles.greeting}> Home badge: { this.props.badgeHome } </Text><Text> </Text>
-          <Button small onPress={() => store.dispatch(changeBottomNavBadgeAction('Home', this.props.badgeHome+1))}><Text>+</Text></Button><Text> </Text>
-          <Button small onPress={() => store.dispatch(changeBottomNavBadgeAction('Home', this.props.badgeHome-1))}><Text>-</Text></Button><Text> </Text>
-        </View>
-
-        <View style={{paddingTop: 20, flexDirection: 'row'}}>
-          <Text style={styles.greeting}> Personal badge: { this.props.badgePersonal } </Text><Text> </Text>
-          <Button small onPress={() => store.dispatch(changeBottomNavBadgeAction('Personal', this.props.badgePersonal+1))}><Text>+</Text></Button><Text> </Text>
-          <Button small onPress={() => store.dispatch(changeBottomNavBadgeAction('Personal', this.props.badgePersonal-1))}><Text>-</Text></Button><Text> </Text>
         </View>
       </View>
     );
