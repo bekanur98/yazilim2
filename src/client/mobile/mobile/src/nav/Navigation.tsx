@@ -33,9 +33,33 @@ const HomeStack = createStackNavigator({
   }
 )
 
+const DummyStack = createStackNavigator({
+  
+  Dummy: {
+    screen: DummyPage
+  }
+
+},
+{
+  initialRouteName: 'Home',
+  defaultNavigationOptions: ({navigation}) => {
+    return {
+      headerLeft:()=>(
+          <Icon
+            type='Entypo'
+            name="add-user"
+            onPress={() => navigation.openDrawer()}
+            fontSize={30}
+          />
+      ) 
+    }
+  }
+}
+)
+
 const drawerNav = createDrawerNavigator({
     HomePage: HomeStack,
-    DummyPage: DummyPage
+    DummyPage: DummyStack
   },
   {
     initialRouteName: 'HomePage',
