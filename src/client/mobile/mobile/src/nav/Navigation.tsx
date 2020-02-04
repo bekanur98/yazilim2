@@ -22,10 +22,11 @@ const HomeStack = createStackNavigator({
       return {
         headerLeft:()=>(
             <Icon
-              type='Entypo'
-              name="add-user"
+              type='Feather'
+              name="menu"
               onPress={() => navigation.openDrawer()}
-              fontSize={30}
+              fontSize={40}
+              style={{marginLeft:20}}
             />
         ) 
       }
@@ -41,15 +42,16 @@ const DummyStack = createStackNavigator({
 
 },
 {
-  initialRouteName: 'Home',
+  initialRouteName: 'Dummy',
   defaultNavigationOptions: ({navigation}) => {
     return {
       headerLeft:()=>(
           <Icon
-            type='Entypo'
-            name="add-user"
+            type='Feather'
+            name="menu"
             onPress={() => navigation.openDrawer()}
-            fontSize={30}
+            fontSize={40}
+            style={{marginLeft:20}}
           />
       ) 
     }
@@ -63,8 +65,6 @@ const drawerNav = createDrawerNavigator({
   },
   {
     initialRouteName: 'HomePage',
-    
-
   }
 )
 

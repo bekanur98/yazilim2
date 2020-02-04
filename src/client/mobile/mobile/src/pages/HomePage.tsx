@@ -33,57 +33,10 @@ class HomePage extends React.Component<Props, State> {
     this.state = {};
   }
 
-  onIncrement = () => {
-    this.props.changeCountAction(this.props.count+1)
-  }
-
-  onDecrement = () => {
-    this.props.changeCountAction(this.props.count-1)
-  }
-
-  changeLang = (lan: string) => {
-    setupLocalization(lan)
-  }
-
   render() {
     return (
       <View style={styles.root}>
         <Text style={{fontSize:30}}>Home page</Text>
-        <View style={styles.buttons}>
-          <View style={styles.button}>
-            <Button small
-              onPress={this.onDecrement}
-              danger
-            >
-              <Text>-</Text>
-            </Button>
-          </View>
-
-          <View style={styles.button}>
-            <Button small
-              onPress={this.onIncrement}
-              success
-            >
-              <Text>+</Text>
-            </Button>
-          </View>
-        </View>
-        
-        <View style={{paddingTop: 20}}>
-          <Text style={styles.greeting}>
-            Locale: { getLocale() }
-          </Text>
-          <Text style={styles.greeting}>
-            {trans('hello', {name: 'Sam'})}
-          </Text>
-          <View style={{flexDirection: 'row', paddingTop: 10}}>
-            <Button small onPress={() => this.changeLang('kg')}><Text>kg</Text></Button><Text> </Text>
-            <Button small onPress={() => this.changeLang('en')}><Text>en</Text></Button><Text> </Text>
-            <Button small onPress={() => this.changeLang('ru')}><Text>ru</Text></Button><Text> </Text>
-            <Button small onPress={() => this.changeLang('tr')}><Text>tr</Text></Button><Text> </Text>
-            <Button onPress={()=>this.props.navigation.openDrawer()}><Text>Hry</Text></Button>
-          </View>
-        </View>
       </View>
     );
   }
