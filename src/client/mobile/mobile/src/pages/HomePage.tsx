@@ -1,21 +1,23 @@
+/* eslint-disable react-native/no-inline-styles */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 // pages/DummyPage
 
 import React from 'react';
-import { connect } from 'react-redux';
-import { StyleSheet } from 'react-native';
-import { View, Button, Text } from 'native-base'
-import { PageProps } from './../types';
+import {connect} from 'react-redux';
+import {StyleSheet} from 'react-native';
+import {View, Button, Text, Content, Container, Header, Item, Icon, Input} from 'native-base';
+import {PageProps} from './../types';
 import * as actions from './../actions/dummyAction';
-import { getLocale, trans, setupLocalization } from './../helper';
-import { store } from './../store';
-import { changeBottomNavBadgeAction } from './../actions/settingsAction';
+import {getLocale, trans, setupLocalization} from './../helper';
+import {store} from './../store';
+import {changeBottomNavBadgeAction} from './../actions/settingsAction';
 import Navigation from 'src/nav/Navigation';
 
 export interface Props extends PageProps {
-  count: number,
-  changeCountAction: (count: number) => void,
-  badgeHome: number,
-  badgePersonal: number,
+  count: number;
+  changeCountAction: (count: number) => void;
+  badgeHome: number;
+  badgePersonal: number;
 }
 
 interface State {}
@@ -23,21 +25,30 @@ interface State {}
 class HomePage extends React.Component<Props, State> {
   static navigationOptions = () => {
     return {
-      title: 'Hello'
-    }
-  }  
+      title: 'Home',
+    };
+  };
 
   constructor(props: Props) {
     super(props);
-    
+
     this.state = {};
   }
 
   render() {
     return (
-      <View style={styles.root}>
-        <Text style={{fontSize:30}}>Home page</Text>
-      </View>
+        <Container style={{}}>
+          <Header searchBar rounded >
+            <Item>
+              <Icon name="ios-search" />
+              <Input placeholder="Search"  />
+            </Item>
+          </Header>
+          <Content style={styles.header}>
+
+            <Text style={{fontSize: 30}}>Home page</Text>
+          </Content>
+        </Container>
     );
   }
 }
@@ -55,6 +66,9 @@ const styles = StyleSheet.create({
     alignItems: 'stretch',
     alignSelf: 'center',
   },
+  header:{
+    margin: 10,
+  },
   button: {
     flex: 1,
     padding: 10,
@@ -70,7 +84,7 @@ const mapStateToProps = (state: any): any => ({
   badgeHome: state.Settings.badgeHome,
   badgePersonal: state.Settings.badgePersonal,
 });
-export default connect( mapStateToProps, actions )(HomePage);
-
-
-
+export default connect(
+  mapStateToProps,
+  actions,
+)(HomePage);

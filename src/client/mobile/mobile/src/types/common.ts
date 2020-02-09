@@ -10,6 +10,6 @@ export interface PageProps extends NavProps {
 
 }
 
-export type BottomNavType = 'Home' | 'News' | 'Personal' | 'Connect';
+export type BottomNavType = 'Home' | 'Favorite' | 'Post' | 'Chat' | 'Profile';
 
 export type TopNavType = 'News' | 'EmergencyNews';

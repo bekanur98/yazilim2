@@ -1,4 +1,4 @@
-// pages/DummyPage
+// pages/FavoritePage
 
 import React from 'react';
 import { connect } from 'react-redux';
@@ -19,7 +19,13 @@ export interface Props extends PageProps {
 
 interface State {}
 
-class DummyPage extends React.Component<Props, State> {
+class FavoritePage extends React.Component<Props, State> {
+  static navigationOptions = () => {
+    return{
+      title: 'Favorite'
+    }
+  }
+
   constructor(props: Props) {
     super(props);
     
@@ -112,7 +118,7 @@ const mapStateToProps = (state: any): any => ({
   badgeHome: state.Settings.badgeHome,
   badgePersonal: state.Settings.badgePersonal,
 });
-export default connect( mapStateToProps, actions )(DummyPage);
+export default connect( mapStateToProps, actions )(FavoritePage);
 
 
 
