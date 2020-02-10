@@ -1,4 +1,24 @@
 {
+    "alrik11es/cowsayphp": {
+        "version": "1.2.0"
+    },
+    "api-platform/api-pack": {
+        "version": "v1.2.1"
+    },
+    "api-platform/core": {
+        "version": "2.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "2.5",
+            "ref": "a93061567140e386f107be75340ac2aee3f86cbf"
+        },
+        "files": [
+            "config/packages/api_platform.yaml",
+            "config/routes/api_platform.yaml",
+            "src/Entity/.gitignore"
+        ]
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -90,11 +110,86 @@
     "egulias/email-validator": {
         "version": "2.1.15"
     },
+    "fig/http-message-util": {
+        "version": "1.1.4"
+    },
+    "fig/link-util": {
+        "version": "1.1.0"
+    },
+    "firebase/php-jwt": {
+        "version": "v5.0.0"
+    },
+    "giggsey/libphonenumber-for-php": {
+        "version": "8.11.3"
+    },
+    "giggsey/locale": {
+        "version": "1.8"
+    },
+    "google/auth": {
+        "version": "v1.6.1"
+    },
+    "google/cloud-core": {
+        "version": "v1.34.0"
+    },
+    "google/cloud-storage": {
+        "version": "v1.17.0"
+    },
+    "google/crc32": {
+        "version": "v0.1.0"
+    },
+    "guzzlehttp/guzzle": {
+        "version": "6.5.2"
+    },
+    "guzzlehttp/promises": {
+        "version": "v1.3.1"
+    },
+    "guzzlehttp/psr7": {
+        "version": "1.6.1"
+    },
+    "heroku/heroku-buildpack-php": {
+        "version": "v169"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
+    "kreait/clock": {
+        "version": "1.0.1"
+    },
+    "kreait/firebase-bundle": {
+        "version": "1.9.0"
+    },
+    "kreait/firebase-php": {
+        "version": "4.39.1"
+    },
+    "kreait/firebase-tokens": {
+        "version": "1.10.0"
+    },
+    "kreait/gcp-metadata": {
+        "version": "1.0.1"
+    },
+    "lcobucci/jwt": {
+        "version": "3.3.1"
+    },
+    "league/flysystem": {
+        "version": "1.0.64"
+    },
     "monolog/monolog": {
         "version": "2.0.2"
+    },
+    "mtdowling/jmespath.php": {
+        "version": "2.5.0"
+    },
+    "nelmio/cors-bundle": {
+        "version": "1.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.5",
+            "ref": "6388de23860284db9acce0a7a5d9d13153bcb571"
+        },
+        "files": [
+            "config/packages/nelmio_cors.yaml"
+        ]
     },
     "nikic/php-parser": {
         "version": "v4.3.0"
@@ -126,11 +221,26 @@
     "psr/event-dispatcher": {
         "version": "1.0.0"
     },
+    "psr/http-message": {
+        "version": "1.0.1"
+    },
     "psr/link": {
         "version": "1.0.0"
     },
     "psr/log": {
         "version": "1.1.2"
+    },
+    "psr/simple-cache": {
+        "version": "1.0.1"
+    },
+    "ralouphie/getallheaders": {
+        "version": "3.0.3"
+    },
+    "riverline/multipart-parser": {
+        "version": "2.0.8"
+    },
+    "rize/uri-template": {
+        "version": "0.3.2"
     },
     "sensio/framework-extra-bundle": {
         "version": "5.2",
@@ -143,6 +253,9 @@
         "files": [
             "config/packages/sensio_framework_extra.yaml"
         ]
+    },
+    "superbalist/flysystem-google-storage": {
+        "version": "7.2.2"
     },
     "symfony/asset": {
         "version": "v5.0.4"
@@ -517,6 +630,9 @@
     },
     "webmozart/assert": {
         "version": "1.6.0"
+    },
+    "willdurand/negotiation": {
+        "version": "v2.3.1"
     },
     "zendframework/zend-code": {
         "version": "3.4.1"
