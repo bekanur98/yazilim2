@@ -6,10 +6,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {StyleSheet} from 'react-native';
 import {View, Button, Text} from 'native-base';
-import {PageProps} from '../types';
-import * as actions from './../actions/dummyAction';
-import {getLocale, trans, setupLocalization} from './../helper';
-import {store} from './../store';
+import {PageProps} from '../../types';
+import * as actions from '../../actions/dummyAction';
+import {getLocale, trans, setupLocalization} from '../../helper';
+import {store} from '../../store';
 
 export interface Props extends PageProps {
     count: number;
@@ -20,10 +20,10 @@ export interface Props extends PageProps {
 
 interface State {}
 
-class ProfilePage extends React.Component<Props, State> {
+class PostPage extends React.Component<Props, State> {
     static navigationOptions = () => {
         return {
-            title: 'Profile',
+            title: 'Post',
         };
     };
 
@@ -77,4 +77,4 @@ const mapStateToProps = (state: any): any => ({
 export default connect(
     mapStateToProps,
     actions,
-)(ProfilePage);
+)(PostPage);

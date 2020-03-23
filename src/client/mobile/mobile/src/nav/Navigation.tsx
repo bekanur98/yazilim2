@@ -1,20 +1,10 @@
 // Navigation
 
 import React from 'react';
-import {Icon, Button, Text, Root} from "native-base";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from 'react-navigation-stack';
-import { createDrawerNavigator } from 'react-navigation-drawer'
 import { createBottomTabNavigator } from "react-navigation-tabs";
-import { createSwitchNavigator } from "react-navigation";
 import { trans } from '../helper';
-import HomePage from '../pages/HomePage';
-import { defaultOpts } from './common'
-import HomeDrawerStructure from "../pages/Home/HomeDrawerStructure";
-import ChatPage from "../pages/ChatPage";
-import PostPage from "../pages/PostPage";
-import ProfilePage from "../pages/ProfilePage";
-import FavoritePage from "../pages/FavoritePage";
 import NavBottomTabIcon from "./NavBottomTabIcon";
 import NavigationHome from "./NavigationHome";
 import NavigationFavorite from "./NavigationFavorite";

@@ -3,7 +3,7 @@
 import { createStackNavigator } from 'react-navigation-stack';
 import { defaultOpts } from './common';
 import { trans } from '../helper';
-import FavoritePage from "../pages/FavoritePage";
+import FavoritePage from "../pages/Favorite/FavoritePage";
 
 
 export default createStackNavigator(

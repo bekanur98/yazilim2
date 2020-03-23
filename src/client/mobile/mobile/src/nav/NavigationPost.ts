@@ -3,8 +3,8 @@
 import { createStackNavigator } from 'react-navigation-stack';
 import { defaultOpts } from './common';
 import { trans } from '../helper';
-import HomePage from "../pages/HomePage";
-import PostPage from "../pages/PostPage";
+import HomePage from "../pages/Home/HomePage";
+import PostPage from "../pages/Post/PostPage";
 
 
 export default createStackNavigator(

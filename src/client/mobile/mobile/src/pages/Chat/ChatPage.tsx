@@ -6,10 +6,10 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {StyleSheet} from 'react-native';
 import {View, Button, Text} from 'native-base';
-import {PageProps} from '../types';
-import * as actions from './../actions/dummyAction';
-import {getLocale, trans, setupLocalization} from './../helper';
-import {store} from './../store';
+import {PageProps} from '../../types';
+import * as actions from '../../actions/dummyAction';
+import {getLocale, trans, setupLocalization} from '../../helper';
+import {store} from '../../store';
 import Chat from "react-navigation-tabs/lib/typescript/example/src/Shared/Chat";
 
 export interface Props extends PageProps {

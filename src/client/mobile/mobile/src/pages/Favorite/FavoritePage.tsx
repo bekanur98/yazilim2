@@ -4,11 +4,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet } from 'react-native';
 import { View, Button, Text } from 'native-base'
-import { PageProps } from './../types';
-import * as actions from './../actions/dummyAction';
-import { getLocale, trans, setupLocalization } from './../helper';
-import { store } from './../store';
-import { changeBottomNavBadgeAction } from './../actions/settingsAction';
+import { PageProps } from '../../types';
+import * as actions from '../../actions/dummyAction';
+import { getLocale, trans, setupLocalization } from '../../helper';
+import { store } from '../../store';
+import { changeBottomNavBadgeAction } from '../../actions/settingsAction';
 
 export interface Props extends PageProps {
   count: number,
