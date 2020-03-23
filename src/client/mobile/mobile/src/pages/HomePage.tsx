@@ -6,11 +6,9 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {StyleSheet} from 'react-native';
 import {View, Button, Text, Content, Container, Header, Item, Icon, Input} from 'native-base';
-import {PageProps} from './../types';
+import {PageProps} from '../types';
 import * as actions from './../actions/dummyAction';
 import {getLocale, trans, setupLocalization} from './../helper';
-import {store} from './../store';
-import {changeBottomNavBadgeAction} from './../actions/settingsAction';
 import Navigation from 'src/nav/Navigation';
 
 export interface Props extends PageProps {

@@ -24,11 +24,11 @@ class FavoritePage extends React.Component<Props, State> {
     return{
       title: 'Favorite'
     }
-  }
+  };
 
   constructor(props: Props) {
     super(props);
-    
+
     this.state = {};
   }
 
@@ -70,7 +70,7 @@ class FavoritePage extends React.Component<Props, State> {
             </Button>
           </View>
         </View>
-        
+
         <View style={{paddingTop: 20}}>
           <Text style={styles.greeting}>
             Locale: { getLocale() }

@@ -1,5 +1,10 @@
 
 {
   "app_name": "Манас Маркет",
-  "hello": "Здравствуйте, %{name}"
+  "hello": "Здравствуйте, %{name}",
+  "title_home": "Главный",
+  "title_favorite": "Избранные",
+  "title_post": "Добавить",
+  "title_chat": "Чат",
+  "title_profile": "Профиль"
 }

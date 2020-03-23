@@ -9,7 +9,7 @@ interface Props {
 }
 
 class HomeDrawerStructure extends React.Component<Props,State> {
-    //Structure for the navigatin Drawer
+  //Structure for the navigatin Drawer
     toggleDrawer = () => {
         //Props to open/close the drawer
         // this.props.navigationProps.toggleDrawer();

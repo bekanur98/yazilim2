@@ -17,14 +17,18 @@ import ProfilePage from "../pages/ProfilePage";
 import FavoritePage from "../pages/FavoritePage";
 import NavBottomTabIcon from "./NavBottomTabIcon";
 import NavigationHome from "./NavigationHome";
+import NavigationFavorite from "./NavigationFavorite";
+import NavigationPost from "./NavigationPost";
+import NavigationChat from "./NavigationChat";
+import NavigationProfile from "./NavigationProfile";
 
 const RootStack = createBottomTabNavigator(
     {
       Home: NavigationHome,
-      Favorite: FavoritePage,
-      Post: PostPage,
-      Chat: ChatPage,
-      Profile: ProfilePage
+      Favorite: NavigationFavorite,
+      Post: NavigationPost,
+      Chat: NavigationChat,
+      Profile: NavigationProfile
     },
     {
         defaultNavigationOptions: ({navigation}) => ({
@@ -39,7 +43,7 @@ const RootStack = createBottomTabNavigator(
                 />);
             },
             //do localize of title pages
-            title: ('title of navigation'),
+            title: trans('title_'+navigation.state.routeName.toLocaleLowerCase()),
         }),
         tabBarOptions: {
             activeTintColor: 'red',
