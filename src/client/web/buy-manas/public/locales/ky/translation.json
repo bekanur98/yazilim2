@@ -1,3 +1,6 @@
 {
-    "hello":"Салам"
+    "hello": "Салам",
+    "auth": "Кирүү / Катталуу",
+    "searchPlaceHolder": "Эмне издеп атасын?",
+    "searchButton": "Издоо"
 }

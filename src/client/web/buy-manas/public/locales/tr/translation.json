@@ -1,3 +1,6 @@
 {
-    "hello":"Selam"
+    "hello": "Selam",
+    "auth": "Giriş / Kayıt",
+    "searchPlaceHolder": "Ne arıyorsun",
+    "searchButton": "Arama"
 }
