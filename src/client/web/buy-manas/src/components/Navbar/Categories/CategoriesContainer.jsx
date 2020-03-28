@@ -1,7 +1,7 @@
 import React from 'react';
 import * as axios from 'axios';
 import Categories from './Categories';
-import { setFaculties } from '../../../actions/index';
+import { setFaculties } from './../../../actions/index';
 import { connect } from 'react-redux';
 
 
