@@ -1,28 +1,27 @@
 import React from 'react';
 import * as axios from 'axios';
 import Categories from './Categories';
-import { setFaculties } from '../../../actions';
+import { setFaculties } from '../../../actions/index';
 import { connect } from 'react-redux';
 
 
 class CategoriesContainer extends React.Component{
     componentDidMount() {
-        axios.get(`http://buymanasapi.ru.xsph.ru/index.php/api/faculties`)
+        axios.get(`http://buymanasapi.ru.xsph.ru/index.php/api/faculties.json`)
             .then(response => {
-                debugger;
-                // this.props.setFaculty(response.data."hydra:member".facultyNameKg);
+                    this.props.setFaculties(response.data);
             });
     }
 
 
     render(){
-        return <Categories faculties={this.props.faculties} />
+        return <Categories faculties={ this.props.faculties } />
     }
 }
 
 const mapStateToProps = (state) => {
     return{
-        faculties: state.categoriesReducer.faculties
+        faculties: state.categoriesBlock.faculties
     }
 };
 
