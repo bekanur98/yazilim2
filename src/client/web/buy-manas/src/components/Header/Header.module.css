@@ -3,6 +3,7 @@
     justify-content: space-between;
     align-items: center;
     background-color: white;
+    padding: 10px 0;
 } 
 
 .appHeader div{
@@ -16,6 +17,8 @@
 }
 .slogan p{
     margin: 0;
+    font-size: 18px;
+    color: #174b81;
 }
 
 .logoBlock img{
@@ -32,12 +35,18 @@
     font-weight: bold;
     color:grey
 }
+ 
 
 .changeLangBlock input{
-    display: none;
-} 
-
-.changeLangBlock label{
-    margin: 1px 6px;
-    cursor: pointer;
+    opacity: 0;
+    padding: 1px 3px;
+    margin-right: 1px;
 }
+.changeLangBlock label{
+    cursor: pointer; 
+} 
+.changeLangBlock input:checked ~  span{
+    color: red;
+}
+
+ 

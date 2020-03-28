@@ -47,7 +47,7 @@
     grid-template-rows: repeat(2, 100px);
     grid-gap: 15px;
     width: 100%;
-    padding: 40px 0 0 0;
+    padding: 40px 0 10px 0;
 }
 
 .categoriesItem{
@@ -55,7 +55,7 @@
     margin: 10px;
     cursor: pointer;
     text-align: center;
-    margin: 0 auto;
+    margin: 0 auto 10px ;
 }
 
 .categoriesItem p{
