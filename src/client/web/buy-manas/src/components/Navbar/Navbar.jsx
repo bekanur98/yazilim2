@@ -14,7 +14,6 @@ const Navbar = (props) => {
                 <button>{t('searchButton')}</button>
             </div>
             <CategoriesContainer />
-
         </div>
     )
 }
