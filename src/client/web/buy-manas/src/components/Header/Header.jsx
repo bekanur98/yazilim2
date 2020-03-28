@@ -8,7 +8,13 @@ const Header = (props) => {
     const { t, i18n } = useTranslation();
     function changeLang(lang = 'ky') {
         i18n.changeLanguage(lang)
-    } 
+    }
+
+    let langBtn = React.createRef();
+    let labell = React.createRef();
+    if(langBtn.checked){
+        labell.style.background = "#000";
+    }
 
     return (
         <div className={styles.appHeader}>
@@ -29,10 +35,10 @@ const Header = (props) => {
                     <button onClick={() => changeLang('en')}>EN</button> */}
 
                     
-                    <label><input ref={langBtn} type="radio" name="lang" onClick={() => changeLang('ky')} />KG </label>
-                    <label><input ref={langBtn} type="radio" name="lang" onClick={() => changeLang('ru')} />RU </label>
-                    <label><input ref={langBtn} type="radio" name="lang" onClick={() => changeLang('tr')} />TR </label>
-                    <label><input ref={langBtn} type="radio" name="lang" onClick={() => changeLang('en')} />EN </label>
+                    <label ref={labell}><input ref={langBtn} type="radio" name="lang" onClick={() => changeLang('ky')} />KG </label>
+                    <label ref={labell}><input ref={langBtn} type="radio" name="lang" onClick={() => changeLang('ru')} />RU </label>
+                    <label ref={labell}><input ref={langBtn} type="radio" name="lang" onClick={() => changeLang('tr')} />TR </label>
+                    <label ref={labell}><input ref={langBtn} type="radio" name="lang" onClick={() => changeLang('en')} />EN </label>
                 </div>
             </div>
         </div>
