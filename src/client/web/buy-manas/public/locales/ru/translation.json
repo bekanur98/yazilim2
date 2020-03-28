@@ -2,5 +2,6 @@
     "hello": "Здравствуйте",
     "auth": "Войти / Зарегистрироваться",
     "searchPlaceHolder": "Что ищете?",
-    "searchButton": "Поиск"
+    "searchButton": "Поиск",
+    "postsTop": "Топ объявления"
 }

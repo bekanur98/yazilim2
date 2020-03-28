@@ -2,5 +2,6 @@
     "hello": "Hello",
     "auth": "Login / Sign up",
     "searchPlaceHolder": "What are you looking for?",
-    "searchButton": "Search"
+    "searchButton": "Search",
+    "postsTop": "Top posts"
 }

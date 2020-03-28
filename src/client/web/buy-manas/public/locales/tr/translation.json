@@ -2,5 +2,6 @@
     "hello": "Selam",
     "auth": "Giriş / Kayıt",
     "searchPlaceHolder": "Ne arıyorsun",
-    "searchButton": "Arama"
+    "searchButton": "Arama",
+    "postsTop": "En iyi reklamlar"
 }
