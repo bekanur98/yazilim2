@@ -40,19 +40,27 @@
 
 /* Categories style */
 
-.categoriesBlock{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.categoriesBlock{ 
+    display: grid;
+    grid-template-columns: repeat(7, minmax(100px, 1fr));
+    grid-template-rows: repeat(2, 100px);
+    grid-gap: 15px;
     width: 100%;
+    padding: 40px 0 0 0;
 }
 
 .categoriesItem{
     font-size: 10px;
     margin: 10px;
-    width: 50px;
+    cursor: pointer;
+    text-align: center;
+    margin: 0 auto;
 }
 
 .categoriesItem p{
-    margin: 0;
+    width: 100%;
+}
+
+.icon img{
+    width: 30px;
 }

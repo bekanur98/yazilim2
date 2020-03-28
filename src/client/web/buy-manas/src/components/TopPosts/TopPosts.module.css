@@ -1,0 +1,22 @@
+.topPostsWrapper{
+    padding: 20px; 
+}
+
+.topPosts{ 
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-gap: 20px;
+}
+
+.topPostItem{
+    width: 200px;
+}
+
+.topPostItem img{
+    width: 100%;
+}
+.topPostItem .postTitle{
+    font-weight: bold;
+    margin: 0 auto;
+    text-align: center;
+}
