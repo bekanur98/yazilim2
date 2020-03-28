@@ -25,3 +25,8 @@ export const setFaculties = faculties => ({
   type: 'SET_FACULTIES',
   faculties
 })
+
+export const setPosts = posts => ({
+  type: 'SET_POSTS',
+  posts
+})
