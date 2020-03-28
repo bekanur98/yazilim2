@@ -1,7 +1,6 @@
 import React from 'react';
 import styles from './TopPosts.module.css'
 import { useTranslation } from 'react-i18next';
-import postImage from './../../assets/images/postImage.png'
 
 const TopPosts = (props) => {
     const { t, i18 } = useTranslation();
@@ -24,5 +23,3 @@ const TopPosts = (props) => {
 
 
 export default TopPosts;
-
-
