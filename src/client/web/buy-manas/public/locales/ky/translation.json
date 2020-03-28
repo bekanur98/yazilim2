@@ -1,7 +1,9 @@
 {
     "hello": "Салам",
     "auth": "Кирүү / Катталуу",
-    "searchPlaceHolder": "Эмне издеп атасын?",
-    "searchButton": "Издоо",
-    "postsTop": "Жогорку жарнамалар"
+    "searchPlaceHolder": "Эмне издеп жатасыз?",
+    "searchButton": "Издөө",
+    "postsTop": "Жогорку жарнамалар",
+    "others": "Башкалар",
+    "logo_text": "өзүңдү жана өнөктөштөрүңдү камсызда"
 }

@@ -2,10 +2,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: white;
 } 
 
 .appHeader div{
     display: flex;
+}
+
+.slogan{
+    flex-direction: column;
+    margin:0px 
 }
 
 .logoBlock img{
@@ -18,8 +24,9 @@
     border: none;
     background: none;
     cursor: pointer;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: bold;
+    color:grey
 }
 
 .changeLangBlock button{

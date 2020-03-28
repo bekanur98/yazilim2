@@ -4,9 +4,9 @@
     justify-content: center;
     flex-direction: column;
     width: 100%;
-    background: rgb(173, 101, 158);
+    background: #174b81;
     padding: 30px 0;
-    margin: 20px 0;
+    /* margin: 20px 0; */
 }
 
 /* Search */
@@ -34,8 +34,9 @@
     font-size: 14px;
     font-weight: bold;
     border-radius: 10px;
-    background: rgb(161, 159, 159);
+    background: rgb(236, 121, 13);
     border: none;
+    color: #174b81;
 }
 
 /* Categories style */
@@ -50,7 +51,7 @@
 }
 
 .categoriesItem{
-    font-size: 10px;
+    font-size: 14px;
     margin: 10px;
     cursor: pointer;
     text-align: center;
@@ -62,5 +63,9 @@
 }
 
 .icon img{
-    width: 30px;
+    width: 35%;
+}
+
+.facultyName{
+    color: white
 }
