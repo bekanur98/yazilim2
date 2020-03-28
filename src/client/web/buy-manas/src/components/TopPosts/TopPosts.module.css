@@ -6,17 +6,27 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
     grid-gap: 20px;
+    height: 300px;
+    border-width: 1px;
+    border-style: solid;
+    cursor: pointer;
 }
 
 .topPostItem{
-    width: 200px;
+    margin-top: 15px;
+    height: 210px;
+    width: 210px;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 10%;
 }
 
 .topPostItem img{
     width: 100%;
 }
 .topPostItem .postTitle{
-    font-weight: bold;
+    /* font-weight: bold; */
+    font-size: 15px;
     margin: 0 auto;
-    text-align: center;
+    /* text-align: center; */
 }

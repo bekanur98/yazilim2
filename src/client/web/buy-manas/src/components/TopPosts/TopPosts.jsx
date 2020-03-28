@@ -3,16 +3,26 @@ import styles from './TopPosts.module.css'
 import { useTranslation } from 'react-i18next';
 
 const TopPosts = (props) => {
-    const { t, i18 } = useTranslation();
+    const { t } = useTranslation();
     return (
         <div className={styles.topPostsWrapper}>
             <h3>{t('postsTop')}</h3> 
  
-            <div className={styles.topPosts}>
+            <div className={styles.topPosts} onMouseOver={()=>console.log('clicked')}>
 
                 {
-                    props.posts.map(tp => <div className={styles.topPost} key={tp.id}>
-                        <p className={styles.postTitle}> {tp.title} </p>
+                    props.posts.map(tp => <div className={styles.topPostItem} key={tp.id}>
+                        {tp.department ? 
+                            (   
+                                <img src={require('../../assets/images/'+tp.department.faculty.id+'.png')} alt="categoryIcon" />        
+                            )
+                            :
+                            (
+                                <img src={require('../../assets/images/logo.png')} alt="categoryIcon" />
+                            )
+                        }
+                        <p className={styles.postTitle}>{tp.title}</p> 
+                        
                     </div>)
                 }
 
