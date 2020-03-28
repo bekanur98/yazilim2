@@ -5,16 +5,12 @@ import { useTranslation } from 'react-i18next';
 
 
 const Header = (props) => {
+
     const { t, i18n } = useTranslation();
     function changeLang(lang = 'kg') {
         i18n.changeLanguage(lang)
     }
-
-    let langBtn = React.createRef();
-    let labell = React.createRef();
-    if(langBtn.checked){
-        labell.style.background = "#000";
-    }
+ 
 
     return (
         <div className={styles.appHeader}>
@@ -22,30 +18,17 @@ const Header = (props) => {
             <div className={styles.logoBlock}>
                 <img src={logo} alt="logo" />
                 <div className={styles.slogan}>
-                        <p style={{color:'#174b81', fontSize:18}}>Buy-Manas</p>
-                        <p style={{color:'#174b81', fontSize:18}}>{t('logo_text')}</p>
+                    <p>Buy-Manas</p>
+                    <p>{t('logo_text')}</p>
                 </div>
             </div>
             <div>
                 <button className={styles.auth}> {t('auth')}</button>
-                <div className={styles.changeLangBlock}>
-                    {/* <button onClick={() => changeLang('kg')}>KG</button>
-                    <button onClick={() => changeLang('ru')}>RU</button>
-                    <button onClick={() => changeLang('tr')}>TR</button>
-                    <button onClick={() => changeLang('en')}>EN</button> */}
-
-                    
-<<<<<<< HEAD
-                    <label ref={labell}><input ref={langBtn} type="radio" name="lang" onClick={() => changeLang('ky')} />KG </label>
-                    <label ref={labell}><input ref={langBtn} type="radio" name="lang" onClick={() => changeLang('ru')} />RU </label>
-                    <label ref={labell}><input ref={langBtn} type="radio" name="lang" onClick={() => changeLang('tr')} />TR </label>
-                    <label ref={labell}><input ref={langBtn} type="radio" name="lang" onClick={() => changeLang('en')} />EN </label>
-=======
-                    <label><input ref={langBtn} type="radio" name="lang" onClick={() => changeLang('kg')} />KG </label>
-                    <label><input ref={langBtn} type="radio" name="lang" onClick={() => changeLang('ru')} />RU </label>
-                    <label><input ref={langBtn} type="radio" name="lang" onClick={() => changeLang('tr')} />TR </label>
-                    <label><input ref={langBtn} type="radio" name="lang" onClick={() => changeLang('en')} />EN </label>
->>>>>>> d067d869fe67d0400a3f197682a0dc77b722a9d5
+                <div className={styles.changeLangBlock}>  
+                    <label> <input type="radio" name="a1" onClick={() => changeLang('kg')} /> <span>KG</span> </label>
+                    <label> <input type="radio" name="a1" onClick={() => changeLang('ru')} /> <span>RU</span> </label>
+                    <label> <input type="radio" name="a1" onClick={() => changeLang('tr')} /> <span>TR</span> </label>
+                    <label> <input type="radio" name="a1" onClick={() => changeLang('en')} /> <span>EN</span> </label>
                 </div>
             </div>
         </div>
