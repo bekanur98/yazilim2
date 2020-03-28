@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 
 const Header = (props) => {
     const { t, i18n } = useTranslation();
-    function changeLang(lang = 'ky') {
+    function changeLang(lang = 'kg') {
         i18n.changeLanguage(lang)
     } 
 
@@ -23,13 +23,13 @@ const Header = (props) => {
             <div>
                 <button className={styles.auth}> {t('auth')}</button>
                 <div className={styles.changeLangBlock}>
-                    {/* <button onClick={() => changeLang('ky')}>KG</button>
+                    {/* <button onClick={() => changeLang('kg')}>KG</button>
                     <button onClick={() => changeLang('ru')}>RU</button>
                     <button onClick={() => changeLang('tr')}>TR</button>
                     <button onClick={() => changeLang('en')}>EN</button> */}
 
                     
-                    <label><input ref={langBtn} type="radio" name="lang" onClick={() => changeLang('ky')} />KG </label>
+                    <label><input ref={langBtn} type="radio" name="lang" onClick={() => changeLang('kg')} />KG </label>
                     <label><input ref={langBtn} type="radio" name="lang" onClick={() => changeLang('ru')} />RU </label>
                     <label><input ref={langBtn} type="radio" name="lang" onClick={() => changeLang('tr')} />TR </label>
                     <label><input ref={langBtn} type="radio" name="lang" onClick={() => changeLang('en')} />EN </label>
