@@ -8,12 +8,14 @@ import { createLogger } from 'redux-logger';
 import Dummy from './reducers/dummyReducer';
 import Settings from './reducers/settingsReducer';
 import userReducer from "./reducers/userReducer";
+import categoryReducer from "./reducers/categoryReducer";
 
 
 const rootReducer = combineReducers({
   Dummy,
   Settings,
   userReducer,
+  categoryReducer,
 
   lastAction: function lastAction(state = null, action) {
     return action;

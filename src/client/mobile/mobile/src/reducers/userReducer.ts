@@ -1,4 +1,4 @@
-// reducers/settings
+// reducers/userReducer
 
 import {
     USER_NAME

@@ -22,4 +22,10 @@ export const USER_PHONE = 'USER_PHONE';
 
 export const USER_FACULTY = 'USER_FACULTY';
 
+export const CATEGORY_GET = 'CATEGORY_GET';
+
+export const CATEGORY_SET = 'CATEGORY_SET';
+
+export const API_URL = 'buymanasapi.ru.xsph.ru/index.php/api/';
+
 export const PAGE_COUNTER_CHANGE = 'PAGE_COUNTER_CHANGE';
