@@ -31,26 +31,11 @@ const TopPosts = (props) => {
                                 }
                             </div>
 
-                            <p className={styles.cost}> {tp.cost != null ? tp.cost + ' сом' : 'Договорная'}</p>
+                            <p className={styles.cost}> {tp.cost != null ? tp.cost + ' сом' : t('contract')}</p>
                             <p className={styles.postTitle}>{tp.title}</p>
                         </div>).sort(function (a, b) { return a.rating - b.rating })
                     }
-                </Slider>
-
-                {/* {
-                    props.posts.filter(tp => <div className={styles.topPostItem} key={tp.id}>
-                        <div className={styles.imgBlock}>
-                            {tp.department ?
-                                <img src={require('../../assets/images/' + tp.department.faculty.id + '.png')} alt="categoryIcon" />
-                                :
-                                <img src={require('../../assets/images/logo.png')} alt="categoryIcon" />
-                            }
-                        </div>
-
-                        <p className={styles.cost}> {tp.cost != null ? tp.cost + ' сом' : 'Договорная'}</p>
-                        <p className={styles.postTitle}>{tp.title}</p>
-                    </div>)
-                } */}
+                </Slider> 
 
             </div>
         </div>
