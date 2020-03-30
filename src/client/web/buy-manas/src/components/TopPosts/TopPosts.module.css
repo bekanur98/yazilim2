@@ -4,29 +4,35 @@
 
 .topPosts{ 
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     grid-gap: 20px;
     height: 300px;
-    border-width: 1px;
-    border-style: solid;
+    border: 1px solid #e1e1e1;
     cursor: pointer;
 }
 
-.topPostItem{
+.topPostItem{ 
     margin-top: 15px;
     height: 210px;
     width: 210px;
-    border-width: 1px;
-    border-style: solid;
-    border-radius: 10%;
+    border: 1px solid #e1e1e1;
+    border-radius: 10%;  
 }
+ 
 
 .topPostItem img{
     width: 100%;
+    margin: 0 auto;
+}
+
+.topPostItem{ 
+    margin: 0;
 }
 .topPostItem .postTitle{
-    /* font-weight: bold; */
+    font-size: 15px; 
+}
+
+.topPostItem .cost{
     font-size: 15px;
-    margin: 0 auto;
-    /* text-align: center; */
+    font-weight: bold;
 }

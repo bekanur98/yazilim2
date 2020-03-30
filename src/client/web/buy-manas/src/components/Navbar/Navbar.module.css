@@ -5,7 +5,7 @@
     flex-direction: column;
     width: 100%;
     background: #174b81;
-    padding: 30px 0;
+    padding: 30px 0 20px;
     /* margin: 20px 0; */
 }
 
@@ -44,18 +44,18 @@
 .categoriesBlock{ 
     display: grid;
     grid-template-columns: repeat(7, minmax(100px, 1fr));
-    grid-template-rows: repeat(2, 100px);
-    grid-gap: 15px;
+    grid-template-rows: repeat(2, 115px);
+    grid-gap: 10px;
     width: 100%;
-    padding: 40px 0 10px 0;
+    padding: 40px 0 10px;
 }
 
 .categoriesItem{
     font-size: 14px;
-    margin: 10px;
     cursor: pointer;
     text-align: center;
     margin: 0 auto 10px ;
+    padding: 0 10px;
 }
 
 .categoriesItem p{
