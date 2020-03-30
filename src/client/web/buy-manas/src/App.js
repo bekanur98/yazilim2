@@ -6,6 +6,7 @@ import TopPostsContainer from './components/TopPosts/TopPostsContainer';
 import {Provider} from 'react-redux'
 import rootReducer from './reducers'
 import { createStore } from 'redux';
+import Footer from './components/Footer/Footer';
 
 const App = (props) => {
    
@@ -18,6 +19,7 @@ const App = (props) => {
                 <Navbar />
                 <div className="appContentWrapper">
                     <TopPostsContainer />
+                    <Footer />
                 </div>
             </div>
         </Provider>
