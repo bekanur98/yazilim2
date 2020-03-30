@@ -1,24 +1,29 @@
-/* eslint-disable react-native/no-inline-styles */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 // pages/DummyPage
 
 import React from 'react';
 import {connect} from 'react-redux';
-import {StyleSheet} from 'react-native';
-import {View, Button, Text, Content, Container, Header, Item, Icon, Input} from 'native-base';
+import {FlatList, StyleSheet, View, Text, Image, TouchableOpacity, ScrollView} from 'react-native';
+import {Content, Container, Header, Item, Icon, Input} from 'native-base'
 import {PageProps} from '../../types';
-import * as actions from '../../actions/dummyAction';
-import {getLocale, trans, setupLocalization} from '../../helper';
-import Navigation from 'src/nav/Navigation';
+import * as actions from '../../actions';
+import {trans} from '../../helper';
+import axios from 'axios';
+import images from '../../assets/images/images'
+// @ts-ignore
+import Category from 'react-native-category'
 
 export interface Props extends PageProps {
   count: number;
   changeCountAction: (count: number) => void;
   badgeHome: number;
   badgePersonal: number;
+  categoryList: any;
+  setCategoryList: (categoryList: []) => void;
 }
 
-interface State {}
+interface State {
+  categoryList: any
+}
 
 class HomePage extends React.Component<Props, State> {
   static navigationOptions = () => {
@@ -30,21 +35,68 @@ class HomePage extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      categoryList: [] as any,
+
+    };
   }
 
-  render() {
+  componentDidMount(): void {
+    this.getCategoryList();
+    this.props.setCategoryList(this.state.categoryList)
+  }
+
+  async getCategoryList(){
+      try{
+        const response = await axios.get(`http://buymanasapi.ru.xsph.ru/index.php/api/faculties.json`)
+        if(response.data){
+          this.setState({categoryList:response.data})
+        }
+      }
+      catch(error){
+        console.log(error)
+      }
+  }
+
+  _renderItem=(item:any)=>{
+    const img = 'assets/images/'+item.item.id+'.png';
+    return(
+        <TouchableOpacity style = {{padding: 5}}>
+          <Image
+              //@ts-ignore
+              source={images[item.item.id]}
+              style={{height:45, width:45}}
+          />
+          <Text style={{justifyContent:'center'}}>{item.item.id}</Text>
+        </TouchableOpacity>
+    )
+};
+
+  render()
+
+  {
     return (
         <Container style={{}}>
           <Header searchBar rounded >
             <Item>
               <Icon name="ios-search" />
-              <Input placeholder="Search"  />
+              <Input
+                  placeholder={trans('search')}
+                  onChange={()=>{}}
+              />
             </Item>
           </Header>
           <Content style={styles.header}>
-
-            <Text style={{fontSize: 30}}>Home page</Text>
+            <FlatList
+                horizontal={true}
+                contentContainerStyle={{alignSelf: 'flex-start'}}
+                data = {this.state.categoryList}
+                keyExtractor={(item:any)=>item.id.toString()}
+                renderItem = {this._renderItem}
+                // showsVerticalScrollIndicator={false}
+                // showsHorizontalScrollIndicator={false}
+                // numColumns={7}
+            />
           </Content>
         </Container>
     );
@@ -78,9 +130,7 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state: any): any => ({
-  count: state.Dummy.count,
-  badgeHome: state.Settings.badgeHome,
-  badgePersonal: state.Settings.badgePersonal,
+  categoryList: state.categoryReducer.categoryList
 });
 export default connect(
   mapStateToProps,
