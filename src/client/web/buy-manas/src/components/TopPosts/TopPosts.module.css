@@ -6,27 +6,35 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     grid-gap: 20px;
-    height: 300px;
-    border: 1px solid #e1e1e1;
+    border: 1px solid #000;
+    border-radius: 10px;    
+    padding: 10px;
     cursor: pointer;
 }
 
 .topPostItem{ 
     margin-top: 15px;
-    height: 210px;
-    width: 210px;
-    border: 1px solid #e1e1e1;
-    border-radius: 10%;  
 }
  
-
-.topPostItem img{
-    width: 100%;
+.topPostItem .imgBlock{  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 210px;
+    width: 210px;
+    border: 3px solid #000;
+    border-radius: 10%;    
     margin: 0 auto;
+
 }
 
-.topPostItem{ 
-    margin: 0;
+.topPostItem img{
+    width: 80%;
+    vertical-align: middle;
+}
+
+.topPostItem p{ 
+    margin: 5px 0 5px 2px;
 }
 .topPostItem .postTitle{
     font-size: 15px; 
@@ -35,4 +43,12 @@
 .topPostItem .cost{
     font-size: 15px;
     font-weight: bold;
+}
+
+
+/* Slider dots */
+
+.slidersStyle button:before{
+    font-size: 30px;
+    color: #000 !important;
 }
