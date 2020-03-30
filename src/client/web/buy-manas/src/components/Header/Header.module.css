@@ -19,6 +19,7 @@
     margin: 0;
     font-size: 18px;
     color: #174b81;
+    cursor: default;
 }
 
 .logoBlock img{
