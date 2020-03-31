@@ -8,6 +8,6 @@ const Profile = (props) => {
             <DescriptionContainer />
         </div>
     )
-}
+};
 
 export default Profile;

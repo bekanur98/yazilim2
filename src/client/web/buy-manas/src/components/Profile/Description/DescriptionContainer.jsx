@@ -1,19 +1,18 @@
 import React from 'react';
 import Description from './Description';
 import * as axios from 'axios';
-import { setUserData } from '../../../actions/index';
+// import { setUserData } from '../../../actions/index';
 
 
 class DescriptionContainer extends React.Component {
     componentDidMount() {
         axios.get(`http://buymanasapi.ru.xsph.ru/index.php/api/users/5.json`)
             .then(response => {
-                this.props.setUserData(response.data);
+                // this.props.setUserData(response.data);
             });
     }
     render() {
         return <Description {...this.props} />
-
     }
 }
 
@@ -32,9 +31,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setUserData: (data) => {
-            dispatch(setUserData(data));
-        }
+        // setUserData: (data) => {
+        //     dispatch(setUserData(data));
+        // }
     }
 }
 
