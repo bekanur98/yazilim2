@@ -34,7 +34,8 @@
     cursor: pointer;
     font-size: 14px;
     font-weight: bold;
-    color:grey
+    color:grey;
+    text-decoration: none;
 }
  
 

@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './Header.module.css';
 import logo from './../../assets/images/logo.png'
 import { useTranslation } from 'react-i18next';
+import { NavLink } from 'react-router-dom';
 
 
 const Header = (props) => {
@@ -16,14 +17,16 @@ const Header = (props) => {
         <div className={styles.appHeader}>
 
             <div className={styles.logoBlock}>
-                <img src={logo} alt="logo" />
+            <NavLink to='/'> <img src={logo} alt="logo" /></NavLink>
                 <div className={styles.slogan}>
                     <p>Buy-Manas</p>
                     <p>{t('logo_text')}</p>
                 </div>
             </div>
             <div>
-                <button className={styles.auth}> {t('auth')}</button>
+
+                <NavLink to='/profile' className={styles.auth}> {t('auth')} </NavLink>
+
                 <div className={styles.changeLangBlock}>  
                     <label> <input type="radio" name="a1" onClick={() => changeLang('kg')} /> <span>KG</span> </label>
                     <label> <input type="radio" name="a1" onClick={() => changeLang('ru')} /> <span>RU</span> </label>
