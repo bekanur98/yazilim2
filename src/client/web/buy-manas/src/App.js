@@ -1,28 +1,22 @@
 import React from 'react';
 import './App.css';
-import Header from './components/Header/Header'
-import Navbar from './components/Navbar/Navbar';
-import TopPostsContainer from './components/TopPosts/TopPostsContainer';
-import {Provider} from 'react-redux'
-import rootReducer from './reducers'
-import { createStore } from 'redux';
+import HeaderContainer from './components/Header/HeaderContainer'
 import Footer from './components/Footer/Footer';
+import Main from './components/Main/Main';
+import { Route } from 'react-router-dom';
+import Profile from './components/Profile/Profile';
 
 const App = (props) => {
-   
-    const store = createStore(rootReducer)
 
-    return (
-        <Provider store={store}>
-            <div className="appWrapper">
-                <Header />
-                <Navbar />
-                <div className="appContentWrapper">
-                    <TopPostsContainer />
-                    <Footer />
-                </div>
-            </div>
-        </Provider>
+    return ( 
+        <div className="appWrapper">
+            <HeaderContainer />
+
+            <Route exact path='/' render={() => <Main />} />
+            <Route path='/profile' render={() => <Profile />} />
+
+            <Footer />
+        </div> 
     );
 }
 
