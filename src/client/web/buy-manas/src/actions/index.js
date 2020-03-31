@@ -30,3 +30,13 @@ export const setPostsAC = posts => ({
     type: 'SET_POSTS',
     posts
 })
+
+export const setAuthUserData = (id, email, username) => ({ 
+    type: 'SET_AUTH_USER_DATA',
+    data: {id, email, username} 
+})
+
+export const setUserData = (userData) => ({ 
+    type: 'SET_USER_DATA',
+    userData
+})
