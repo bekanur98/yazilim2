@@ -6,7 +6,6 @@ import { NavLink } from 'react-router-dom';
 
 
 const Header = (props) => {
-
     const { t, i18n } = useTranslation();
     function changeLang(lang = 'kg') {
         i18n.changeLanguage(lang)
@@ -24,8 +23,8 @@ const Header = (props) => {
                 </div>
             </div>
             <div>
-
-                <NavLink to='/profile' className={styles.auth}> {t('auth')} </NavLink>
+                <button className={styles.auth}>{t('auth')}</button>
+                <NavLink to='/profile'> Profile(Test) </NavLink>
 
                 <div className={styles.changeLangBlock}>  
                     <label> <input type="radio" name="a1" onClick={() => changeLang('kg')} /> <span>KG</span> </label>
