@@ -8,11 +8,26 @@
 
 .avatar{
     width: 100%;
+    border-radius: 10px;
 }
+
 
 .about{
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
+}
+
+/* Name, username */
+.names p{
+    margin: 0;
+}
+.names .name{
+    font-weight: bold;
+    font-size: 26px;
+}
+.names .username{
+    font-size: 18px;
+    margin-bottom: 30px;
 }
 
 .iDontKnow{
@@ -30,3 +45,30 @@
     text-align: center;
     background: #174b81;
 }
+
+.addPostBtn, .editProfile{ 
+    width: 90%;
+    height: 20%;
+    margin: 0 auto;
+    border: none;
+    border-radius: 10px;
+    background: #174b81;
+    color: #fff;
+} 
+.addPostBtn{
+    font-size: 18px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    width: 60%;
+}
+.phoneNumber{ 
+    width: 40%;
+    height: 10%;
+    line-height: 15px;
+    padding: 10px 0;
+    border-radius: 10px;
+    background: #174b81;
+    color: #fff;
+    text-align: center;
+    letter-spacing: 1px;
+} 
