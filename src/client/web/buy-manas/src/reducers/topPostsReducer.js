@@ -6,7 +6,10 @@ let initialState = {
 const topPostsReducer = (state = initialState, action) => {
     switch(action.type){ 
         case 'SET_POSTS':{
-            return {  ...state, posts: action.posts }
+            return {  
+                ...state,
+                posts: action.posts 
+            }
         } 
         default:
             return state;
