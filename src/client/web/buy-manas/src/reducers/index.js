@@ -13,5 +13,5 @@ export default combineReducers({
   categoriesBlock: categoriesReducer,
   topPostsBlock: topPostsReducer,
   auth: authReducer,
-  profileReducer
+  profilePage: profileReducer
 })
