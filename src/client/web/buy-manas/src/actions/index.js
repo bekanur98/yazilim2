@@ -35,6 +35,10 @@ export const setAuthUserData = (id, email, username) => ({
     type: 'SET_AUTH_USER_DATA',
     data: {id, email, username} 
 })
+ 
+export const toggleModal = () => ({ 
+    type: 'TOGGLE_MODAL'
+})
 
 export const setUserData = (userData) => ({ 
     type: 'SET_USER_DATA',
