@@ -4,7 +4,8 @@ const initialState = {
     username: null,
     posters: [],
     phone:null,
-    faculty: null
+    faculty: null,
+    isModalOpen: true
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -12,13 +13,18 @@ const profileReducer = (state = initialState, action) => {
         case 'SET_USER_DATA':{
             return {
                 ...state, 
-                ...action.data
+                ...action.userData
             };
         } 
+        case 'TOGGLE_MODAL':{
+            return{
+                ...state,
+                isModalOpen: !state.isModalOpen
+            }
+        }
         default:
             return state;
     } 
 
 } 
-
 export default profileReducer;
