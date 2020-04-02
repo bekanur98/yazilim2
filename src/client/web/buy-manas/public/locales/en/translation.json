@@ -9,5 +9,16 @@
     "contract": "contract" ,
     "copyright": "All rights reserved",
     "Sell": "Sell",
-    "editProfile": "Edit profile"
+    "editProfile": "Edit profile",
+    "yourName": "Your name",
+    "yourEmail": "Your email",
+    "yourUsername": "Your username",
+    "yourNumber": "Your number",
+    "password": "Password",
+    "saveChanges": "Save changes",
+    "signUp": "Sign up",
+    "login": "Login",
+    "with": "with",
+    "or": "or",
+    "forgotPassword": "Forgot password?"
 }
