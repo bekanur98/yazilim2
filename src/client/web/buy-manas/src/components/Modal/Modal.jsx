@@ -23,7 +23,10 @@ class Modal extends React.Component {
                 <div className={styles.logoBlock}>
                     <img src={require('../../assets/images/logo.png')} alt="LOGO"/>
                 </div>
-                {this.props.children}
+                <div className={styles.modalBody}>
+                    {this.props.children}
+
+                </div>
             </div>,
             this.root
         )
