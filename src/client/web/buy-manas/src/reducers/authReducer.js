@@ -1,7 +1,8 @@
 let initialState = {
     id: null,
     email: null,
-    username: null
+    username: null,
+    isModalOpen: false
 };
 
 const authReducer = (state = initialState, action) => {
@@ -12,6 +13,12 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 ...action.data
             } 
+        }
+        case 'TOGGLE_MODAL':{
+            return{
+                ...state,
+                isModalOpen: !state.isModalOpen
+            }
         }
         default:
             return state;
