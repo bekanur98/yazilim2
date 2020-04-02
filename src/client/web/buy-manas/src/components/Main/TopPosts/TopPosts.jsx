@@ -24,7 +24,7 @@ const TopPosts = (props) => {
             <div className={styles.topPosts} >
                 <Slider className={styles.slidersStyle} {...settings} >
                     {
-                        props.posts.sort((a, b) => b.rating < a.rating)
+                        props.posts.sort((a, b) => b.rating - a.rating)
                             .map(tp => <div className={styles.topPostItem} key={tp.id}>
                                 <div className={styles.imgBlock}>
                                     {tp.department ?
