@@ -5,7 +5,7 @@ import Modal from '../../Modal/Modal';
 
 const Description = (props) => {
     const { t } = useTranslation();
- 
+
     return (
         <div className={styles.descriptionWrapper}>
             <img className={styles.avatar} src={require('../../../assets/images/avatar.jpg')} alt="avatar" />
@@ -15,18 +15,31 @@ const Description = (props) => {
                     <p className={styles.username}> @{props.username} </p>
                 </div>
                 <div className={styles.iDontKnow}>
-                    <div className={styles.faculty}> {props.faculty} </div>
-                    <div className={styles.postLength}> {props.posters.length} </div>
-                    <div className={styles.rating}> {props.rating} </div>
+                    <div className={styles.faculty}> faculty </div>
+                    <div className={styles.postLength}> posters.length </div>
+                    <div className={styles.rating}> rating </div>
                 </div>
             </div>
             <button className={styles.addPostBtn}> {t('Sell')} </button>
             <button className={styles.editProfile} onClick={props.toggleModal}> {t('editProfile')} </button>
-            <div className={styles.phoneNumber}> {props.phone} </div>
+            <div className={styles.phoneNumber}> props.phone </div>
             {
                 props.isModalOpen &&
                 <Modal onClose={props.toggleModal}>
-                    <h1>Modal</h1>
+                    <form action="GET">
+                        
+                        <input type="text" placeholder={t('yourName')} />
+                        <input type="text" placeholder={t('yourEmail')} />
+                        <input type="text" placeholder={t('yourUsername')} />
+                        <select id="faculties" name="faculties">
+                            <option value="volvo">Engineering</option> 
+                            <option value="volvo">Engineering</option> 
+                            <option value="volvo">Engineering</option> 
+                            <option value="volvo">Engineering</option> 
+                        </select>
+                        <input type="phone" placeholder={t('yourNumber')} />
+                        <button> {t('saveChanges')} </button>
+                    </form>
                 </Modal>
             }
 
