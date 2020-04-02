@@ -5,7 +5,7 @@ const initialState = {
     posters: [],
     phone:null,
     faculty: null,
-    isModalOpen: true
+    isModalOpen: false
 };
 
 const profileReducer = (state = initialState, action) => {
