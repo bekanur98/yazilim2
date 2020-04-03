@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import * as axios from 'axios'
-import { setAuthUserData, toggleModal } from '../../actions/index'
+import { setAuthUserData, toggleModalWindowAuth, toggleModalLoginAuth } from '../../actions/index'
 import { connect } from 'react-redux';
 
 class HeaderContainer extends React.Component {
@@ -18,7 +18,8 @@ class HeaderContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    isModalOpen: state.auth.isModalOpen
+    isModalOpen: state.auth.isModalOpen,
+    isLogin: state.auth.isLogin
 }); 
 
-export default connect(mapStateToProps, {setAuthUserData, toggleModal})(HeaderContainer);
+export default connect(mapStateToProps, {setAuthUserData, toggleModalWindowAuth, toggleModalLoginAuth})(HeaderContainer);
