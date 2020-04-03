@@ -3,7 +3,14 @@ import styles from './Header.module.css';
 import logo from './../../assets/images/logo.png'
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
-import Modal from '../Modal/Modal';
+import Modal from '../common/Modal/Modal';
+
+
+// let topPostsArray = [];
+
+// for(let i = 1;i < 10; i++){
+//     topPostsArray.sort((a, b) => b.rating - a.rating).push(props.posts[i])
+// }
 
 
 const Header = (props) => {
@@ -23,7 +30,7 @@ const Header = (props) => {
                 </div>
             </div>
             <div>
-                <button className={styles.auth} onClick={props.toggleModal}>{t('auth')}</button>
+                <button className={styles.auth} onClick={props.toggleModalWindowAuth}>{t('auth')}</button>
                 <NavLink to='/profile'> Profile(Test) </NavLink>
 
                 <div className={styles.changeLangBlock}>
@@ -36,16 +43,35 @@ const Header = (props) => {
 
             {
                 props.isModalOpen &&
-                <Modal onClose={props.toggleModal}>
-                    <form action="GET">
-                        
-                        <input type="text" placeholder={t('yourName')} />
-                        <input type="text" placeholder={t('yourEmail')} />
-                        <input type="text" placeholder={t('yourUsername')} /> 
-                        <input type="phone" placeholder={t('yourNumber')} />
-                        <input type="password" placeholder={t('password')} />
-                        <button> {t('signUp')} </button>
-                    </form>
+                <Modal onClose={props.toggleModalWindowAuth}>
+                    {
+                        props.isLogin ?
+                            <form action="GET">
+                                <input type="text" placeholder={t('yourUsername')} />
+                                <input type="password" placeholder={t('password')} />
+                                <p className={styles.forgotPass}>{t('forgotPassword')}</p>
+                                <button> {t('login')} </button>
+                                <p className={styles.signUp}>{t('or')} <span className={styles.clickableLink} onClick={props.toggleModalLoginAuth}>{t('signUp')}</span></p>
+                                <p className={styles.withWord}>{t('with')}</p>
+                                <p className={styles.withSocialNet}>
+                                    <a href="https://facebook.com">F</a>
+                                    <a href="https://twitter.com">T</a>
+                                    <a href="https://google.com">G</a>
+                                </p>
+                            </form>
+                            :
+                            <form action="GET">
+                                <input type="text" placeholder={t('yourUsername')} />
+
+                                <input type="text" placeholder={t('yourEmail')} />
+                                <input type="phone" placeholder={t('yourNumber')} />
+                                <input type="password" placeholder={t('password')} />
+                                <input type="password" placeholder={t('password')} />
+                                <button> {t('signUp')} </button>
+                                <p className={styles.signUp}>Есть аккаунт? <span className={styles.clickableLink} onClick={props.toggleModalLoginAuth}> Вход </span> </p>
+                            </form>
+                    }
+
                 </Modal>
             }
         </div>
