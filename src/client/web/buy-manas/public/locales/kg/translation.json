@@ -9,5 +9,16 @@
     "contract": "Келишимдүү" ,
     "copyright": "Бардык укуктар корголгон",
     "Sell": "Жарыя берүү",
-    "editProfile": "Профильди өзгөртүү"
+    "editProfile": "Профильди өзгөртүү",
+    "yourName": "Сиздин атыңыз",
+    "yourEmail": "Сиздин e-mail",
+    "yourUsername": "Сиздин псевдоним",
+    "yourNumber": "Сиздин номериниз",
+    "password": "Пароль",
+    "saveChanges": "Өзгөртүүлөрдү сактоо",
+    "signUp": "Регистрациялоо",
+    "login": "Кирүү",
+    "with": "менен",
+    "or": "же",
+    "forgotPassword": "Паролду унуттуңузбу?"
 }

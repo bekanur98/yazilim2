@@ -9,5 +9,17 @@
     "contract": "Договорная",
     "copyright": "Все права защищены",
     "Sell": "Подать объявление",
-    "editProfile": "Изменить профиль"
+    "editProfile": "Изменить профиль",
+    "yourName": "Ваше имя",
+    "yourEmail": "Ваш e-mail",
+    "yourUsername": "Ваш псевдоним",
+    "yourNumber": "Ваш номер",
+    "password": "Пароль",
+    "saveChanges": "Сохранить изменения",
+    "signUp": "Зарегистрироваться",
+    "login": "Войти",
+    "with": "с",
+    "or": "или",
+    "forgotPassword": "Забыли пароль?"
+
 }

@@ -9,5 +9,17 @@
     "contract": "Anlaşma",
     "copyright": "Tüm hakları saklıdır" ,
     "Sell": "İlan verin",
-    "editProfile": "Profili Değiştir"
+    "editProfile": "Profili Değiştir",
+    "yourName": "Senin adın",
+    "yourEmail": "E-postanız",
+    "yourUsername": "Your username",
+    "yourNumber": "Numaranız",
+    "password": "parola",
+    "saveChanges": "Değişiklikleri kaydet",
+    "signUp": "Kaydol",
+    "login": "oturum aç",
+    "with": "ile",
+    "or": "же",
+    "forgotPassword": "Parolanızı mı unuttunuz?"
+
 }

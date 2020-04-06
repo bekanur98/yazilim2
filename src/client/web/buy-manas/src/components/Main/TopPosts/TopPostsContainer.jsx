@@ -12,7 +12,7 @@ class TopPostsContainer extends React.Component{
             });
     }
     render(){
-        return <TopPosts posts={ this.props.posts } />
+        return <TopPosts {...this.props} />
     }
 }
 

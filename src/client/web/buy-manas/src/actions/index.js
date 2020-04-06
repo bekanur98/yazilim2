@@ -36,11 +36,23 @@ export const setAuthUserData = (id, email, username) => ({
     data: {id, email, username} 
 })
  
-export const toggleModal = () => ({ 
-    type: 'TOGGLE_MODAL'
+export const toggleModalWindowEditProfile = () => ({ 
+    type: 'TOGGLE_MODAL_WINDOW_EDIT_PROFILE'
+})
+
+export const toggleModalWindowAuth = () => ({ 
+    type: 'TOGGLE_WINDOW_MODAL_AUTH'
+})
+export const toggleModalLoginAuth = () => ({ 
+    type: 'TOGGLE_MODAL_LOGIN_AUTH'
 })
 
 export const setUserData = (userData) => ({ 
     type: 'SET_USER_DATA',
     userData
+})
+
+export const toggleIsFetching = (isFetching) => ({
+    type: 'SET_IS_FETCHING', 
+    isFetching  
 })
