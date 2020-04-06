@@ -29,3 +29,7 @@ export const CATEGORY_SET = 'CATEGORY_SET';
 export const API_URL = 'http://buymanasapi.ru.xsph.ru/index.php/api/';
 
 export const PAGE_COUNTER_CHANGE = 'PAGE_COUNTER_CHANGE';
+
+export const FETCH_POSTER_SUCCESS = 'FETCH_POSTER_SUCCESS';
+
+export const IMAGES_URL = 'http://buymanasapi.ru.xsph.ru';

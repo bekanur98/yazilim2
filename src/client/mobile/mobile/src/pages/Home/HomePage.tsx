@@ -6,7 +6,7 @@ import {FlatList, StyleSheet, View, Text, Dimensions,
   Image, TouchableOpacity, ScrollView, Button
 } from 'react-native';
 import {Content, Container, Header, Item, Icon, Input} from 'native-base'
-import {PageProps} from '../../types';
+import {IPoster, PageProps} from '../../types';
 import * as actions from '../../actions';
 import {trans} from '../../helper';
 import axios from 'axios';
@@ -15,6 +15,9 @@ import images from '../../assets/images/images';
 import Category from 'react-native-category';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import {API_URL, COLORS} from "../../constants";
+import TopPostCom from "../../components/TopPostCom";
+import {fetchPosters} from "../../actions";
+import {AppState} from "../../store";
 
 
 export interface Props extends PageProps {
@@ -24,6 +27,8 @@ export interface Props extends PageProps {
   badgePersonal: number;
   categoryList: any[];
   setCategoryList: (categoryList: []) => void;
+  posterList: IPoster[];
+  fetchPosters: () => void;
 }
 
 interface State {
@@ -51,7 +56,7 @@ class HomePage extends React.Component<Props, State> {
     };
   }
 
-  componentDidMount(): void {
+  async componentDidMount(){
     if(!this.props.categoryList.length){
       this.getCategoryList()
     }
@@ -59,6 +64,9 @@ class HomePage extends React.Component<Props, State> {
       this.setState({categoryList:this.props.categoryList});
       const itemWdt = Math.floor((Dimensions.get('window').width-60)/60)
       this.setState({categoryHorizontalList: this.props.categoryList.slice(0,itemWdt-1)})
+    }
+    if(this.props.posterList.length){
+        await this.props.fetchPosters();
     }
   }
 
@@ -206,6 +214,11 @@ class HomePage extends React.Component<Props, State> {
                 />
               </RBSheet>
             </View>
+              <TopPostCom
+                  //@ts-ignore
+                  posterList={this.props.posterList}
+
+              />
           </Content>
         </Container>
     );
@@ -228,10 +241,14 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = (state: any): any => ({
-  categoryList: state.categoryReducer.categoryList
+const mapStateToProps = (state: AppState): any => ({
+  categoryList: state.categoryReducer.categoryList,
+  posterList: state.posterReducer.posterList
 });
-export default connect(
-  mapStateToProps,
-  actions,
-)(HomePage);
+
+//@ts-ignore
+const mapDispatchToProps = dispatch => ({
+    fetchPosters: () => dispatch(fetchPosters())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
