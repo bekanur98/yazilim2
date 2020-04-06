@@ -3,10 +3,11 @@ import { connect } from 'react-redux';
 import * as axios from 'axios';
 import TopPosts from './TopPosts';
 import { setPostsAC } from './../../../actions/index';
+import { API_URL } from '../../../constants';
 
 class TopPostsContainer extends React.Component{
     componentDidMount() {
-        axios.get(`http://buymanasapi.ru.xsph.ru/index.php/api/posters.json`)
+        axios.get(`${API_URL}posters.json`)
             .then(response => {
                 this.props.setPosts(response.data);
             });

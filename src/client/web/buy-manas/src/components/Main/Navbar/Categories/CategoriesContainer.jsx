@@ -3,11 +3,12 @@ import * as axios from 'axios';
 import Categories from './Categories';
 import { setFaculties } from '../../../../actions/index';
 import { connect } from 'react-redux';
+import { API_URL } from '../../../../constants';
 
 
 class CategoriesContainer extends React.Component{
     componentDidMount() {
-        axios.get(`http://buymanasapi.ru.xsph.ru/index.php/api/faculties.json`)
+        axios.get(`${API_URL}faculties`)
             .then(response => {
                     this.props.setFaculties(response.data);
             });

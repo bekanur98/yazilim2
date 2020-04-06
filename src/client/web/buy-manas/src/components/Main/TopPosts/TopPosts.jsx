@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import { IMAGES_URL } from '../../../constants';
 
 const TopPosts = (props) => { 
 
@@ -19,9 +20,15 @@ const TopPosts = (props) => {
 
     // cicle for top 10 posts 
     const topPostsArray = [];
-    for (let i = 0; i <= 10; i++) {
-        topPostsArray.sort((a, b) => b.rating - a.rating).push(props.posts[i])
-    } 
+    props.posts.sort((a,b)=>b.rating - a.rating).map(p=>{
+        if(topPostsArray.length<=10)
+        topPostsArray.push(p);
+
+
+    })
+    // for (let i = 0; i <= 10; i++) {
+    //     topPostsArray.sort((a, b) => b.rating - a.rating).push(props.posts[i])
+    // } 
 
  
     
@@ -35,8 +42,8 @@ const TopPosts = (props) => {
                     {
                         props.posts.map(p => <div className={styles.topPostItem} key={p.id}>
                             <div className={styles.imgBlock}>
-                                {p.department ?
-                                    <img src={require('../../../assets/images/' + p.department.faculty.id + '.png')} alt="categoryIcon" />
+                                {p.images.length ?
+                                    <img src={IMAGES_URL + p.images[0].url} alt="categoryIcon" />
                                     :
                                     <img src={require('../../../assets/images/logo.png')} alt="categoryIcon" />
                                 }
