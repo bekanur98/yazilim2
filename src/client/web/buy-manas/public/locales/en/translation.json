@@ -20,5 +20,6 @@
     "login": "Login",
     "with": "with",
     "or": "or",
-    "forgotPassword": "Forgot password?"
+    "forgotPassword": "Forgot password?",
+    "postsLast": "Last posts"
 }
