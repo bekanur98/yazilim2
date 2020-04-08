@@ -36,7 +36,7 @@ const RootStack = createBottomTabNavigator(
             title: trans('title_'+navigation.state.routeName.toLocaleLowerCase()),
         }),
         tabBarOptions: {
-            activeTintColor: 'red',
+            activeTintColor: 'orange',
             inactiveBackgroundColor: 'light-yellow'
         }
     }
@@ -53,6 +53,5 @@ const rootNav = createStackNavigator({
 );
 
 export default  createAppContainer(rootNav)
-// export default createAppContainer(appSwitchNavigator);
 
 
