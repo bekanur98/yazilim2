@@ -3,7 +3,7 @@ let initialState = {
 };
 
 
-const topPostsReducer = (state = initialState, action) => {
+const postsReducer = (state = initialState, action) => {
     switch(action.type){ 
         case 'SET_POSTS':{
             return {  
@@ -17,4 +17,4 @@ const topPostsReducer = (state = initialState, action) => {
 
 } 
 
-export default topPostsReducer;
+export default postsReducer;
