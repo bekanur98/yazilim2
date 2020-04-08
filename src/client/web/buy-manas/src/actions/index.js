@@ -26,7 +26,7 @@ export const setFaculties = faculties => ({
     faculties
 })
 
-export const setPostsAC = posts => ({
+export const setPosts = posts => ({
     type: 'SET_POSTS',
     posts
 })

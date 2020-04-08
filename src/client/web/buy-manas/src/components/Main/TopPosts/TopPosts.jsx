@@ -14,14 +14,14 @@ const TopPosts = (props) => {
         infinite: false,
         speed: 500,
         slidesToShow: 5,
-        slidesToScroll: 2
+        slidesToScroll: 1
     };
     
 
     // cicle for top 10 posts 
     const topPostsArray = [];
     props.posts.sort((a,b)=>b.rating - a.rating).map(p=>{
-        if(topPostsArray.length<=10)
+        if(topPostsArray.length<=9)
         topPostsArray.push(p);
 
 
@@ -40,7 +40,7 @@ const TopPosts = (props) => {
             <div className={styles.topPosts} >
                 <Slider className={styles.slidersStyle} {...settings} >
                     {
-                        props.posts.map(p => <div className={styles.topPostItem} key={p.id}>
+                        topPostsArray.map(p => <div className={styles.topPostItem} key={p.id}>
                             <div className={styles.imgBlock}>
                                 {p.images.length ?
                                     <img src={IMAGES_URL + p.images[0].url} alt="categoryIcon" />
@@ -51,7 +51,6 @@ const TopPosts = (props) => {
 
                             <p className={styles.cost}> {p.cost != null ? p.cost + ' сом' : t('contract')}</p>
                             <p className={styles.postTitle}>{p.title}</p>
-                            <p> Рейтинг {p.rating} </p>
                         </div>)
                     }
 

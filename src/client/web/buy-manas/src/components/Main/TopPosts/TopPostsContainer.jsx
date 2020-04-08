@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as axios from 'axios';
 import TopPosts from './TopPosts';
-import { setPostsAC } from './../../../actions/index';
+import { setPosts } from './../../../actions/index';
 import { API_URL } from '../../../constants';
 
 class TopPostsContainer extends React.Component{
@@ -19,19 +19,11 @@ class TopPostsContainer extends React.Component{
 
 const mapStateToProps = (state) => {
     return{
-        posts: state.topPostsBlock.posts
+        posts: state.postsData.posts
     }
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return{
-        setPosts: (post) => {
-            dispatch(setPostsAC(post));
-        }
-    }
-};
+}; 
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(TopPostsContainer);
+export default connect(mapStateToProps, {setPosts})(TopPostsContainer);
 
 
