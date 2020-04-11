@@ -3,7 +3,7 @@ let initialState = {
     email: null,
     username: null,
     isModalOpen: false,
-    isLogin: true
+    wannaLogin: true 
 };
 
 const authReducer = (state = initialState, action) => {
@@ -12,7 +12,7 @@ const authReducer = (state = initialState, action) => {
         case 'SET_AUTH_USER_DATA':{
             return {
                 ...state,
-                ...action.data
+                ...action.payload
             } 
         }
         case 'TOGGLE_WINDOW_MODAL_AUTH':{
@@ -24,7 +24,7 @@ const authReducer = (state = initialState, action) => {
         case 'TOGGLE_MODAL_LOGIN_AUTH':{
             return{
                 ...state,
-                isLogin: !state.isLogin
+                wannaLogin: !state.wannaLogin
             }
         }
         default:
