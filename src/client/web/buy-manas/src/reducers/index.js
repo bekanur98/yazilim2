@@ -5,6 +5,8 @@ import categoriesReducer from './categoriesReducer'
 import postsReducer from './postsReducer'
 import authReducer from './authReducer'
 import profileReducer from './profileReducer'
+import { reducer as formReducer } from 'redux-form';
+
 
 
 export default combineReducers({
@@ -13,5 +15,6 @@ export default combineReducers({
   categoriesBlock: categoriesReducer,
   postsData: postsReducer,
   auth: authReducer,
-  profilePage: profileReducer
+  profilePage: profileReducer,
+  form: formReducer
 })
