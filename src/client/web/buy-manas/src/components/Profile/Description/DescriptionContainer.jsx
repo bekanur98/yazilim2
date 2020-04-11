@@ -1,18 +1,12 @@
 import React from 'react';
 import Description from './Description';
-import * as axios from 'axios';
 import { setUserData, toggleModalWindowEditProfile, toggleIsFetching } from '../../../actions/index';
 import { connect } from 'react-redux';
 
 
 class DescriptionContainer extends React.Component {
     componentDidMount() {
-        this.props.toggleIsFetching(true);
-        axios.get(`http://buymanasapi.ru.xsph.ru/index.php/api/users/5.json`)
-            .then(response => {
-                this.props.setUserData(response.data);
-                this.props.toggleIsFetching(false);
-            });
+        this.props.setUserData();
     }
     render() {
         return <Description {...this.props} />
