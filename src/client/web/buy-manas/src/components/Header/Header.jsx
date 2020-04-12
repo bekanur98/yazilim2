@@ -5,8 +5,11 @@ import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 import Modal from '../common/Modal/Modal';
 import { reduxForm, Field } from 'redux-form';
+import * as axios from 'axios';
+import { API_URL } from '../../constants';
 
 const LoginForm = (props) => {
+    
     const { t, i18n } = useTranslation(); 
     return (
         <form onSubmit={props.handleSubmit}>
@@ -62,7 +65,28 @@ const Header = (props) => {
     } 
     
     const onSubmit = (formData) =>{
-        props.login(formData.username, formData.logPassword) 
+        props.login(formData.username, formData.logPassword)
+        
+        axios.get(`${API_URL}users`,{params:{'username':formData.username}})
+        .then(r=> {
+            if(r.data.length){
+                console.log('hi')
+            }
+            else{
+                axios.post(`${API_URL}users`,{
+                        "username": formData.username,
+                        "password": formData.regPassword,
+                        "name": 'test',
+                        "email": formData.email,
+                        "phone": formData.number,
+                        
+                })
+                .then(r => console.log(r.data))
+                .catch(e=> console.log(e))
+            }
+        })
+        
+
     }
 
     return (
