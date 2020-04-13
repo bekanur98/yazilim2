@@ -5,32 +5,41 @@ const instance = axios.create({
 })
 
 export const usersApi = {
-    getUser(userId){
+    getUser(userId) {
         return instance.get(`users/${userId}`);
     }
 }
- 
+
 
 
 export const facultiesApi = {
-    getfaculties(){
+    getfaculties() {
         return instance.get(`faculties`);
     }
 }
 
 
 export const postersApi = {
-    getPosts(){
+    getPosts() {
         return instance.get(`posters.json`)
     }
 }
 
 
-export const authApi = { 
-    login(userId, username, password) {
-        return instance.post(`users/${userId}`, {userId, username, password})
+export const authApi = {
+    checkUser(formData) {
+        return instance.get(`users`, { params: { 'username': formData.username } })
     },
-    logout(userId) {
-        return instance.delete(`users/${userId}`)
+    login(userId) {
+        return instance.get(`users/${userId}`)
+    }, 
+    register(formData) {
+        return instance.post(`users`, {
+            "username": formData.username,
+            "password": formData.regPassword,
+            "name": 'test',
+            "email": formData.email,
+            "phone": formData.number,
+        })
     }
 }
