@@ -1,4 +1,6 @@
-import { postersApi, facultiesApi, usersApi, authApi} from "../api/api"
+import React from 'react'
+import { postersApi, facultiesApi, usersApi, authApi } from "../api/api"
+import { Redirect } from "react-router-dom"
 
 
 // ACTIONS
@@ -32,33 +34,34 @@ export const setFacultiesSuccess = faculties => ({
 export const setPostsSuccess = posts => ({
     type: 'SET_POSTS',
     posts
-}) 
+})
 
-export const toggleModalWindowEditProfile = () => ({ 
+export const toggleModalWindowEditProfile = () => ({
     type: 'TOGGLE_MODAL_WINDOW_EDIT_PROFILE'
 })
 
-export const toggleModalWindowAuth = () => ({ 
+export const toggleModalWindowAuth = () => ({
     type: 'TOGGLE_WINDOW_MODAL_AUTH'
 })
-export const toggleModalLoginAuth = () => ({ 
+export const toggleModalLoginAuth = () => ({
     type: 'TOGGLE_MODAL_LOGIN_AUTH'
 })
 
-export const setUserDataSuccess = (userData) => ({ 
+export const setUserDataSuccess = (userData) => ({
     type: 'SET_USER_DATA',
     userData
 })
 
 export const toggleIsFetching = (isFetching) => ({
-    type: 'SET_IS_FETCHING', 
-    isFetching  
+    type: 'SET_IS_FETCHING',
+    isFetching
 })
-
-export const setAuthUserData = (username, login, isAuth) => ({
+export const setAuthUserData = (payload, isAuth) => ({
     type: 'SET_AUTH_USER_DATA',
-    payload: { username, login, isAuth }
+    payload: { ...payload, isAuth }
 });
+
+
 
 // REDUX-THUNKS
 
@@ -76,36 +79,58 @@ export const setFaculties = () => (dispatch) => {
         });
 }
 
-export const setUserData = () => (dispatch) => {
+export const setUserData = (userId) => (dispatch) => {
     dispatch(toggleIsFetching(true));
-    usersApi.getUser(5)
+    usersApi.getUser(userId)
         .then(response => {
             dispatch(setUserDataSuccess(response.data));
             dispatch(toggleIsFetching(false));
         });
 }
 
- 
 
 
-export const authUserDataThunk = () => (dispatch) => {
-    authApi.me()
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                let { username, password } = response.data
-                dispatch(setAuthUserData(username, password, true));
+
+export const login = (formData) => (dispatch) => {
+    authApi.checkUser(formData)
+        .then(r => {
+            if (r.data.length) {
+                if (formData.logPassword == r.data[0].password) {
+                    authApi.login(r.data[0].id)
+                        .then(response => {
+                            dispatch(setAuthUserData(response.data, true))
+                            return <Redirect to='/profile' />
+                        })
+                } else {
+                    alert('Неправильный пароль/логин')
+                };
+            } else {
+                alert('Такой аккаунт не существует')
             }
-        });
+        })
 }
-export const login = (userId, username, password, isAuth) => (dispatch) => {
-    authApi.login(userId, username, password, true)
-        .then(response => {
-            dispatch(authUserDataThunk())
-        });
-}
+
 export const logout = () => (dispatch) => {
-    authApi.logout()
-        .then(response => {
-            dispatch(setAuthUserData(null, null, null, false))
-        });
+    dispatch(setAuthUserData(undefined, false))
+    return <Redirect to='/main' />
+}
+
+export const register = (formData) => (dispatch) => {
+    authApi.checkUser(formData)
+        .then(r => {
+            if (r.data.length) {
+
+            }
+            else {
+                authApi.register(formData)
+                    .then(r => {
+                        if (r.status === 201) {
+                            dispatch(setAuthUserData(r.data, true))
+                            return <Redirect to='/profile' />
+                        } else {
+                            alert('чтото пошло не так')
+                        }
+                    })
+            }
+        })
 }
