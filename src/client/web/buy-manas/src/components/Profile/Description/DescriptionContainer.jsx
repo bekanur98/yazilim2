@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 
 class DescriptionContainer extends React.Component {
     componentDidMount() {
-        this.props.setUserData();
+        this.props.setUserData(this.props.id);
     }
     render() {
         return <Description {...this.props} />
@@ -14,16 +14,17 @@ class DescriptionContainer extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+
     return {
-        name: state.profilePage.name,
-        id: state.profilePage.id,
-        username: state.profilePage.username,
-        email: state.profilePage.email,
-        posters: state.profilePage.posters,
-        phone: state.profilePage.phone,
-        faculty: state.profilePage.faculty,
+        name: state.auth.name,
+        id: state.auth.id,
+        username: state.auth.username,
+        email: state.auth.email,
+        posters: state.auth.posters,
+        phone: state.auth.phone,
+        faculty: state.auth.faculty,
         isModalOpen: state.profilePage.isModalOpen,
-        isFetching: state.profilePage.isFetching
+        isFetching: state.profilePage.isFetching, 
     }
 }
  
