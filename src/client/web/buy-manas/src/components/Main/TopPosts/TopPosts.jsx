@@ -17,21 +17,11 @@ const TopPosts = (props) => {
         slidesToScroll: 1
     };
     
-
-    // cicle for top 10 posts 
     const topPostsArray = [];
     props.posts.sort((a,b)=>b.rating - a.rating).map(p=>{
         if(topPostsArray.length<=9)
         topPostsArray.push(p);
-
-
-    })
-    // for (let i = 0; i <= 10; i++) {
-    //     topPostsArray.sort((a, b) => b.rating - a.rating).push(props.posts[i])
-    // } 
-
- 
-    
+    }) 
 
     return (
         <div className={styles.topPostsWrapper}>
