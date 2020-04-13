@@ -1,16 +1,16 @@
 let initialState = {
-    id: null,
-    email: null,
+    id: null, 
     username: null,
+    phone: null,
+    name: null,
     isModalOpen: false,
     wannaLogin: true 
 };
-
 const authReducer = (state = initialState, action) => {
 
     switch(action.type){ 
         case 'SET_AUTH_USER_DATA':{
-            return {
+        return {
                 ...state,
                 ...action.payload
             } 
@@ -31,7 +31,6 @@ const authReducer = (state = initialState, action) => {
             return state;
     } 
 
-};
-
+}; 
 
 export default authReducer;

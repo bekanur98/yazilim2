@@ -16,9 +16,9 @@ const Description = (props) => {
                     <p className={styles.username}> @{props.username} </p>
                 </div>
                 <div className={styles.iDontKnow}>
-                    <div className={styles.faculty}> <img src={require('../../../assets/images/' + props.faculty.id + '.png')} alt="Faculty" /> </div>
+                    <div className={styles.faculty}> <img src={require('../../../assets/images/' + '5' + '.png')} alt="Faculty" /> </div>
                     <div className={styles.postLength}>
-                        <p> {props.posters.length} </p>
+                        <p> {props.posters.length ? props.posters.length : 0 } </p>
                         <span> posts </span> 
                     </div>
                     <div className={styles.rating}>
