@@ -73,7 +73,7 @@ const Header = (props) => {
         <div className={styles.appHeader}>
 
             <div className={styles.logoBlock}>
-                <NavLink to='/'> <img src={logo} alt="logo" /></NavLink>
+                <NavLink to='/main'> <img src={logo} alt="logo" /></NavLink>
                 <div className={styles.slogan}>
                     <p>Buy-Manas</p>
                     <p>{t('logo_text')}</p>
