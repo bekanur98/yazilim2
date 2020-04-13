@@ -5,12 +5,10 @@ import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 import Modal from '../common/Modal/Modal';
 import { reduxForm, Field } from 'redux-form';
-import * as axios from 'axios';
-import { API_URL } from '../../constants';
 
 const LoginForm = (props) => {
     
-    const { t, i18n } = useTranslation(); 
+    const { t } = useTranslation(); 
     return (
         <form onSubmit={props.handleSubmit}>
             <Field component='input' type="text" placeholder={t('yourUsername')} name='username'/>
@@ -34,7 +32,7 @@ const LoginForm = (props) => {
 }
 
 const RegisterForm = (props) => {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     return (
         <form onSubmit={props.handleSubmit}>
             <Field component='input' type="text" placeholder={t('yourUsername')} name='username' />
@@ -64,29 +62,11 @@ const Header = (props) => {
         i18n.changeLanguage(lang)
     } 
     
-    const onSubmit = (formData) =>{
-        props.login(formData.username, formData.logPassword)
-        
-        axios.get(`${API_URL}users`,{params:{'username':formData.username}})
-        .then(r=> {
-            if(r.data.length){
-                console.log('hi')
-            }
-            else{
-                axios.post(`${API_URL}users`,{
-                        "username": formData.username,
-                        "password": formData.regPassword,
-                        "name": 'test',
-                        "email": formData.email,
-                        "phone": formData.number,
-                        
-                })
-                .then(r => console.log(r.data))
-                .catch(e=> console.log(e))
-            }
-        })
-        
-
+    const onRegisterSubmit = (formData) =>{
+        props.register(formData)
+    }
+    const onLoginSubmit = (formData) =>{
+        props.login(formData)
     }
 
     return (
@@ -100,8 +80,13 @@ const Header = (props) => {
                 </div>
             </div>
             <div>
-                <button className={styles.auth} onClick={props.toggleModalWindowAuth}>{t('auth')}</button>
-                <NavLink to='/profile'> Profile(Test) </NavLink>
+
+                {props.isAuth 
+                    ? <div><NavLink to='/profile'> Profile(Test) </NavLink> - <button onClick={props.logout}>logout</button></div>
+                    : <button className={styles.auth} onClick={props.toggleModalWindowAuth}>{t('auth')}</button>
+                }
+                
+                
 
                 <div className={styles.changeLangBlock}>
                     <label> <input type="radio" name="a1" onClick={() => changeLang('kg')} /> <span>KG</span> </label>
@@ -116,9 +101,9 @@ const Header = (props) => {
                 <Modal onClose={props.toggleModalWindowAuth}>
                     {
                         props.wannaLogin ?
-                            <LoginReduxForm toggleModalLoginAuth={props.toggleModalLoginAuth} onSubmit={onSubmit} />
+                            <LoginReduxForm toggleModalLoginAuth={props.toggleModalLoginAuth} onSubmit={onLoginSubmit} />
                             :
-                            <RegisterReduxForm toggleModalLoginAuth={props.toggleModalLoginAuth} onSubmit={onSubmit} />
+                            <RegisterReduxForm toggleModalLoginAuth={props.toggleModalLoginAuth} onSubmit={onRegisterSubmit} />
                     }
                 </Modal>
             }
