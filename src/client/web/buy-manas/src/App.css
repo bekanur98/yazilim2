@@ -1,7 +1,8 @@
 .appWrapper{
     display: grid;
     grid-template-areas: ' h '
-                         ' c ';
+                         ' c '
+                         ' f ';
     width: 1200px;
     margin: 0 auto;
     background: whitesmoke;
