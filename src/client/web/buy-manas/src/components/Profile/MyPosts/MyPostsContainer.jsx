@@ -6,7 +6,7 @@ import { setUserData } from '../../../actions/index';
 
 class MyPostsContainer extends React.Component{
     componentDidMount() {
-        this.props.setUserData();
+        this.props.setUserData(this.props.id);
     }
     render(){
         return <MyPosts {...this.props} />
@@ -15,7 +15,8 @@ class MyPostsContainer extends React.Component{
 
 const mapStateToProps = (state) => {
     return{
-        posts: state.profilePage.posters
+        posts: state.auth.posters,
+        id: state.auth.id
     }
 }; 
 
