@@ -25,6 +25,7 @@ const mapStateToProps = (state) => {
         faculty: state.auth.faculty,
         isModalOpen: state.profilePage.isModalOpen,
         isFetching: state.profilePage.isFetching, 
+        faculties: state.categoriesBlock.faculties
     }
 }
  
