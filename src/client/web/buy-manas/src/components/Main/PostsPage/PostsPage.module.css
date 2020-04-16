@@ -1,0 +1,68 @@
+.postWrapper{
+    display: flex;
+    justify-content: space-between; 
+} 
+
+.aboutPost{
+    padding: 20px;
+}
+
+.aboutPost .postImg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 600px;
+    height: 300px;
+    border-radius: 20px;
+    border: 2px solid rgb(31, 30, 30);
+    padding: 20px 10px;
+}
+.aboutPost .postImg.noneBorder{
+    border: none;
+}
+.aboutPost .postImg img{
+    border-radius: 20px;
+    height: 100%;
+}
+
+.aboutPost .descrBlock{
+    padding: 20px 0;
+}
+
+
+
+hr{
+    width: 90%;
+    color: #eee;
+    text-align: center;
+}
+
+
+
+.aboutAuthor{
+    height: 100%; 
+    margin: 20px 80px 0 0;
+    padding: 0 20px 40px;
+    border-radius: 10px; 
+    width: 30%; 
+}
+
+.aboutAuthor .username,
+.aboutAuthor .phone,
+.aboutAuthor .authorsFaculty {
+    padding: 10px;
+    /* border-bottom: 1px solid rgb(37, 36, 36); */
+}
+
+.aboutAuthor .username{
+    cursor: pointer;
+}
+
+.aboutAuthor .authorsFaculty{
+    padding: 10px; 
+}
+.aboutAuthor .authorsFaculty img{
+    padding: 10px;
+    margin: 0 auto;
+    width: 30%;
+}
