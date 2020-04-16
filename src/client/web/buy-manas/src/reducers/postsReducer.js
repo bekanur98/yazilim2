@@ -1,5 +1,6 @@
 let initialState = {
-    posts: []
+    posts: [],
+    forPostPage: null
 };
 
 
@@ -9,6 +10,12 @@ const postsReducer = (state = initialState, action) => {
             return {  
                 ...state,
                 posts: action.posts 
+            }
+        } 
+        case 'SET_ONE_POST':{
+            return {  
+                ...state,
+                forPostPage: {...action.postData} 
             }
         } 
         default:
