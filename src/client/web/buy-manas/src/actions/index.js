@@ -1,6 +1,5 @@
-import React from 'react'
 import { postersApi, facultiesApi, usersApi, authApi } from "../api/api"
-import { Redirect } from "react-router-dom"
+import { stopSubmit } from 'redux-form'
 
 
 // ACTIONS
@@ -61,6 +60,10 @@ export const setAuthUserData = (payload, isAuth) => ({
     payload: { ...payload, isAuth }
 });
 
+export const setOnePost = (postData) => ({
+    type: 'SET_ONE_POST',
+    postData
+})
 
 
 // REDUX-THUNKS
@@ -90,47 +93,51 @@ export const setUserData = (userId) => (dispatch) => {
 
 
 
-
 export const login = (formData) => (dispatch) => {
     authApi.checkUser(formData)
         .then(r => {
-            if (r.data.length) {
-                if (formData.logPassword == r.data[0].password) {
-                    authApi.login(r.data[0].id)
-                        .then(response => {
-                            dispatch(setAuthUserData(response.data, true))
-                            return <Redirect to='/profile' />
-                        })
-                } else {
-                    alert('Неправильный пароль/логин')
-                };
+            if (r.data.length && formData.logPassword == r.data[0].password) {
+                authApi.login(r.data[0].id)
+                    .then(response => {
+                        dispatch(setAuthUserData(response.data, true))
+                        dispatch(toggleModalWindowAuth());
+                    })
             } else {
-                alert('Такой аккаунт не существует')
-            }
+                dispatch(stopSubmit('login', { _error: 'Неправильный логин или пароль' }));
+            };
         })
 }
 
 export const logout = () => (dispatch) => {
     dispatch(setAuthUserData(undefined, false))
-    return <Redirect to='/main' />
 }
 
 export const register = (formData) => (dispatch) => {
     authApi.checkUser(formData)
         .then(r => {
             if (r.data.length) {
-
+                dispatch(stopSubmit('register', { _error: 'Неправильный логин или пароль' }));
+                // throw new SubmissionError({
+                //     username: 'Имя пользователя уже существует'
+                // })
             }
             else {
                 authApi.register(formData)
                     .then(r => {
                         if (r.status === 201) {
-                            dispatch(setAuthUserData(r.data, true))
-                            return <Redirect to='/profile' />
+                            dispatch(setAuthUserData(r.data, true)) 
+                            dispatch(toggleModalWindowAuth());
                         } else {
-                            alert('чтото пошло не так')
+                            alert('Что-то пошло не так')
                         }
                     })
             }
+        })
+}
+
+export const getOnePost = (postId) => (dispatch) => {
+    postersApi.getOnePost(postId)
+        .then(r => {
+            dispatch(setOnePost(r.data))
         })
 }
