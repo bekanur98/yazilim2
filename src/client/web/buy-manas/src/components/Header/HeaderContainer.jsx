@@ -12,7 +12,9 @@ class HeaderContainer extends React.Component {
 const mapStateToProps = (state) => ({
     isModalOpen: state.auth.isModalOpen,
     wannaLogin: state.auth.wannaLogin,
-    isAuth: state.auth.isAuth
+    isAuth: state.auth.isAuth,
+    faculties: state.categoriesBlock.faculties,
+    username: state.auth.username
 }); 
 
 export default connect(mapStateToProps, {setAuthUserData, toggleModalWindowAuth, toggleModalLoginAuth, login, logout, register})(HeaderContainer);
