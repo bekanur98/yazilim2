@@ -16,8 +16,8 @@ const Footer = (props) => {
 
             <div className={styles.leftSide}>
                 <div className={styles.mediaLinks}>
-                    <a href="#">Facebook</a>
-                    <a href="#">Twitter</a>
+                    <a href="https://facebook.com">Facebook</a>
+                    <a href="https://instagram.com">Instagram</a>
                 </div>
             </div>
         </div>
