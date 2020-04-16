@@ -17,3 +17,29 @@
     margin: 0 auto;
     background: rgba(0, 0, 0, 0.3);
 } 
+
+.FormsControls_formControl__1XUDo .react-tel-input .form-control{
+    position: relative;
+    font-size: 14px;
+    letter-spacing: .01rem;
+    margin-top: 5px !important;
+    margin-bottom: 0 !important;
+    padding-left: 6px;
+    margin-left: 32px;  
+    height: 35px;
+    width: 215px;
+    border-radius: 0; 
+    border: none;
+    border-bottom: 1px solid black;
+}
+ 
+.FormsControls_formControl__1XUDo .react-tel-input .flag-dropdown{
+    left: -5px;
+}
+.preloader{
+    text-align: center;
+}
+.preloader img{
+    width: 80%; 
+    height: 100vh;
+}
