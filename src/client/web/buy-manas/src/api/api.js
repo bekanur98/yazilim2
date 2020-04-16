@@ -22,6 +22,9 @@ export const facultiesApi = {
 export const postersApi = {
     getPosts() {
         return instance.get(`posters.json`)
+    },
+    getOnePost(postId){
+        return instance.get(`posters/${postId}`)
     }
 }
 
@@ -37,9 +40,10 @@ export const authApi = {
         return instance.post(`users`, {
             "username": formData.username,
             "password": formData.regPassword,
-            "name": 'test',
+            "name": formData.name,
             "email": formData.email,
             "phone": formData.number,
+            "faculty": formData.faculty.value
         })
     }
 }
