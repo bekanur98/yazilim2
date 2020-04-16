@@ -3,7 +3,7 @@ import preloader from '../../../assets/images/preloader.gif'
 
 const Preloader = () => {
     return (
-        <div>
+        <div className='preloader'>
             {}
             <img src={ preloader } alt="Loading"/>
         </div>
