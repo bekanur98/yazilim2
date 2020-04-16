@@ -1,0 +1,23 @@
+.newPostWrapper{
+    padding: 20px;
+}
+.newPostWrapper form{
+    display: grid;
+}
+.newPostWrapper form div:not(.submit){
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+}
+.newPostWrapper form div .blockName{
+    text-align: right;
+    font-weight: bold;
+    color: #333333;
+}
+
+.newPostWrapper form div .inputs input{
+    background: #fff;
+    color: #636363;
+    border: none;
+    border-bottom: 1px solid #636363;
+    width: 100%;
+} 
