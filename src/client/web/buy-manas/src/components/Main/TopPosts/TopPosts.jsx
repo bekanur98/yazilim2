@@ -5,8 +5,9 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { IMAGES_URL } from '../../../constants';
+import { NavLink } from 'react-router-dom';
 
-const TopPosts = (props) => { 
+const TopPosts = (props) => {
 
     const { t } = useTranslation();
     let settings = {
@@ -16,12 +17,12 @@ const TopPosts = (props) => {
         slidesToShow: 5,
         slidesToScroll: 1
     };
-    
+
     const topPostsArray = [];
-    props.posts.sort((a,b)=>b.rating - a.rating).map(p=>{
-        if(topPostsArray.length<=9)
-        topPostsArray.push(p);
-    }) 
+    props.posts.sort((a, b) => b.rating - a.rating).map(p => {
+        if (topPostsArray.length <= 9)
+            topPostsArray.push(p);
+    })
 
     return (
         <div className={styles.topPostsWrapper}>
@@ -30,25 +31,27 @@ const TopPosts = (props) => {
             <div className={styles.topPosts} >
                 <Slider className={styles.slidersStyle} {...settings} >
                     {
-                        topPostsArray.map(p => <div className={styles.topPostItem} key={p.id}>
-                            <div className={styles.imgBlock}>
-                                {p.images.length ?
-                                    <img src={IMAGES_URL + p.images[0].url} alt="categoryIcon" />
-                                    :
-                                    <img src={require('../../../assets/images/logo.png')} alt="categoryIcon" />
-                                }
-                            </div>
+                        topPostsArray.map(p => <NavLink to={`posts/${p.id}`}>
+                            <div className={styles.topPostItem} key={p.id}>
+                                <div className={styles.imgBlock}>
+                                    {p.images.length ?
+                                        <img src={IMAGES_URL + p.images[0].url} alt="categoryIcon" />
+                                        :
+                                        <img src={require('../../../assets/images/logo.png')} alt="categoryIcon" />
+                                    }
+                                </div>
 
-                            <p className={styles.cost}> {p.cost != null ? p.cost + ' сом' : t('contract')}</p>
-                            <p className={styles.postTitle}>{p.title}</p>
-                        </div>)
+                                <p className={styles.cost}> {p.cost != null ? p.cost + ' сом' : t('contract')}</p>
+                                <p className={styles.postTitle}>{p.title}</p>
+                            </div>
+                        </NavLink>)
                     }
 
                 </Slider>
 
             </div>
         </div>
-    );    
+    );
 }
 
 export default TopPosts;

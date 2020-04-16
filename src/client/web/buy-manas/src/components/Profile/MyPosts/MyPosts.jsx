@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './MyPosts.module.css';
 import { useTranslation } from 'react-i18next';
 import { IMAGES_URL } from '../../../constants';
+import { NavLink } from 'react-router-dom';
 
 
 const MyPosts = (props) => {
@@ -20,7 +21,8 @@ const MyPosts = (props) => {
 
             {
                     LastPostsArray.length 
-                        ? LastPostsArray.map(p => <div className={styles.myPostItem} key={p.id}>
+                        ? LastPostsArray.map(p => <NavLink to={`posts/${p.id}`}>
+                             <div className={styles.myPostItem} key={p.id}>
                             <div className={styles.imgBlock}>
                                 {p.images.length ?
                                     <img src={IMAGES_URL + p.images[0].url} alt="categoryIcon" />
@@ -31,7 +33,8 @@ const MyPosts = (props) => {
 
                             <p className={styles.cost}> {p.cost != null ? p.cost + ' сом' : t('contract')}</p>
                             <p className={styles.postTitle}>{p.title}</p>
-                        </div>)
+                        </div>
+                        </NavLink>)
                         : <p className={styles.nullPosts}>Пока нет постов((</p>
                          
                 }

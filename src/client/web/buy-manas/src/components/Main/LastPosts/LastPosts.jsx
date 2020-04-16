@@ -4,10 +4,11 @@ import { useTranslation } from 'react-i18next';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { IMAGES_URL } from '../../../constants';
+import { NavLink } from 'react-router-dom';
 
 const LastPosts = (props) => {
 
-    const { t } = useTranslation(); 
+    const { t } = useTranslation();
 
 
     // cicle for top 10 posts 
@@ -25,9 +26,10 @@ const LastPosts = (props) => {
         <div className={styles.LastPostsWrapper}>
             <h3>{t('postsLast')}</h3>
 
-            <div className={styles.lastPosts} > 
-                    {
-                        LastPostsArray.map(p => <div className={styles.lastPostItem} key={p.id}>
+            <div className={styles.lastPosts} >
+                {
+                    LastPostsArray.map(p => <NavLink to={`posts/${p.id}`}>
+                        <div className={styles.lastPostItem} key={p.id}>
                             <div className={styles.imgBlock}>
                                 {p.images.length ?
                                     <img src={IMAGES_URL + p.images[0].url} alt="categoryIcon" />
@@ -38,8 +40,9 @@ const LastPosts = (props) => {
 
                             <p className={styles.cost}> {p.cost != null ? p.cost + ' сом' : t('contract')}</p>
                             <p className={styles.postTitle}>{p.title}</p>
-                        </div>)
-                    } 
+                        </div>
+                    </NavLink>)
+                }
             </div>
         </div>
     );
