@@ -12,6 +12,11 @@
     cursor: pointer;
 }
 
+.lastPosts a{
+    text-decoration: none;
+    color: black;
+}
+
 .lastPostItem{ 
     margin-top: 15px;
 }

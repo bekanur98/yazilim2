@@ -12,6 +12,11 @@
     cursor: pointer;
 }
 
+.topPosts a{
+    text-decoration: none;
+    color: black;
+}
+
 .topPostItem{ 
     margin-top: 15px;
 }
