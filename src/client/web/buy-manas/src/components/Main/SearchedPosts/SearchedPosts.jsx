@@ -1,20 +1,20 @@
 import React from 'react';
-import styles from './LastPosts.module.css'
+// import  from './LastPosts.module.css'
+import styles from '../LastPosts/LastPosts.module.css'
 import { useTranslation } from 'react-i18next';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { IMAGES_URL } from '../../../constants';
 import { NavLink } from 'react-router-dom';
 
-const LastPosts = (props) => {
+const SearchedPosts = (props) => {
 
     const { t } = useTranslation();
 
-    console.log(props)
 
     // cicle for top 10 posts 
     const LastPostsArray = [];
-    props.posts.sort((a, b) => {
+    props.searchedPost.sort((a, b) => {
         return new Date(b.publishedAt) - new Date(a.publishedAt);
     }).map(p => {
         LastPostsArray.push(p);
@@ -24,8 +24,8 @@ const LastPosts = (props) => {
 
 
     return (
-        <div className={styles.LastPostsWrapper}>
-            <h3>{t('postsLast')}</h3>
+        <div >
+            <h3>Результаты поиска</h3>
 
             <div className={styles.lastPosts} >
                 {
@@ -49,4 +49,4 @@ const LastPosts = (props) => {
     );
 }
 
-export default LastPosts;
+export default SearchedPosts;

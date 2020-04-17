@@ -28,6 +28,11 @@ export const postersApi = {
     }
 }
 
+export const searchPostsApi = {
+    getPostsByTitle(title){
+        return instance.get('posters',{ params: {'title': title}})
+    }
+}
 
 export const authApi = {
     checkUser(formData) {

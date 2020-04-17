@@ -1,5 +1,6 @@
 let initialState = {
     posts: [],
+    searchedPost: [],
     forPostPage: null
 };
 
@@ -16,6 +17,12 @@ const postsReducer = (state = initialState, action) => {
             return {  
                 ...state,
                 forPostPage: {...action.postData} 
+            }
+        }
+        case 'SET_POSTS_BY_TITLE': {
+            return {
+                ...state,
+                searchedPost: action.searchedPost
             }
         } 
         default:

@@ -1,11 +1,12 @@
 import React from 'react'; 
 import { connect } from 'react-redux';
 import LastPosts from './LastPosts';
-import { setPosts } from '../../../actions/index';
+import { setPosts, setPostByTitle } from '../../../actions/index';
 
 class LastPostsContainer extends React.Component{
     componentDidMount() {
         this.props.setPosts();
+        this.props.setPostByTitle('пост')
     }
     render(){
         return <LastPosts {...this.props} />
@@ -14,10 +15,11 @@ class LastPostsContainer extends React.Component{
 
 const mapStateToProps = (state) => {
     return{
-        posts: state.postsData.posts
+        posts: state.postsData.posts,
+        searchedPosts: state.postsData.searchedPosts
     }
 }; 
 
-export default connect(mapStateToProps, {setPosts})(LastPostsContainer);
+export default connect(mapStateToProps, {setPosts,setPostByTitle})(LastPostsContainer);
 
 

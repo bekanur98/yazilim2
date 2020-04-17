@@ -14,9 +14,10 @@ const App = (props) => {
     return (
         <div className="appWrapper">
             <HeaderContainer />
-            <Route path='/main' render={() => <Main />} />
+            <Route exact path='/' render={() => <Main />} />
             <Route path='/profile' render={() => <Profile />} />            
-            <Route exact path='/facultiesPosts/:facultyId' render={() => <FacultiesPostsContainer />} />            
+            <Route path='/facultiesPosts/:facultyId' render={() => <FacultiesPostsContainer />} />
+            <Route path={'/facultiesPosts/:facultyId/posts/:postsId'} render={() => <PostsPageContainer />} />                        
             <Route path={'/posts/:postsId'} render={() => <PostsPageContainer />} />            
             <Route path={'/newPost'} render={() => <NewPostContainer />} />            
             <Footer />

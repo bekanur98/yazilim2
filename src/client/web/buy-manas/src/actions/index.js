@@ -1,4 +1,4 @@
-import { postersApi, facultiesApi, usersApi, authApi } from "../api/api"
+import { postersApi, facultiesApi, usersApi, authApi, searchPostsApi } from "../api/api"
 import { stopSubmit } from 'redux-form'
 
 
@@ -28,6 +28,11 @@ export const VisibilityFilters = {
 export const setFacultiesSuccess = faculties => ({
     type: 'SET_FACULTIES',
     faculties
+})
+
+export const setPostsByTitleSuccess = searchedPost => ({
+    type: 'SET_POSTS_BY_TITLE',
+    searchedPost
 })
 
 export const setPostsSuccess = posts => ({
@@ -67,6 +72,13 @@ export const setOnePost = (postData) => ({
 
 
 // REDUX-THUNKS
+
+export const setPostByTitle = (title) => (dispatch) => {
+    searchPostsApi.getPostsByTitle(title)
+        .then(response => {
+            dispatch(setPostsByTitleSuccess(response.data))
+        })
+}
 
 export const setPosts = () => (dispatch) => {
     postersApi.getPosts()

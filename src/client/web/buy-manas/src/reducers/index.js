@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux'
-import todos from './todos'
 import visibilityFilter from './visibilityFilter' 
 import categoriesReducer from './categoriesReducer' 
 import postsReducer from './postsReducer'
@@ -10,7 +9,6 @@ import { reducer as formReducer } from 'redux-form';
 
 
 export default combineReducers({
-  todos,
   visibilityFilter,
   categoriesBlock: categoriesReducer,
   postsData: postsReducer,
