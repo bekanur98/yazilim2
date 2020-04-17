@@ -14,6 +14,17 @@ export const Input = ({input, meta, ...props}) => {
     )
 }
 
+
+export const Textarea = ({input, meta, ...props}) => {
+    const hasError = meta.touched && meta.error
+    return(
+        <div className={styles.formControl + ' ' + (hasError ? styles.error : '') }>
+            <div> <textarea type="text" {...input} {...props} autoComplete="off"/> </div>
+            { hasError && <span>{meta.error}</span> } 
+        </div>
+    )
+}
+
 export const Phone = ({input, meta, ...props}) => { 
     const {t} = useTranslation();
     return(
