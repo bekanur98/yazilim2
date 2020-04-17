@@ -33,6 +33,12 @@ const postsReducer = (state = initialState, action) => {
                 searchedPost: actions.searchedPost
             }
         }
+        case 'NEW_POST': {
+            return{
+                ...state,
+                posts: action.newPostData
+            }
+        }
         default:
             return state;
     } 
