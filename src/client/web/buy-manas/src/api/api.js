@@ -21,10 +21,24 @@ export const facultiesApi = {
 
 export const postersApi = {
     getPosts() {
-        return instance.get(`posters.json`)
+        return instance.get(`posters`)
     },
     getOnePost(postId){
         return instance.get(`posters/${postId}`)
+    },
+    postPost(newPostData){
+        debugger
+        return instance.post(`posters`, {
+            "title": newPostData.title,
+            "description": newPostData.description,
+            "cost": newPostData.cost,
+            "rating": 0,
+            "images": [],
+            // "publishedAt": newPostData.publishedAt,
+            // "author": newPostData.author,
+            // "department": newPostData.department,
+            // "comments": [],
+        })
     }
 }
 
