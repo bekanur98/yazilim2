@@ -6,9 +6,11 @@ import { NavLink } from 'react-router-dom';
 import Modal from '../common/Modal/Modal';
 import LoginForm from './LoginForm/LoginForm';
 import RegisterForm from './RegisterForm/RegisterForm';
+import {useDispatch} from 'react-redux';
+import { setPostByTitle } from '../../actions/index';
 
 const Header = (props) => {
-    // console.log('header'+)
+    const dispatch = useDispatch();
     const { t, i18n } = useTranslation();
     function changeLang(lang = 'kg') {
         i18n.changeLanguage(lang)
@@ -25,7 +27,7 @@ const Header = (props) => {
         <div className={styles.appHeader}>
 
             <div className={styles.logoBlock}>
-                <NavLink to='/'> <img src={logo} alt="logo" /></NavLink>
+                <NavLink to='/'> <img src={logo} onClick={()=>dispatch(setPostByTitle(''))} alt="logo" /></NavLink>
                 <div className={styles.slogan}>
                     <p>Buy-Manas</p>
                     <p>{t('logo_text')}</p>

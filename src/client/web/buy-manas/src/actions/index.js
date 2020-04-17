@@ -37,7 +37,7 @@ export const setPostsByTitleSuccess = searchedPost => ({
 
 export const setPostsByTitleFailure = () => ({
     type: 'NOTHING_FOUNDED',
-    searchedPost: []
+    searchedPost: undefined
 })
 
 export const setPostsSuccess = posts => ({

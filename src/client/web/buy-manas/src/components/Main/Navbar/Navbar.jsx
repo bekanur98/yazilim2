@@ -14,6 +14,7 @@ const Navbar = (props) => {
     function onClickSearch(search){
         if(search){
             dispatch(setPostByTitle(search));
+            setSearchText('')
         }
             
     }

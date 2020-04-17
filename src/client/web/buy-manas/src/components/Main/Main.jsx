@@ -9,14 +9,16 @@ import { useEffect } from 'react';
 
 const Main = (props) => {
 
-    const searchedPost = useSelector(state => state.postsData.searchedPost) 
-    console.log(searchedPost)
+    let searchedPost = useSelector(state => state.postsData.searchedPost);
+    // console.log(searchedPost)
+
+    
 
     return (
 
         <div className={styles.mainWrapper}>
             <Navbar />
-            {searchedPost.length ?
+            {searchedPost ?
                 <SearchedPostsContainer/>
             :
                 (

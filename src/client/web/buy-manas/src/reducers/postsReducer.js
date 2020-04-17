@@ -29,8 +29,8 @@ const postsReducer = (state = initialState, action) => {
         } 
         case 'NOTHING_FOUNDED': {
             return {
-                state,
-                // searchedPost: actions.searchedPost
+                ...state,
+                searchedPost: actions.searchedPost
             }
         }
         default:
