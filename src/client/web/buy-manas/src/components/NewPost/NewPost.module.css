@@ -1,23 +1,33 @@
-.newPostWrapper{
+ .newPostWrapper{
     padding: 20px;
-}
-.newPostWrapper form{
+ }
+ 
+ .newPostWrapper form > div:not(.submit){
     display: grid;
-}
-.newPostWrapper form div:not(.submit){
-    display: grid;
-    grid-template-columns: 1fr 4fr;
-}
-.newPostWrapper form div .blockName{
+    grid-template-columns: 1fr 4fr; 
+    margin-top: 40px;
+ }
+
+ .newPostWrapper form div .blockName{
     text-align: right;
-    font-weight: bold;
-    color: #333333;
 }
 
-.newPostWrapper form div .inputs input{
-    background: #fff;
-    color: #636363;
+.newPostWrapper form div .inputs{
+    margin: auto 0 auto 20px;
+}
+
+.newPostWrapper form div .inputs input,
+.newPostWrapper form div .inputs textarea{
+    background: whitesmoke;
+    padding: 10px;
+    color: #707070;
     border: none;
-    border-bottom: 1px solid #636363;
-    width: 100%;
-} 
+    border-bottom: 1px solid #707070;
+    border-radius: 0;
+    width: 300px;
+}
+.newPostWrapper form .newDescr .inputs textarea{
+    height: 200px; 
+    max-width: 300px;
+    resize: none;
+}
