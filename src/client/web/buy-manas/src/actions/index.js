@@ -75,22 +75,25 @@ export const setOnePost = (postData) => ({
     postData
 })
 
+export const newPostSuccess = (newPostData) => ({
+    type: 'NEW_POST',
+    newPostData
+})
 
 // REDUX-THUNKS
 
 export const setPostByTitle = (title) => (dispatch) => {
-    if(title){
+    if (title) {
         searchPostsApi.getPostsByTitle(title)
-        .then(response => {
-            if(response.data.length > 0){
-                dispatch(setPostsByTitleSuccess(response.data))
-            }  
-        })
+            .then(response => {
+                if (response.data.length > 0) {
+                    dispatch(setPostsByTitleSuccess(response.data))
+                }
+            })
     }
-    else{
-        console.log('hi')
+    else {
         dispatch(setPostsByTitleFailure())
-        }
+    }
 }
 
 export const setPosts = () => (dispatch) => {
@@ -142,15 +145,12 @@ export const register = (formData) => (dispatch) => {
         .then(r => {
             if (r.data.length) {
                 dispatch(stopSubmit('register', { _error: 'Неправильный логин или пароль' }));
-                // throw new SubmissionError({
-                //     username: 'Имя пользователя уже существует'
-                // })
             }
             else {
                 authApi.register(formData)
                     .then(r => {
                         if (r.status === 201) {
-                            dispatch(setAuthUserData(r.data, true)) 
+                            dispatch(setAuthUserData(r.data, true))
                             dispatch(toggleModalWindowAuth());
                         } else {
                             alert('Что-то пошло не так')
@@ -164,5 +164,18 @@ export const getOnePost = (postId) => (dispatch) => {
     postersApi.getOnePost(postId)
         .then(r => {
             dispatch(setOnePost(r.data))
+        })
+}
+
+export const newPost = (newPostData) => (dispatch) => {
+    debugger
+    postersApi.postPost(newPostData)
+        .then(r => {
+            if(r.status === 201){ 
+                debugger
+                dispatch(newPostSuccess(r.data))
+            } else {
+                alert(r)
+            }
         })
 }
