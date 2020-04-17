@@ -1,6 +1,5 @@
 import React from 'react';
-// import  from './LastPosts.module.css'
-import styles from '../LastPosts/LastPosts.module.css'
+import styles from './SearchedPosts.module.css'
 import { useTranslation } from 'react-i18next';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -27,10 +26,10 @@ const SearchedPosts = (props) => {
         <div >
             <h3>Результаты поиска</h3>
 
-            <div className={styles.lastPosts} >
+            <div className={styles.searchedPosts} >
                 {
                     LastPostsArray.map(p => <NavLink to={`posts/${p.id}`}>
-                        <div className={styles.lastPostItem} key={p.id}>
+                        <div className={styles.searchedPostItem} key={p.id}>
                             <div className={styles.imgBlock}>
                                 {p.images.length ?
                                     <img src={IMAGES_URL + p.images[0].url} alt="categoryIcon" />
@@ -38,9 +37,11 @@ const SearchedPosts = (props) => {
                                     <img src={require('../../../assets/images/logo.png')} alt="categoryIcon" />
                                 }
                             </div>
-
-                            <p className={styles.cost}> {p.cost != null ? p.cost + ' сом' : t('contract')}</p>
-                            <p className={styles.postTitle}>{p.title}</p>
+                            <div className={styles.descriptionBlock}>
+                                <p className={styles.postTitle}>{p.title}</p>
+                                <p className={styles.description}>{p.description}</p>
+                                <p className={styles.cost}> {p.cost != null ? p.cost + ' сом' : t('contract')}</p>
+                            </div>
                         </div>
                     </NavLink>)
                 }
