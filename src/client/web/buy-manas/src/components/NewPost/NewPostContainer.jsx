@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import NewPost from './NewPost';
+import { newPost } from '../../actions';
 
 class NewPostContainer extends React.Component {
     render() {
@@ -8,8 +9,9 @@ class NewPostContainer extends React.Component {
     }
 }
 
-const mapStateToProps = (state) => ({
-    state: state
+const mapStateToProps = (state) => ({ 
+    name: state.auth.name,
+    id: state.auth.id
 });
 
-export default connect(mapStateToProps, {})(NewPostContainer);
+export default connect(mapStateToProps, {newPost})(NewPostContainer);
