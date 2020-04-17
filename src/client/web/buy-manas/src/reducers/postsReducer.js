@@ -1,3 +1,5 @@
+import actions from "redux-form/lib/actions";
+
 let initialState = {
     posts: [],
     searchedPost: [],
@@ -25,6 +27,12 @@ const postsReducer = (state = initialState, action) => {
                 searchedPost: action.searchedPost
             }
         } 
+        case 'NOTHING_FOUNDED': {
+            return {
+                state,
+                // searchedPost: actions.searchedPost
+            }
+        }
         default:
             return state;
     } 

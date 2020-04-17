@@ -35,6 +35,11 @@ export const setPostsByTitleSuccess = searchedPost => ({
     searchedPost
 })
 
+export const setPostsByTitleFailure = () => ({
+    type: 'NOTHING_FOUNDED',
+    searchedPost: []
+})
+
 export const setPostsSuccess = posts => ({
     type: 'SET_POSTS',
     posts
@@ -74,10 +79,18 @@ export const setOnePost = (postData) => ({
 // REDUX-THUNKS
 
 export const setPostByTitle = (title) => (dispatch) => {
-    searchPostsApi.getPostsByTitle(title)
+    if(title){
+        searchPostsApi.getPostsByTitle(title)
         .then(response => {
-            dispatch(setPostsByTitleSuccess(response.data))
+            if(response.data.length > 0){
+                dispatch(setPostsByTitleSuccess(response.data))
+            }  
         })
+    }
+    else{
+        console.log('hi')
+        dispatch(setPostsByTitleFailure())
+        }
 }
 
 export const setPosts = () => (dispatch) => {

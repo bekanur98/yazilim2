@@ -5,11 +5,13 @@ import TopPostsContainer from './TopPosts/TopPostsContainer';
 import styles from './Main.module.css'
 import LastPostsContainer from './LastPosts/LastPostsContainer';
 import SearchedPostsContainer from './SearchedPosts/SearchedPostsContainer';
+import { useEffect } from 'react';
 
 const Main = (props) => {
 
-    const searchedPost = useSelector(state => state.postsData.searchedPost)
+    const searchedPost = useSelector(state => state.postsData.searchedPost) 
     console.log(searchedPost)
+
     return (
 
         <div className={styles.mainWrapper}>

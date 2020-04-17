@@ -13,10 +13,9 @@ const Navbar = (props) => {
 
     function onClickSearch(search){
         if(search){
-            dispatch(setPostByTitle(search));   
+            dispatch(setPostByTitle(search));
         }
-        
-        
+            
     }
 
     const { t } = useTranslation();

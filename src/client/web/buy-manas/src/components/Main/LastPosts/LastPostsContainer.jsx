@@ -6,7 +6,6 @@ import { setPosts, setPostByTitle } from '../../../actions/index';
 class LastPostsContainer extends React.Component{
     componentDidMount() {
         this.props.setPosts();
-        this.props.setPostByTitle('пост')
     }
     render(){
         return <LastPosts {...this.props} />
