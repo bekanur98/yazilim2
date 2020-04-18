@@ -2,13 +2,13 @@ import React from 'react';
 import {IPoster, PageProps} from '../types';
 import {fetchPosters} from '../actions';
 import {connect} from 'react-redux';
-import {FlatList, Text, View, TouchableOpacity, Image} from "react-native";
+import {FlatList, Text, View, TouchableOpacity, Image, StyleSheet} from "react-native";
 import {AppState} from "../store";
 import {Container, Content} from "native-base";
 import images from "../assets/images/images";
 import {IMAGES_URL} from "../constants";
 
-interface Props{
+interface Props extends PageProps{
     posterList: IPoster[];
 }
 
@@ -26,50 +26,50 @@ class TopPostCom extends React.Component<Props,State>{
 
     _renderItem=(item:any)=>{
         const post = item.item
+        // console.warn(post.images[0].url)
             return(
-                // <View style={{}}>
-                    <TouchableOpacity style = {{margin: 5,flexDirection:'row'}}>
-                        {!post.images.length?
-                            post.department?
-                                <Image
-                                    //@ts-ignore
-                                    source={images[post.department.faculty.id]}
-                                    style={{height:120, width:80}}
-                                />
-                                :
-                                <Image
-                                    //@ts-ignore
-                                    source={require('../assets/images/logo.png')}
-                                    style={{height:120, width:80}}
-                                />
+                <TouchableOpacity style = {styles.topPost}>
+                    {!post.images.length?
+                        post.department?
+                            <Image
+                                //@ts-ignore
+                                source={images[post.department.faculty.id]}
+                                style={{height:70, width:70}}
+                            />
                             :
                             <Image
                                 //@ts-ignore
-                                source={{uri:'http://buymanasapi.ru.xsph.ru/images/5e85d1128d5d6425405044.PNG'}}
-                                style={{height:120, width:80}}
-                            />}
-                    </TouchableOpacity>
-                    // {/*<Text>{post.cost}</Text>*/}
-                // </View>
+                                source={require('../assets/images/logo.png')}
+                                style={{height:70, width:70}}
+                            />
+                        :
+                        <Image
+                            //@ts-ignore
+                            source={{uri:`http://buymanasapi.ru.xsph.ru/${post.images[0].url}`}}
+                            style={{height:70, width:70}}
+                        />}
+                        <Text>{post.title}</Text>
+                        <Text>{post.cost} сом</Text>
+                </TouchableOpacity>
             )
     };
 
     render(){
         return(
-            <Container>
-                <Content padder>
-                    <View style={{}}>
+            
+                <Content>
+                    <View style={{backgroundColor:'white'}}>
                         <Text>ТОП объявления</Text>
                         <FlatList
                             horizontal={true}
                             data={this.state.topPostList}
                             renderItem={this._renderItem}
                             keyExtractor={(item:any)=>item.id.toString()}
-                            showsHorizontalScrollIndicator={false}
+                            showsHorizontalScrollIndicator={true}
                         />
                     </View>
                 </Content>
-            </Container>
+            
         )
     }
 
@@ -82,6 +82,18 @@ const mapStateToProps = (state: AppState) => ({
 const mapDispatchToProps = dispatch => ({
     fetchPosters: () => dispatch(fetchPosters())
 });
+
+const styles = StyleSheet.create({
+    topPost: {
+        margin: 5,
+        flexDirection:'column',
+        height:160,
+        width: 100,
+        borderWidth:1,
+        borderRadius: 10,
+        padding:5
+        }
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(TopPostCom);
 

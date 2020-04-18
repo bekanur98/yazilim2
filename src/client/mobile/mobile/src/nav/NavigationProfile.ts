@@ -5,6 +5,7 @@ import { defaultOpts } from './common';
 import { trans } from '../helper';
 import HomePage from "../pages/Home/HomePage";
 import ProfilePage from "../pages/Profile/ProfilePage";
+import RegistrationPage from '../pages/Profile/RegistrationPage';
 
 
 export default createStackNavigator(
@@ -15,6 +16,12 @@ export default createStackNavigator(
                 headerShown: false,
             },
         },
+        RegistrationPage: {
+            screen: RegistrationPage,
+            navigationOptions: {
+                title:"Регистрация"
+            }
+        }
     },
     {
         defaultNavigationOptions: {

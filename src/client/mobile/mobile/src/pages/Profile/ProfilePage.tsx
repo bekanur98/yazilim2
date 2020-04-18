@@ -9,13 +9,12 @@ import {View, Button, Text} from 'native-base';
 import {PageProps} from '../../types';
 import * as actions from '../../actions/dummyAction';
 import {getLocale, trans, setupLocalization} from '../../helper';
-import {store} from '../../store';
+import {store, AppState} from '../../store';
+import LoginPageCom from '../../components/LoginPageCom';
+import Profile from '../../components/Profile';
 
 export interface Props extends PageProps {
-    count: number;
-    changeCountAction: (count: number) => void;
-    badgeHome: number;
-    badgePersonal: number;
+    user: any
 }
 
 interface State {}
@@ -35,13 +34,20 @@ class ProfilePage extends React.Component<Props, State> {
 
     render() {
         return (
-            <View style={styles.root}>
-                <Button
-                >
-                    <Text>Chat</Text>
-                </Button>
-                <Text style={{fontSize: 30}}>Home page</Text>
-            </View>
+                ! this.props.user ? 
+                (
+                    //@ts-ignore
+                    <LoginPageCom
+                        
+                        navigation={this.props.navigation}
+                />
+                )
+                :
+                (
+                    <Profile
+                        navigation={this.props.navigation}
+                    />
+                )
         );
     }
 }
@@ -50,8 +56,8 @@ class ProfilePage extends React.Component<Props, State> {
 const styles = StyleSheet.create({
     root: {
         alignItems: 'center',
-        alignSelf: 'center',
-        paddingTop: 20,
+        alignSelf:'center',
+        paddingTop: 20
     },
     buttons: {
         flexDirection: 'row',
@@ -69,10 +75,8 @@ const styles = StyleSheet.create({
     },
 });
 
-const mapStateToProps = (state: any): any => ({
-    count: state.Dummy.count,
-    badgeHome: state.Settings.badgeHome,
-    badgePersonal: state.Settings.badgePersonal,
+const mapStateToProps = (state: AppState): any => ({
+    user: state.userReducer.user
 });
 export default connect(
     mapStateToProps,

@@ -1,19 +1,30 @@
 // reducers/userReducer
 
 import {
-    USER_NAME
+    SET_USER, RESET_USER
 } from '../constants';
+import { IAuthor } from '../types';
 
-const initialState = {
-    userName: ''
+interface IUserState{
+    user: IAuthor
+}
+
+const initialState : IUserState = {
+    //@ts-ignore
+    user: undefined
 };
 
 const userReducer = (state = initialState, action: any) => {
     switch(action.type) {
-        case USER_NAME:
+        case SET_USER:
             return {
                 ...state,
-                userName: action.payload,
+                user: action.payload,
+            };
+        case RESET_USER:
+            return {
+                ...state,
+                user: action.payload
             };
         default:
             return state;

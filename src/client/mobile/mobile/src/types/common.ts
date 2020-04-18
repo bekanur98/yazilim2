@@ -10,9 +10,25 @@ export interface PageProps extends NavProps {
 
 }
 
+export interface IUser {
+  username: string;
+  name: string;
+  email: string;
+  password: string;
+  phone: string;
+  faculty?: any
+}
+
 export interface IAuthor {
   id: number;
+  username: string;
+  password: string;
   name: string;
+  email: string;
+  phone: string;
+  posters: IUserPoster[];
+  faculty: {id: number};
+  images: IImage[];
 }
 
 export interface IDepartment{
@@ -27,6 +43,14 @@ export interface IComment{
 
 export interface IImage {
   url: string;
+}
+
+export interface IUserPoster{
+  id: number;
+  title: string;
+  description: string;
+  publishedAt: string;
+  images: IImage[];
 }
 
 export interface IPoster{
