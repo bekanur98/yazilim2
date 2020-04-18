@@ -3,22 +3,22 @@ import actions from "redux-form/lib/actions";
 let initialState = {
     posts: [],
     searchedPost: [],
-    forPostPage: null
+    forPostPage: null,
+    currentImage: null
 };
 
-
 const postsReducer = (state = initialState, action) => {
-    switch(action.type){ 
-        case 'SET_POSTS':{
-            return {  
+    switch (action.type) {
+        case 'SET_POSTS': {
+            return {
                 ...state,
-                posts: action.posts 
+                posts: action.posts
             }
-        } 
-        case 'SET_ONE_POST':{
-            return {  
+        }
+        case 'SET_ONE_POST': {
+            return {
                 ...state,
-                forPostPage: {...action.postData} 
+                forPostPage: { ...action.postData }
             }
         }
         case 'SET_POSTS_BY_TITLE': {
@@ -26,7 +26,7 @@ const postsReducer = (state = initialState, action) => {
                 ...state,
                 searchedPost: action.searchedPost
             }
-        } 
+        }
         case 'NOTHING_FOUNDED': {
             return {
                 ...state,
@@ -34,15 +34,22 @@ const postsReducer = (state = initialState, action) => {
             }
         }
         case 'NEW_POST': {
-            return{
+            debugger
+            return {
                 ...state,
-                posts: action.newPostData
+                posts: [...state.posts, action.newPostData]
+            }
+        }
+        case 'NEW_CURRENT_IMAGE': {
+            return {
+                ...state,
+                currentImage: action.image
             }
         }
         default:
             return state;
-    } 
+    }
 
-} 
+}
 
 export default postsReducer;
