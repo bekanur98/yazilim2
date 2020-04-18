@@ -5,25 +5,24 @@ import { Input, Textarea } from '../common/FormsControls/FormsControls';
 import { required } from '../../utils/validators/validators';
 
 const NewPost = (props) => {
-    let date = new Date();
+    let date = new Date(); 
+    const uploadImage = e => {
+        if(e.target.files.length){
+            props.newCurrentImage(e.target.files[0]);
+        } else {
+            return []
+        }
+    } 
     let submit = (value) => {
-        debugger
-        // let obj = {
-        //     ...value,
-        //     publishedAt: date,
-        //     author: {
-        //         id: props.id,
-        //         name: props.name,
-        //         images: []
-        //     },
-        //     department: {
-        //         faculty:{
-        //             id: 5
-        //         }
-        //     }
-        // }
+        let obj = {
+            ...value,
+            publishedAt: date,
+            author: `api/users/${props.userId}`,
+            rating: 0,
+            images: props.image
+        }
 
-        props.newPost(value)
+        props.newPostImage(obj)
     };
 
     return(
@@ -31,7 +30,7 @@ const NewPost = (props) => {
             <form onSubmit={props.handleSubmit(submit)}>
                 <div className={styles.newImage}>
                     <p className={styles.blockName}>Загрузите фотографии</p>                
-                    <div className={styles.inputs}></div>
+                    <div className={styles.inputs}><input onChange={uploadImage} type='file'/></div>
                 </div>
 
                 <div className={styles.newTitle}>
@@ -47,6 +46,13 @@ const NewPost = (props) => {
                         <Field component={Textarea} name='description' type='text' placeholder='Описание' validate={[required]} />
                     </div>
                 </div>
+{/* 
+                <div className={styles.newDep}>
+                    <p className={styles.blockName}>Категория</p>                
+                    <div className={styles.inputs}>
+                        <Field component={Input} name='department' type='text' placeholder='Описание' validate={[required]} />
+                    </div>
+                </div> */}
 
                 <div className={styles.newCost}>
                     <p className={styles.blockName}>Цена</p>                
