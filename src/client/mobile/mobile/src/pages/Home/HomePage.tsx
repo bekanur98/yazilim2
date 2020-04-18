@@ -16,8 +16,9 @@ import Category from 'react-native-category';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import {API_URL, COLORS} from "../../constants";
 import TopPostCom from "../../components/TopPostCom";
-import {fetchPosters} from "../../actions";
+import {fetchPosters, setCategoryList} from "../../actions";
 import {AppState} from "../../store";
+import LastPostCom from '../../components/LastPostCom';
 
 
 export interface Props extends PageProps {
@@ -26,7 +27,7 @@ export interface Props extends PageProps {
   badgeHome: number;
   badgePersonal: number;
   categoryList: any[];
-  setCategoryList: (categoryList: []) => void;
+  setCategoryList: (categoryList: any) => void;
   posterList: IPoster[];
   fetchPosters: () => void;
 }
@@ -65,9 +66,9 @@ class HomePage extends React.Component<Props, State> {
       const itemWdt = Math.floor((Dimensions.get('window').width-60)/60)
       this.setState({categoryHorizontalList: this.props.categoryList.slice(0,itemWdt-1)})
     }
-    if(this.props.posterList.length){
+    // if(this.props.posterList.length){
         await this.props.fetchPosters();
-    }
+    // }
   }
 
   async getCategoryList(){
@@ -149,7 +150,7 @@ class HomePage extends React.Component<Props, State> {
 
   {
     return (
-        <Container style={{}}>
+        <Container style={{backgroundColor:'white'}}>
           <Header searchBar rounded
             style={{backgroundColor:COLORS.b}}
             androidStatusBarColor={COLORS.b}
@@ -176,12 +177,12 @@ class HomePage extends React.Component<Props, State> {
                   />
                 </TouchableOpacity>
               </View>
+              {/* not all categories */}
               <FlatList
                   horizontal
                   data = {this.state.categoryHorizontalList}
                   keyExtractor={(item:any)=>item.id.toString()}
                   renderItem={this._render}
-                  showsHorizontalScrollIndicator
               />
               <RBSheet
                   ref={ref => {
@@ -209,16 +210,24 @@ class HomePage extends React.Component<Props, State> {
                     data = {this.state.categoryList}
                     keyExtractor={(item:any)=>item.id.toString()}
                     renderItem = {this._renderItem}
-                    showsVerticalScrollIndicator={false}
+                    showsVerticalScrollIndicator={true}
                     ItemSeparatorComponent={this._renderSeparator}
                 />
               </RBSheet>
             </View>
+            <View>
               <TopPostCom
                   //@ts-ignore
                   posterList={this.props.posterList}
 
               />
+              <LastPostCom
+                  //@ts-ignore
+                  navigation={this.props.navigation}
+                  posterList={this.props.posterList}
+                  title={"Последние посты"}
+              />
+            </View>
           </Content>
         </Container>
     );
@@ -229,10 +238,10 @@ class HomePage extends React.Component<Props, State> {
 const styles = StyleSheet.create({
   header:{
     margin: 10,
-    flexDirection: 'row'
+    flexDirection: 'column'
   },
   category: {
-
+    
   },
   renderItemCategoryText: {
     textAlign:'justify',
@@ -248,7 +257,8 @@ const mapStateToProps = (state: AppState): any => ({
 
 //@ts-ignore
 const mapDispatchToProps = dispatch => ({
-    fetchPosters: () => dispatch(fetchPosters())
+    fetchPosters: () => dispatch(fetchPosters()),
+    setCategoryList: (categoryList: any) => dispatch(setCategoryList(categoryList))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

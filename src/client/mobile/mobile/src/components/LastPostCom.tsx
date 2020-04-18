@@ -1,0 +1,131 @@
+import React from 'react';
+import {IPoster, PageProps} from '../types';
+import {fetchPosters} from '../actions';
+import {connect} from 'react-redux';
+import {FlatList, Text, View, TouchableOpacity, Image, StyleSheet} from "react-native";
+import {AppState} from "../store";
+import {Icon, Content} from "native-base";
+import images from "../assets/images/images";
+import {IMAGES_URL} from "../constants";
+
+interface Props extends PageProps{
+    posterList: IPoster[];
+    title: string;
+}
+
+interface State{
+    lastPostList: IPoster[];
+}
+
+class LastPostCom extends React.Component<Props,State>{
+    constructor(props: Props) {
+        super(props);
+        this.state={
+            // lastPostList: this.props.posterList.sort((a,b)=>b.rating-a.rating).slice(0,10),
+            lastPostList: this.props.posterList,
+        }
+    }
+
+    _renderItem=(item:any)=>{
+        const post = item.item
+        // console.warn(post.images[0].url)
+            return(
+                <View style={styles.lastPost}>
+                    <View style={{alignItems:'center'}}>
+                        <TouchableOpacity style = {{}}>
+                            {!post.images.length?
+                                post.department?
+                                <Image
+                                    //@ts-ignore
+                                    source={images[post.department.faculty.id]}
+                                    style={{height:165, width:165}}
+                                />
+                                :
+                                <Image
+                                    //@ts-ignore
+                                    source={require('../assets/images/logo.png')}
+                                    style={{height:165, width:165}}
+                                />
+                                :
+                                <Image
+                                    //@ts-ignore
+                                    source={{uri:`http://buymanasapi.ru.xsph.ru/${post.images[0].url}`}}
+                                    style={{height:165, width:165}}
+                            />}
+                        </TouchableOpacity>
+                    </View>
+                    <View style={{flexDirection:'column', padding:5}}>
+                        <Text style={{}}>{post.title}</Text>
+                    </View>
+                    <View>
+                            {
+                                post.cost ? 
+                                (<Text style={{marginTop:10}}>{post.cost} сом</Text>):
+                                (<Text style={{marginTop:10}}>Договорная</Text>)
+                            }
+                    </View>
+                    <View style={{bottom:0, justifyContent:'space-between', flexDirection:'row'}}>
+                        <TouchableOpacity>
+                            <Icon
+                                type={'SimpleLineIcons'}
+                                name={'heart'}
+                                style={{color:'red'}}
+                            />
+                        </TouchableOpacity>
+                        <TouchableOpacity>
+                            <Icon
+                                type={'AntDesign'}
+                                name={'mail'}
+                                style={{color:'rgb(236, 121, 13)'}}
+                            />
+                        </TouchableOpacity>
+                    </View>
+                </View>
+            )
+    };
+
+    render(){
+        return(
+            // <Container>
+                <Content padder>
+                    <View style={{backgroundColor:'white'}}>
+                        <Text>{this.props.title}</Text>
+                        <FlatList
+                            data={this.state.lastPostList.sort((a,b)=>Math.abs(new Date(b.publishedAt) as any) - Math.abs(new Date(a.publishedAt) as any))}
+                            numColumns={2}
+                            renderItem={this._renderItem}
+                            keyExtractor={(item:any)=>item.id.toString()}
+                            showsVerticalScrollIndicator={true}
+                        />
+                    </View>
+                </Content>
+            // </Container>
+        )
+    }
+
+}
+const mapStateToProps = (state: AppState) => ({
+    // posterList: state.posterReducer.posterList,
+});
+
+//@ts-ignore
+const mapDispatchToProps = dispatch => ({
+    fetchPosters: () => dispatch(fetchPosters())
+});
+
+const styles = StyleSheet.create({
+    lastPost: {
+        margin: 5,
+        flexDirection:'column',
+        height:280,
+        width: '48%',
+        borderWidth:1,
+        borderRadius: 10,
+        padding:5,
+        // textAlign:'auto'
+        // alignItems:'center'
+        }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(LastPostCom);
+
