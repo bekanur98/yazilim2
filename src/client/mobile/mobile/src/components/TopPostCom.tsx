@@ -20,8 +20,12 @@ class TopPostCom extends React.Component<Props,State>{
     constructor(props: Props) {
         super(props);
         this.state={
-            topPostList: this.props.posterList.sort((a,b)=>b.rating-a.rating).slice(0,10),
+            topPostList: undefined,
         }
+    }
+
+    componentDidMount(){
+        this.setState({topPostList:this.props.posterList.sort((a,b)=>b.rating-a.rating).slice(0,10)})
     }
 
     _renderItem=(item:any)=>{

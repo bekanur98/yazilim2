@@ -10,7 +10,7 @@ import {PageProps} from '../../types';
 import * as actions from '../../actions/dummyAction';
 import {getLocale, trans, setupLocalization} from '../../helper';
 import {store} from '../../store';
-import Chat from "react-navigation-tabs/lib/typescript/example/src/Shared/Chat";
+// import Chat from "react-navigation-tabs/lib/typescript/example/src/Shared/Chat";
 
 export interface Props extends PageProps {
     count: number;

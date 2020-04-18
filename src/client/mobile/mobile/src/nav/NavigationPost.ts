@@ -12,7 +12,7 @@ export default createStackNavigator(
         Post: {
             screen: PostPage,
             navigationOptions: {
-                headerShown: false,
+                headerShown: false
             },
         },
     },

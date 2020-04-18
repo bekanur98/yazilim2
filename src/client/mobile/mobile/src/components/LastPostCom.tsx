@@ -11,6 +11,8 @@ import {IMAGES_URL} from "../constants";
 interface Props extends PageProps{
     posterList: IPoster[];
     title: string;
+    myPosts: boolean;
+    user: any
 }
 
 interface State{
@@ -21,8 +23,17 @@ class LastPostCom extends React.Component<Props,State>{
     constructor(props: Props) {
         super(props);
         this.state={
-            // lastPostList: this.props.posterList.sort((a,b)=>b.rating-a.rating).slice(0,10),
-            lastPostList: this.props.posterList,
+            lastPostList: [],
+        }
+    }
+
+    componentDidMount(){
+        if(this.props.myPosts){
+            //@ts-ignore
+            this.setState({lastPostList:this.props.user.posters.sort((a,b)=>Math.abs(new Date(b.publishedAt) as any) - Math.abs(new Date(a.publishedAt) as any))})
+        }
+        else{
+            this.setState({lastPostList:this.props.posterList.sort((a,b)=>Math.abs(new Date(b.publishedAt) as any) - Math.abs(new Date(a.publishedAt) as any))})
         }
     }
 
@@ -91,7 +102,7 @@ class LastPostCom extends React.Component<Props,State>{
                     <View style={{backgroundColor:'white'}}>
                         <Text>{this.props.title}</Text>
                         <FlatList
-                            data={this.state.lastPostList.sort((a,b)=>Math.abs(new Date(b.publishedAt) as any) - Math.abs(new Date(a.publishedAt) as any))}
+                            data={this.state.lastPostList}
                             numColumns={2}
                             renderItem={this._renderItem}
                             keyExtractor={(item:any)=>item.id.toString()}
@@ -105,7 +116,8 @@ class LastPostCom extends React.Component<Props,State>{
 
 }
 const mapStateToProps = (state: AppState) => ({
-    // posterList: state.posterReducer.posterList,
+    posterList: state.posterReducer.posterList,
+    user: state.userReducer.user,
 });
 
 //@ts-ignore
