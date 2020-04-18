@@ -1,5 +1,7 @@
 import { postersApi, facultiesApi, usersApi, authApi, searchPostsApi } from "../api/api"
 import { stopSubmit } from 'redux-form'
+import * as axios from 'axios';
+import { API_URL } from "../constants"
 
 
 // ACTIONS
@@ -78,6 +80,11 @@ export const setOnePost = (postData) => ({
 export const newPostSuccess = (newPostData) => ({
     type: 'NEW_POST',
     newPostData
+})
+
+export const newCurrentImage = (image) => ({
+    type: 'NEW_CURRENT_IMAGE',
+    image
 })
 
 // REDUX-THUNKS
@@ -167,15 +174,27 @@ export const getOnePost = (postId) => (dispatch) => {
         })
 }
 
-export const newPost = (newPostData) => (dispatch) => {
+export const newPostImage = (newPostData) => (dispatch) => {
     debugger
-    postersApi.postPost(newPostData)
+    postersApi.newPostImage(newPostData.images)
         .then(r => {
-            if(r.status === 201){ 
-                debugger
-                dispatch(newPostSuccess(r.data))
-            } else {
-                alert(r)
+            debugger
+            if(r.data.url){ 
+                axios.post(`http://buymanasapi.ru.xsph.ru/index.php/api/posters`, {
+                    "title": newPostData.title,
+                    "description": newPostData.description,
+                    "publishedAt": newPostData.publishedAt,
+                    "author": newPostData.author,
+                    "department": null,
+                    "cost": parseInt(newPostData.cost),
+                    "rating": 0,
+                    "images": [`/api/images/${r.data.id}`]
+                }).then(r => {
+                    if(r.status === 201){ 
+                        debugger
+                        dispatch(newPostSuccess(r.data))
+                    }
+                })
             }
         })
 }
