@@ -1,17 +1,23 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import NewPost from './NewPost';
-import { newPost } from '../../actions';
+import { newCurrentImage } from '../../actions';
+import { newPostImage } from '../../actions';
+import { setPosts } from './../../actions/index';
 
 class NewPostContainer extends React.Component {
+    componentDidMount(){
+        this.props.setPosts();
+    }
+
     render() {
         return <NewPost {...this.props} />
     }
 }
 
 const mapStateToProps = (state) => ({ 
-    name: state.auth.name,
-    id: state.auth.id
+    userId: state.auth.id,
+    image: state.postsData.currentImage
 });
 
-export default connect(mapStateToProps, {newPost})(NewPostContainer);
+export default connect(mapStateToProps, {newPostImage, newCurrentImage, setPosts})(NewPostContainer);
