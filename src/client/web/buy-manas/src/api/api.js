@@ -27,17 +27,24 @@ export const postersApi = {
         return instance.get(`posters/${postId}`)
     },
     postPost(newPostData){
-        debugger
         return instance.post(`posters`, {
             "title": newPostData.title,
             "description": newPostData.description,
-            "cost": newPostData.cost,
-            "rating": 0,
-            "images": [],
-            // "publishedAt": newPostData.publishedAt,
-            // "author": newPostData.author,
-            // "department": newPostData.department,
-            // "comments": [],
+            "publishedAt": newPostData.publishedAt,
+            "author": newPostData.author,
+            "department": newPostData.department,
+            "cost": parseInt(newPostData.cost),
+            "rating": 0
+        })
+    },
+    newPostImage(images){
+        debugger
+        const formData = new FormData();
+        formData.append("file", images)
+        return instance.post(`images`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
         })
     }
 }
