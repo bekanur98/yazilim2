@@ -16,7 +16,12 @@ const RootStack = createBottomTabNavigator(
     {
       Home: NavigationHome,
       Favorite: NavigationFavorite,
-      Post: NavigationPost,
+      Post: {
+          screen: NavigationPost, 
+          navigationOptions: {
+            tabBarVisible: false
+          }
+        },
       Chat: NavigationChat,
       Profile: NavigationProfile
     },

@@ -3,14 +3,14 @@
 import { createStackNavigator } from 'react-navigation-stack';
 import { defaultOpts } from './common';
 import { trans } from '../helper';
-import PostPage from "../pages/Post/PostPage";
+import ChatPage from '../pages/Chat/ChatPage';
 
 
 
 export default createStackNavigator(
     {
-        Post: {
-            screen: PostPage,
+        Chat: {
+            screen: ChatPage,
             navigationOptions: {
                 headerShown: false,
             },

@@ -87,7 +87,7 @@ class Profile extends React.Component<Props, State> {
                       <LastPostCom
                         //@ts-ignore
                         navigation={this.props.navigation}
-                        posterList={this.props.user.posters}
+                        myPosts={true}
                         title={"Мои посты"}
                       />
                   </View>

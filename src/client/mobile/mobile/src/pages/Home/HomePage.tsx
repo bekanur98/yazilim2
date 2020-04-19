@@ -22,10 +22,6 @@ import LastPostCom from '../../components/LastPostCom';
 
 
 export interface Props extends PageProps {
-  count: number;
-  changeCountAction: (count: number) => void;
-  badgeHome: number;
-  badgePersonal: number;
   categoryList: any[];
   setCategoryList: (categoryList: any) => void;
   posterList: IPoster[];
@@ -36,6 +32,7 @@ interface State {
   categoryList: any[];
   categoryHorizontalList: any[];
   num: number;
+  posterList: IPoster[]
   facultyName: string;
 }
 
@@ -52,6 +49,7 @@ class HomePage extends React.Component<Props, State> {
     this.state = {
       categoryList: [] as any,
       categoryHorizontalList: [] as any,
+      posterList: [],
       facultyName: 'facultyNameRu',
       num: 0
     };
@@ -114,7 +112,7 @@ class HomePage extends React.Component<Props, State> {
               //@ts-ignore
               source={require('../../assets/images/14.png')}
               style={{height:45, width:45, marginHorizontal:10}}
-              />
+            />
             <Text style={styles.renderItemCategoryText}>Другое</Text>
           </TouchableOpacity>
       </View>
@@ -217,14 +215,15 @@ class HomePage extends React.Component<Props, State> {
             </View>
             <View>
               <TopPostCom
-                  //@ts-ignore
-                  posterList={this.props.posterList}
+                  navigation={this.props.navigation}
+                  // posterList={this.state.posterList}
 
               />
               <LastPostCom
-                  //@ts-ignore
+                  
                   navigation={this.props.navigation}
-                  posterList={this.props.posterList}
+                  // posterList={this.state.posterList}
+                  myPosts={false}
                   title={"Последние посты"}
               />
             </View>
@@ -250,7 +249,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = (state: AppState): any => ({
+const mapStateToProps = (state: AppState) => ({
   categoryList: state.categoryReducer.categoryList,
   posterList: state.posterReducer.posterList
 });
