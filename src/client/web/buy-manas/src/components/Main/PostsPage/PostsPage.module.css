@@ -1,4 +1,4 @@
-.postWrapper{
+.forFlexDisplay{
     display: flex;
     justify-content: space-between; 
 } 
@@ -65,4 +65,71 @@ hr{
     padding: 10px;
     margin: 0 auto;
     width: 30%;
+}
+
+.commentsBlock h2{
+    padding: 20px;
+}
+
+.commentsBlock .comments .commentsOfPost{
+    width: 98%;
+    height: 400px;
+    margin: 30px auto;
+    border: 1px solid black;
+    background: #fff; 
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+/* Скрытие скроллбара для комментов */
+.commentsBlock .comments .commentsOfPost::-webkit-scrollbar {
+    width: 0px;  /* ширина scrollbar'a */
+    background: transparent;  /* опционально */
+}
+.commentsBlock .comments .commentsOfPost .commentItem{
+    width: 95%;
+    margin: 10px;
+    padding: 10px;
+    background: whitesmoke;
+    min-height: 50px;
+}
+.commentsBlock .comments .commentsOfPost .commentItem .author{
+    font-size: 15px;
+    font-weight: bold;
+    margin: 0 0 10px 10px;
+    cursor: pointer;
+}
+.commentsBlock .comments .commentsOfPost .commentItem .content{
+    font-size: 13px;
+    color: #1f1e1e;
+}
+.commentsBlock .comments .commentsOfPost .commentItem .author span.publishedAt{
+    text-align: right;
+    font-size: 10px;
+    font-weight: normal;
+    margin-left: 20px;
+}
+.commentsBlock .comments .newComment form{
+    display: flex; 
+    width: 100%;
+    margin-left: 20px;
+}
+.commentsBlock .comments .newComment form input{
+    width: 530px;
+    background: whitesmoke;
+    border: none;
+    border-bottom: 1px solid #8d8c8c;
+    height: 25px;
+    padding: 7px;
+    font-size: 14px;
+    margin-right: 8px;
+}
+.commentsBlock .comments .newComment form button{
+    background: whitesmoke;
+    border-radius: 10px; 
+}
+
+.blockComment{
+    font-style: italic;
+    margin-left: 20px;
 }
