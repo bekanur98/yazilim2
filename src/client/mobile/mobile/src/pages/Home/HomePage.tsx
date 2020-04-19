@@ -3,7 +3,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {FlatList, StyleSheet, View, Text, Dimensions,
-  Image, TouchableOpacity, ScrollView, Button
+  Image, TouchableOpacity
 } from 'react-native';
 import {Content, Container, Header, Item, Icon, Input} from 'native-base'
 import {IPoster, PageProps} from '../../types';
@@ -219,13 +219,14 @@ class HomePage extends React.Component<Props, State> {
                   // posterList={this.state.posterList}
 
               />
-              <LastPostCom
-                  
+              {/* <SafeAreaView> */}
+              <LastPostCom                  
                   navigation={this.props.navigation}
                   // posterList={this.state.posterList}
                   myPosts={false}
                   title={"Последние посты"}
               />
+              {/* </SafeAreaView> */}
             </View>
           </Content>
         </Container>

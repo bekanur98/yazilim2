@@ -24,6 +24,10 @@
   "terms_first": "Я ознакомлен(а) с ",
   "terms_second_url": "условиями",
   "terms_third": "пользовния",
-  "registration": "Регистрация"
+  "registration": "Регистрация",
+  "title": "Название",
+  "description": "Описание",
+  "cost": "Стоимость",
+  "publish": "Опубликовать"
 
 }

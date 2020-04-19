@@ -2,9 +2,11 @@ import React from 'react';
 import {IPoster, PageProps} from '../types';
 import {fetchPosters} from '../actions';
 import {connect} from 'react-redux';
-import {FlatList, Text, View, TouchableOpacity, Image, StyleSheet} from "react-native";
+import {FlatList, Text, View, TouchableOpacity,YellowBox, 
+    Image, StyleSheet, SafeAreaView, ActivityIndicator
+} from "react-native";
 import {AppState} from "../store";
-import {Icon, Content} from "native-base";
+import {Icon, Content, Container} from "native-base";
 import images from "../assets/images/images";
 import {IMAGES_URL} from "../constants";
 
@@ -28,6 +30,9 @@ class LastPostCom extends React.Component<Props,State>{
     }
 
     componentDidMount(){
+        YellowBox.ignoreWarnings([
+            'VirtualizedLists should never be nested', // TODO: Remove when fixed
+          ])
         if(this.props.myPosts){
             //@ts-ignore
             this.setState({lastPostList:this.props.user.posters.sort((a,b)=>Math.abs(new Date(b.publishedAt) as any) - Math.abs(new Date(a.publishedAt) as any))})
@@ -95,19 +100,43 @@ class LastPostCom extends React.Component<Props,State>{
             )
     };
 
+    renderHeader = () => {
+        return <Text>Hello</Text>;
+      };
+
+    renderFooter = () => {
+        // if (!this.state.loading) return null;
+    
+        return (
+          <View
+            style={{
+              paddingVertical: 20,
+              borderTopWidth: 1,
+              borderColor: "#CED0CE"
+            }}
+          >
+            <ActivityIndicator animating size="large" />
+          </View>
+        );
+      };
+
     render(){
         return(
             // <Container>
                 <Content padder>
-                    <View style={{backgroundColor:'white'}}>
+                    <View>
                         <Text>{this.props.title}</Text>
-                        <FlatList
-                            data={this.state.lastPostList}
-                            numColumns={2}
-                            renderItem={this._renderItem}
-                            keyExtractor={(item:any)=>item.id.toString()}
-                            showsVerticalScrollIndicator={true}
-                        />
+                        <SafeAreaView style={{backgroundColor:'white', flex:1}}>
+                            <FlatList
+                                ListHeaderComponent={this.renderHeader}
+                                ListFooterComponent={this.renderFooter}
+                                data={this.state.lastPostList}
+                                numColumns={2}
+                                renderItem={this._renderItem}
+                                keyExtractor={(item:any)=>item.id.toString()}
+                                showsVerticalScrollIndicator={true}
+                            />
+                        </SafeAreaView>
                     </View>
                 </Content>
             // </Container>
