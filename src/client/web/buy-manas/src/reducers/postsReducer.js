@@ -5,7 +5,8 @@ let initialState = {
     searchedPost: [],
     forPostPage: null,
     currentImage: null,
-    comments: []
+    comments: [],
+    postsOfFaculty: []
 };
 
 const postsReducer = (state = initialState, action) => {
@@ -51,6 +52,12 @@ const postsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 comments: [...state.comments,  action.commentData]
+            }
+        }
+        case 'GET_FACULTIES_POSTS': {
+            return {
+                ...state,
+                postsOfFaculty: [...action.posts]
             }
         }
         default:
