@@ -1,7 +1,5 @@
-import { postersApi, facultiesApi, usersApi, authApi, searchPostsApi } from "../api/api"
+import { postersApi, facultiesApi, usersApi, authApi, searchPostsApi, departmentsApi } from "../api/api"
 import { stopSubmit } from 'redux-form'
-import * as axios from 'axios';
-import { API_URL } from "../constants"
 
 
 // ACTIONS
@@ -30,6 +28,11 @@ export const VisibilityFilters = {
 export const setFacultiesSuccess = faculties => ({
     type: 'SET_FACULTIES',
     faculties
+})
+
+export const setDepartmentsSuccess = departments => ({
+    type: 'SET_DEPARTMENTS',
+    departments
 })
 
 export const setPostsByTitleSuccess = searchedPost => ({
@@ -98,6 +101,10 @@ export const getCommentsSuccess = (comments) => ({
     comments
 })
 
+export const getFacultiesPostsSuccess = (posts) => ({
+    type: 'GET_FACULTIES_POSTS',
+    posts
+})
 // REDUX-THUNKS
 
 export const setPostByTitle = (title) => (dispatch) => {
@@ -128,6 +135,13 @@ export const setFaculties = () => (dispatch) => {
         });
 }
 
+export const setDepartments = () => (dispatch) => {
+    departmentsApi.getDepartments()
+        .then(response => {
+            dispatch(setDepartmentsSuccess(response.data));
+        });
+}
+
 export const setUserData = (userId) => (dispatch) => {
     dispatch(toggleIsFetching(true));
     usersApi.getUser(userId)
@@ -138,6 +152,20 @@ export const setUserData = (userId) => (dispatch) => {
 }
 
 
+export const forLocalStorage = (loginData) => (dispatch) => {
+    localStorage.setItem('myLoginData', JSON.stringify(loginData))
+    let myData = localStorage.getItem('myLoginData')
+    myData = JSON.parse(myData)
+    dispatch(setAuthUserData(myData, true))
+}
+
+export const logWithLocalStorage = (r) => (dispatch) => {
+    authApi.login(r.id)
+        .then(response => {
+            dispatch(forLocalStorage(response.data))
+        })
+}
+
 
 export const login = (formData) => (dispatch) => {
     authApi.checkUser(formData)
@@ -145,7 +173,7 @@ export const login = (formData) => (dispatch) => {
             if (r.data.length && formData.logPassword == r.data[0].password) {
                 authApi.login(r.data[0].id)
                     .then(response => {
-                        dispatch(setAuthUserData(response.data, true))
+                        dispatch(forLocalStorage(response.data))
                         dispatch(toggleModalWindowAuth());
                     })
             } else {
@@ -155,14 +183,15 @@ export const login = (formData) => (dispatch) => {
 }
 
 export const logout = () => (dispatch) => {
-    dispatch(setAuthUserData(undefined, false))
+    dispatch(setAuthUserData(undefined, false));
+    localStorage.removeItem('myLoginData');
 }
 
 export const register = (formData) => (dispatch) => {
     authApi.checkUser(formData)
         .then(r => {
             if (r.data.length) {
-                dispatch(stopSubmit('register', { _error: 'Неправильный логин или пароль' }));
+                dispatch(stopSubmit('register', { _error: 'Такое имя пользователя уже существует' }));
             }
             else {
                 authApi.register(formData)
@@ -170,6 +199,7 @@ export const register = (formData) => (dispatch) => {
                         if (r.status === 201) {
                             dispatch(setAuthUserData(r.data, true))
                             dispatch(toggleModalWindowAuth());
+                            dispatch(forLocalStorage(r.data))
                         } else {
                             alert('Что-то пошло не так')
                         }
@@ -186,31 +216,52 @@ export const getOnePost = (postId) => (dispatch) => {
 }
 
 export const newPostImage = (newPostData) => (dispatch) => {
-    postersApi.newPostImage(newPostData.images)
-        .then(r => {
-            if(r.data.url){ 
-                axios.post(`http://buymanasapi.ru.xsph.ru/index.php/api/posters`, {
-                    "title": newPostData.title,
-                    "description": newPostData.description,
-                    "publishedAt": newPostData.publishedAt,
-                    "author": newPostData.author,
-                    "department": null,
-                    "cost": parseInt(newPostData.cost),
-                    "rating": 0,
-                    "images": [`/api/images/${r.data.id}`]
-                }).then(r => {
-                    if(r.status === 201){ 
-                        dispatch(newPostSuccess(r.data))
-                    }
-                })
-            }
-        })
+    if (newPostData.images) {
+        postersApi.newPostImage(newPostData.images)
+            .then(r => {
+                if (r.data.url) {
+                    postersApi.newPost(newPostData, r)
+                        .then(r => {
+                            if (r.status === 201) {
+                                dispatch(newPostSuccess(r.data));
+                                dispatch(stopSubmit('newPost', { _error: 'Объявление опубликовано' }));
+                                dispatch(newCurrentImage(null));
+                            }
+                        })
+                }
+            })
+    } else {
+        debugger
+        postersApi.newPost(newPostData)
+            .then(r => {
+        debugger
+        if (r.status === 201) {
+                    dispatch(newPostSuccess(r.data));
+                    dispatch(stopSubmit('newPost', { _error: 'Объявление опубликовано' }));
+                    dispatch(newCurrentImage(null));
+        debugger
+    }
+            })
+    }
 }
 
 export const newComment = (commentData) => (dispatch) => {
-        postersApi.newComment(commentData)
+    postersApi.newComment(commentData)
         .then(r => {
             dispatch(newCommentSuccess(r.data))
         })
 }
- 
+
+export const getFacultiesPosts = (facultyId) => (dispatch) => {
+    if (facultyId == "0") {
+        postersApi.getFacultiesNullPosts()
+            .then(r => {
+                dispatch(getFacultiesPostsSuccess(r.data))
+            })
+    } else {
+        postersApi.getFacultiesPosts(facultyId)
+            .then(r => {
+                dispatch(getFacultiesPostsSuccess(r.data))
+            })
+    }
+}
