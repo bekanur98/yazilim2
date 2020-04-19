@@ -19,24 +19,24 @@ const MyPosts = (props) => {
             <h3>Мои посты</h3>
             <div className={styles.myPosts}>
 
-            {
-                    LastPostsArray.length 
+                {
+                    LastPostsArray.length
                         ? LastPostsArray.map(p => <NavLink to={`posts/${p.id}`}>
-                             <div className={styles.myPostItem} key={p.id}>
-                            <div className={styles.imgBlock}>
-                                {p.images.length ?
-                                    <img src={IMAGES_URL + p.images[0].url} alt="categoryIcon" />
-                                    :
-                                    <img src={require('../../../assets/images/logo.png')} alt="categoryIcon" />
-                                }
-                            </div>
+                            <div className={styles.myPostItem} key={p.id}>
+                                <div className={styles.imgBlock}>
+                                    {p.images.length ?
+                                        <img src={IMAGES_URL + p.images[0].url} alt="categoryIcon" />
+                                        :
+                                        <img src={require('../../../assets/images/logo.png')} alt="categoryIcon" />
+                                    }
+                                </div>
 
-                            <p className={styles.cost}> {p.cost != null ? p.cost + ' сом' : t('contract')}</p>
-                            <p className={styles.postTitle}>{p.title}</p>
-                        </div>
+                                {/* <p className={styles.cost}> {p.cost != null ? p.cost + ' сом' : t('contract')}</p> */}
+                                <p className={styles.postTitle}>{p.title}</p>
+                            </div>
                         </NavLink>)
                         : <p className={styles.nullPosts}>Пока нет постов((</p>
-                         
+
                 }
             </div>
         </div>
