@@ -4,7 +4,8 @@ let initialState = {
     posts: [],
     searchedPost: [],
     forPostPage: null,
-    currentImage: null
+    currentImage: null,
+    comments: []
 };
 
 const postsReducer = (state = initialState, action) => {
@@ -18,7 +19,8 @@ const postsReducer = (state = initialState, action) => {
         case 'SET_ONE_POST': {
             return {
                 ...state,
-                forPostPage: { ...action.postData }
+                forPostPage: { ...action.postData },
+                comments: [...action.comments]
             }
         }
         case 'SET_POSTS_BY_TITLE': {
@@ -34,7 +36,6 @@ const postsReducer = (state = initialState, action) => {
             }
         }
         case 'NEW_POST': {
-            debugger
             return {
                 ...state,
                 posts: [...state.posts, action.newPostData]
@@ -44,6 +45,12 @@ const postsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 currentImage: action.image
+            }
+        } 
+        case 'NEW_COMMENT': {
+            return {
+                ...state,
+                comments: [...state.comments,  action.commentData]
             }
         }
         default:
