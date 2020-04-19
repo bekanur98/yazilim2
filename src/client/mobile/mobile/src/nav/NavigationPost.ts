@@ -11,9 +11,10 @@ export default createStackNavigator(
     {
         Post: {
             screen: PostPage,
-            navigationOptions: {
-                headerShown: false
-            },
+            navigationOptions: ({navigation})=>({
+                headerShown: true,
+                // title:'Публикация'   
+            }),
         },
     },
     {

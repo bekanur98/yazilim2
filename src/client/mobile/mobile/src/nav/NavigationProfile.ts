@@ -19,6 +19,7 @@ export default createStackNavigator(
         RegistrationPage: {
             screen: RegistrationPage,
             navigationOptions: {
+                headerShown: true,
                 title:"Регистрация"
             }
         }
