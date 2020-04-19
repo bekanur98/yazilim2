@@ -1,9 +1,16 @@
 import React from 'react';
 import Header from './Header';
-import { setAuthUserData, toggleModalWindowAuth, toggleModalLoginAuth, login, logout, register } from '../../actions/index'
+import { setAuthUserData, toggleModalWindowAuth, toggleModalLoginAuth, login, logout, register, logWithLocalStorage } from '../../actions/index'
 import { connect } from 'react-redux';
 
 class HeaderContainer extends React.Component { 
+    componentDidMount(){
+        let myData = localStorage.getItem('myLoginData')
+        if(myData){
+            myData = JSON.parse(myData)
+            this.props.logWithLocalStorage(myData);
+        }
+    }
     render() {
         return <Header {...this.props} />
     }
@@ -17,4 +24,4 @@ const mapStateToProps = (state) => ({
     username: state.auth.username
 }); 
 
-export default connect(mapStateToProps, {setAuthUserData, toggleModalWindowAuth, toggleModalLoginAuth, login, logout, register})(HeaderContainer);
+export default connect(mapStateToProps, {setAuthUserData, toggleModalWindowAuth, toggleModalLoginAuth, login, logout, register, logWithLocalStorage})(HeaderContainer);
