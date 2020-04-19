@@ -3,12 +3,13 @@ import FacultiesPosts from './FacultiesPosts';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { setPosts } from '../../actions/index';
+import { getFacultiesPosts } from '../../actions/index';
 
 
 class FacultiesPostsContainer extends React.Component{
     componentDidMount(){
-        this.props.setPosts();
+        let facultyId = this.props.match.params.facultyId
+        this.props.getFacultiesPosts(facultyId)
     }
 
     render(){
@@ -18,11 +19,11 @@ class FacultiesPostsContainer extends React.Component{
 
 const mapStateToProps = (state) => {
     return{
-        posts: state.postsData.posts
+        posts: state.postsData.postsOfFaculty
     }        
 }
 
 export default compose(
-    connect(mapStateToProps, { setPosts }),
+    connect(mapStateToProps, { getFacultiesPosts }),
     withRouter
 )(FacultiesPostsContainer);  
