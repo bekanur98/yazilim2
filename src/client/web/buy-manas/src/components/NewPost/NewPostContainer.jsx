@@ -3,11 +3,13 @@ import { connect } from 'react-redux';
 import NewPost from './NewPost';
 import { newCurrentImage } from '../../actions';
 import { newPostImage } from '../../actions';
-import { setPosts } from './../../actions/index';
+import { setPosts, setDepartments, setFaculties} from './../../actions/index';
 
 class NewPostContainer extends React.Component {
     componentDidMount(){
         this.props.setPosts();
+        this.props.setDepartments();
+        this.props.setFaculties();
     }
 
     render() {
@@ -17,7 +19,9 @@ class NewPostContainer extends React.Component {
 
 const mapStateToProps = (state) => ({ 
     userId: state.auth.id,
-    image: state.postsData.currentImage
+    image: state.postsData.currentImage,
+    departments: state.categoriesBlock.departments,
+    faculties: state.categoriesBlock.faculties
 });
 
-export default connect(mapStateToProps, {newPostImage, newCurrentImage, setPosts})(NewPostContainer);
+export default connect(mapStateToProps, {newPostImage, newCurrentImage, setPosts, setDepartments, setFaculties})(NewPostContainer);
