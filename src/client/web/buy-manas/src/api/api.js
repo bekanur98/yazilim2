@@ -25,26 +25,22 @@ export const postersApi = {
     },
     getOnePost(postId){
         return instance.get(`posters/${postId}`)
-    },
-    postPost(newPostData){
-        return instance.post(`posters`, {
-            "title": newPostData.title,
-            "description": newPostData.description,
-            "publishedAt": newPostData.publishedAt,
-            "author": newPostData.author,
-            "department": newPostData.department,
-            "cost": parseInt(newPostData.cost),
-            "rating": 0
-        })
-    },
+    }, 
     newPostImage(images){
-        debugger
         const formData = new FormData();
         formData.append("file", images)
         return instance.post(`images`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
+        })
+    },
+    newComment(commentData){
+        return instance.post(`comments`, {
+            "content": commentData.newComment,
+            "publishedAt": commentData.publishedAt,
+            "author": commentData.author,
+            "poster": commentData.poster
         })
     }
 }
