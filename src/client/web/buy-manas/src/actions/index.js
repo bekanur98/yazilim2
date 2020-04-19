@@ -74,7 +74,8 @@ export const setAuthUserData = (payload, isAuth) => ({
 
 export const setOnePost = (postData) => ({
     type: 'SET_ONE_POST',
-    postData
+    postData,
+    comments: postData.comments
 })
 
 export const newPostSuccess = (newPostData) => ({
@@ -85,6 +86,16 @@ export const newPostSuccess = (newPostData) => ({
 export const newCurrentImage = (image) => ({
     type: 'NEW_CURRENT_IMAGE',
     image
+})
+
+export const newCommentSuccess = (commentData) => ({
+    type: 'NEW_COMMENT',
+    commentData
+})
+
+export const getCommentsSuccess = (comments) => ({
+    type: 'GET_COMMENTS',
+    comments
 })
 
 // REDUX-THUNKS
@@ -175,10 +186,8 @@ export const getOnePost = (postId) => (dispatch) => {
 }
 
 export const newPostImage = (newPostData) => (dispatch) => {
-    debugger
     postersApi.newPostImage(newPostData.images)
         .then(r => {
-            debugger
             if(r.data.url){ 
                 axios.post(`http://buymanasapi.ru.xsph.ru/index.php/api/posters`, {
                     "title": newPostData.title,
@@ -191,10 +200,17 @@ export const newPostImage = (newPostData) => (dispatch) => {
                     "images": [`/api/images/${r.data.id}`]
                 }).then(r => {
                     if(r.status === 201){ 
-                        debugger
                         dispatch(newPostSuccess(r.data))
                     }
                 })
             }
         })
 }
+
+export const newComment = (commentData) => (dispatch) => {
+        postersApi.newComment(commentData)
+        .then(r => {
+            dispatch(newCommentSuccess(r.data))
+        })
+}
+ 
