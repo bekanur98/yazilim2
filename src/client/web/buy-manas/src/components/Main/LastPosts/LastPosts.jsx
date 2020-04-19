@@ -5,12 +5,10 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { IMAGES_URL } from '../../../constants';
 import { NavLink } from 'react-router-dom';
+// import ReactScrollPagination from 'react-scroll-pagination'
 
 const LastPosts = (props) => {
-
-    const { t } = useTranslation();
-
-    console.log(props)
+    const { t } = useTranslation(); 
 
     // cicle for top 10 posts 
     const LastPostsArray = [];
@@ -44,6 +42,7 @@ const LastPosts = (props) => {
                         </div>
                     </NavLink>)
                 }
+                {/* <ReactScrollPagination fetchFunc={props.setPosts} /> */}
             </div>
         </div>
     );
