@@ -17,7 +17,7 @@ const NewPost = (props) => {
         let obj = {
             ...value,
             publishedAt: date,
-            author: `api/users/${props.userId}`,
+            author: `/api/users/${props.userId}`,
             rating: 0,
             images: props.image
         }
