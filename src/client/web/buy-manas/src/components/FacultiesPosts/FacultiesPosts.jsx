@@ -7,8 +7,7 @@ import { NavLink } from 'react-router-dom';
 const FacultiesPosts = (props) => {
     const { t } = useTranslation();
     const LastPostsArray = [];
-    props.posts.filter(p => p.department != null && p.department.faculty.id == props.match.params.facultyId)
-        .sort((a, b) => {
+    props.posts.sort((a, b) => {
             return new Date(b.publishedAt) - new Date(a.publishedAt);
         }).map(p => {
             LastPostsArray.push(p);
