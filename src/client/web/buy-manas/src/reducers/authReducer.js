@@ -1,8 +1,4 @@
-let initialState = {
-    id: null, 
-    username: null,
-    phone: null,
-    name: null,
+let initialState = { 
     isModalOpen: false,
     wannaLogin: true 
 };
