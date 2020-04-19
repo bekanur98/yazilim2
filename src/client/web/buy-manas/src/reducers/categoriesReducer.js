@@ -1,5 +1,6 @@
 const initialState = {
-    faculties: []
+    faculties: [],
+    departments: []
 };
 
 const categoriesReducer = (state = initialState, action) => {
@@ -8,6 +9,12 @@ const categoriesReducer = (state = initialState, action) => {
             return {
                 ...state, 
                 faculties: action.faculties 
+            };
+        } 
+        case 'SET_DEPARTMENTS':{
+            return {
+                ...state, 
+                departments: action.departments 
             };
         } 
         default:
