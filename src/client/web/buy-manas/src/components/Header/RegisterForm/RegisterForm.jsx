@@ -17,9 +17,10 @@ const RegisterForm = (props) => {
             <Field component={Input} name='name' type="text" placeholder={t('yourName')} validate={[required]} />
             <Field component={Input} name='username' type="text" placeholder={t('yourUsername')} validate={[required, maxLength30]} />
             <Field component={Input} name='email' type="text" placeholder={t('yourEmail')} validate={[required, emailValid]} />
-            <Field component={Phone} name='number' validate={[required, maxLength13]} />
+            <Field component={Phone} name='number' validate={[required]} />
             <Field component="select" name="faculty">
-                {props.faculties.map(f => <option key={f.id}>{f[facultyName]}</option>)}
+                <option></option>
+                {props.faculties.map(f => <option key={f.id} value={f.id}>{f[facultyName]}</option>)}
             </Field>
             <Field component={Input} name='regPassword' type="password" placeholder={t('password')} validate={[required, minLength8]} />
             <Field component={Input} name='confirmPassword' type="password" placeholder={t('password')} validate={[required, matchInput]} />
