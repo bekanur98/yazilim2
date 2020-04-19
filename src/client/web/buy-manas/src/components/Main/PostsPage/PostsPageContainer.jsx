@@ -3,20 +3,23 @@ import PostsPage from './PostsPage';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
-import { getOnePost } from '../../../actions/index';
+import { getOnePost, newComment } from '../../../actions/index';
 
 class PostsPageContainer extends React.Component{
     componentDidMount(){ 
-        let postId = this.props.match.params.postsId
+        const postId = this.props.match.params.postsId
         this.props.getOnePost(postId)
     }
     render(){
-        return <PostsPage {...this.props} />
+        return <PostsPage {...this.props} postId={this.props.match.params.postsId}/>
     }
 }
 
 const mapStateToProps = (state) => ({
-    post: state.postsData.forPostPage
+    post: state.postsData.forPostPage,
+    comments: state.postsData.comments,
+    userId: state.auth.id,
+    isAuth: state.auth.isAuth
 })
 
-export default compose( connect(mapStateToProps, { getOnePost }), withRouter)(PostsPageContainer)
+export default compose( connect(mapStateToProps, { getOnePost, newComment }), withRouter)(PostsPageContainer)
