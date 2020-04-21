@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './NewPost.module.css';
 import { Field, reduxForm } from 'redux-form';
 import { Input, Textarea } from '../common/FormsControls/FormsControls';
 import { required } from '../../utils/validators/validators';
 import { compose } from 'redux';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
-import { getLocale } from '../../i18next';
+import { getLocale } from '../../i18next'; 
+
 
 const NewPost = (props) => {
     const facultyName = 'facultyName' + getLocale().charAt(0).toUpperCase() + getLocale().slice(1);
@@ -17,7 +18,6 @@ const NewPost = (props) => {
         }  
     } 
     let submit = (value) => {
-        debugger
         let obj = {
             ...value,
             publishedAt: date,
@@ -31,6 +31,20 @@ const NewPost = (props) => {
         value.cost = ''; 
 
     };
+
+    const [state, setState] = useState({
+        faculty: null,
+        department: null,
+        departmentList: [...props.departments]
+    }); 
+
+    const changeFaculty = (item) => { 
+        setState({
+                faculty: parseInt(item.target.value), 
+                department: state.departmentList.filter( i => i.faculty.id == parseInt(item.target.value) ),
+                departmentList: [...props.departments] 
+            })
+    }   
 
     return(
         <div className={styles.newPostWrapper}>
@@ -52,27 +66,28 @@ const NewPost = (props) => {
                     <div className={styles.inputs}>
                         <Field component={Textarea} name='description' type='text' placeholder='Описание' validate={[required]} />
                     </div>
-                </div>
+                </div> 
 
-                {/* <div className={styles.newFaculty}>
-                    <p className={styles.blockName}>Выберите факультет</p>                
-                    <div className={styles.inputs}>
-                        <Field component='select' name='faculties' >
-                            {props.faculties.map(f => <option key={f.id} value={f.id}>{f[facultyName]}</option>)} 
-                        </Field>
-                    </div>
-                </div> */}
-
-                <div className={styles.newDep}>
-                    <p className={styles.blockName}>Выберите департамент</p>                
-                    <div className={styles.inputs}>
-                        <Field component='select' name='department' >
+                <div className="newFaculty">
+                    <p className="blockName">Выберите факультет</p>
+                    <div className="inputs">
+                        <Field component='select' name='faculty' className={styles.newPostSelect} onChange={item => changeFaculty(item)} >
                             <option></option>
-                            {props.departments.map(d => <option key={d.id} value={d.id}>{d[depName]}</option>)} 
+                            { props.faculties.map(item => <option key={item.id} value={item.id} > {item.facultyNameRu} </option>) }
                         </Field>
                     </div>
                 </div>
-
+                                
+                {state.faculty
+                    ? <div className="newDep">
+                        <p className="blockName">Выберите департамент</p>
+                        <div className="inputs">
+                            <Field component='select' name='department' className={styles.newPostSelect}>
+                                {state.department.map(item => <option key={item.id} value={item.id} > {item.dep_name_ru} </option>)}
+                            </Field>
+                        </div>
+                    </div>
+                    : null}
                 <div className={styles.newCost}>
                     <p className={styles.blockName}>Цена <sup>*</sup></p>                
                     <div className={styles.inputs}>
