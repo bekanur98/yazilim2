@@ -27,7 +27,8 @@
     padding: 0 10px 10px ;
 }
 
-.modalBody input, select{
+.modalBody input, 
+.modalBody select.yourFaculty{
     width: 200px;
     display: block;
     padding: 7px;
