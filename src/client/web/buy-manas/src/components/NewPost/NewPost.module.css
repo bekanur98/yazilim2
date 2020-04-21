@@ -27,12 +27,10 @@
     border-bottom: 1px solid #707070;
     border-radius: 0;
     width: 300px;
-}
-.newPostWrapper form div .inputs select{
-    margin-left: 0;
-    width: 320px;
-    background: whitesmoke;
+} 
 
+.newPostWrapper form div.newFaculty .inputs .newPostSelect {
+    padding: 20px;
 }
 
 .newPostWrapper form .newDescr .inputs textarea{
