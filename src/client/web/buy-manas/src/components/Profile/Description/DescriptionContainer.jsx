@@ -1,7 +1,6 @@
 import React from 'react';
 import Description from './Description';
-import { toggleModalWindowEditProfile } from '../../../actions/login';
-import { setUserData, toggleIsFetching} from '../../../actions/users';
+import { setUserData, toggleIsFetching, newAvatar, editProfile, toggleModalWindowEditProfile} from '../../../actions/users';
 import { connect } from 'react-redux';
 
 
@@ -17,6 +16,8 @@ class DescriptionContainer extends React.Component {
 const mapStateToProps = (state) => {
 
     return {
+        avatar: state.auth.avatar,
+        myAvatar: state.auth.images,
         name: state.auth.name,
         id: state.auth.id,
         username: state.auth.username,
@@ -31,4 +32,4 @@ const mapStateToProps = (state) => {
 }
  
 
-export default connect(mapStateToProps, {setUserData, toggleModalWindowEditProfile, toggleIsFetching})(DescriptionContainer);
+export default connect(mapStateToProps, {setUserData, toggleModalWindowEditProfile, toggleIsFetching, newAvatar, editProfile})(DescriptionContainer);
