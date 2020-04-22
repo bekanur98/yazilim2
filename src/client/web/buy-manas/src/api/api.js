@@ -11,22 +11,27 @@ export const usersApi = {
     getUser(userId) {
         return instance.get(`users/${userId}`);
     },
-    editAvatar(avatar) {
+    newAvatar(userId, avatar) {
         const formData = new FormData();
         formData.append("file", avatar)
+        debugger
         return instance.post(`images`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
+        }).then(r => {
+            return instance.put(`users/${userId}`, {
+                "images": r ? [`/api/images/${r.data.id}`] : []
+            })
         })
-    }, 
+    },
     editProfile(userId, profileData, r) {
-        return instance.put(`users/${userId}`, {  
+        debugger
+        return instance.put(`users/${userId}`, {
             "name": profileData.name,
-            "email": profileData.email,  
+            "email": profileData.email,
             "phone": profileData.phone,
-            "faculty": profileData.faculty, 
-            "images": r ? [`/api/images/${r.data.id}`] : []
+            "faculty": profileData.faculty
         })
     },
 }
@@ -85,16 +90,16 @@ export const postersApi = {
             "poster": commentData.poster
         })
     },
-    getFacultiesPosts(facultyId){
+    getFacultiesPosts(facultyId) {
         return instance.get(`posters?department.faculty.id=${facultyId}&page=1`)
     },
-    getFacultiesNullPosts(){
+    getFacultiesNullPosts() {
         return instance.get(`posters?exists[department]=false&page=1`)
     },
     getPostsByTitle(title) {
         return instance.get('posters', { params: { 'title': title } })
     }
-} 
+}
 
 
 
