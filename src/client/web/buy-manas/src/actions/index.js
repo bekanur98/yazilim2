@@ -231,15 +231,12 @@ export const newPostImage = (newPostData) => (dispatch) => {
                 }
             })
     } else {
-        debugger
         postersApi.newPost(newPostData)
             .then(r => {
-        debugger
         if (r.status === 201) {
                     dispatch(newPostSuccess(r.data));
                     dispatch(stopSubmit('newPost', { _error: 'Объявление опубликовано' }));
                     dispatch(newCurrentImage(null));
-        debugger
     }
             })
     }
