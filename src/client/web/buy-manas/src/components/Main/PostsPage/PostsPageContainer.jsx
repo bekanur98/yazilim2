@@ -3,7 +3,8 @@ import PostsPage from './PostsPage';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { withRouter } from 'react-router-dom';
-import { getOnePost, newComment } from '../../../actions/index';
+import { getOnePost } from '../../../actions/posts';
+import { newComment } from '../../../actions/comments';
 
 class PostsPageContainer extends React.Component{
     componentDidMount(){ 

@@ -1,7 +1,7 @@
 import React from 'react'; 
 import { connect } from 'react-redux';
 import TopPosts from './TopPosts';
-import { setPosts } from './../../../actions/index';
+import { setPosts } from './../../../actions/posts';
 
 class TopPostsContainer extends React.Component{
     componentDidMount() {

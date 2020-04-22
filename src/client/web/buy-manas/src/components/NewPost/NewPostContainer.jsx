@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import NewPost from './NewPost';
-import { newCurrentImage } from '../../actions';
-import { newPostImage } from '../../actions';
-import { setPosts, setDepartments, setFaculties} from './../../actions/index';
+import { newCurrentImage, newPostImage, setPosts } from '../../actions/posts'; 
+import {  setDepartments, setFaculties} from './../../actions/faculties';
 
 class NewPostContainer extends React.Component {
     componentDidMount(){

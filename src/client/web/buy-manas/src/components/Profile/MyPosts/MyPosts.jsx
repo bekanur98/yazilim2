@@ -1,19 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './MyPosts.module.css';
-import { useTranslation } from 'react-i18next';
 import { IMAGES_URL } from '../../../constants';
 import { NavLink } from 'react-router-dom';
 
 
 const MyPosts = (props) => {
-    const { t } = useTranslation();
 
+    
     const LastPostsArray = [];
     props.posts.sort((a, b) => {
         return new Date(b.publishedAt) - new Date(a.publishedAt);
     }).map(p => {
         LastPostsArray.push(p);
     });
+ 
     return (
         <div className={styles.myPostsWrapper}>
             <h3>Мои посты</h3>
@@ -30,8 +30,6 @@ const MyPosts = (props) => {
                                         <img src={require('../../../assets/images/logo.png')} alt="categoryIcon" />
                                     }
                                 </div>
-
-                                {/* <p className={styles.cost}> {p.cost != null ? p.cost + ' сом' : t('contract')}</p> */}
                                 <p className={styles.postTitle}>{p.title}</p>
                             </div>
                         </NavLink>)

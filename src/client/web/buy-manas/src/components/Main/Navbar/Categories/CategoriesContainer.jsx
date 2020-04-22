@@ -1,6 +1,6 @@
 import React from 'react';
 import Categories from './Categories';
-import { setFaculties } from '../../../../actions/index';
+import { setFaculties } from '../../../../actions/faculties';
 import { connect } from 'react-redux';
 
 

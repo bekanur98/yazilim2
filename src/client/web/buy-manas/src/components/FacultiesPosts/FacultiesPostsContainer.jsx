@@ -3,7 +3,7 @@ import FacultiesPosts from './FacultiesPosts';
 import { withRouter } from 'react-router-dom';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { getFacultiesPosts } from '../../actions/index';
+import { getFacultiesPosts } from '../../actions/faculties';
 
 
 class FacultiesPostsContainer extends React.Component{

@@ -4,10 +4,31 @@ const instance = axios.create({
     baseURL: 'http://buymanasapi.ru.xsph.ru/index.php/api/'
 })
 
+
+
+
 export const usersApi = {
     getUser(userId) {
         return instance.get(`users/${userId}`);
-    }
+    },
+    editAvatar(avatar) {
+        const formData = new FormData();
+        formData.append("file", avatar)
+        return instance.post(`images`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        })
+    }, 
+    editProfile(userId, profileData, r) {
+        return instance.put(`users/${userId}`, {  
+            "name": profileData.name,
+            "email": profileData.email,  
+            "phone": profileData.phone,
+            "faculty": profileData.faculty, 
+            "images": r ? [`/api/images/${r.data.id}`] : []
+        })
+    },
 }
 
 
@@ -18,11 +39,14 @@ export const facultiesApi = {
     }
 }
 
+
+
 export const departmentsApi = {
     getDepartments() {
         return instance.get(`departments`);
     }
 }
+
 
 
 export const postersApi = {
@@ -66,14 +90,13 @@ export const postersApi = {
     },
     getFacultiesNullPosts(){
         return instance.get(`posters?exists[department]=false&page=1`)
-    }
-}
-
-export const searchPostsApi = {
+    },
     getPostsByTitle(title) {
         return instance.get('posters', { params: { 'title': title } })
     }
-}
+} 
+
+
 
 export const authApi = {
     checkUser(formData) {

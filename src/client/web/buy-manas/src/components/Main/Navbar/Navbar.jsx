@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import styles from './Navbar.module.css'
 import { useTranslation } from 'react-i18next';
 import CategoriesContainer from './Categories/CategoriesContainer';
-import { setPostByTitle } from '../../../actions/index'
+import { setPostByTitle } from '../../../actions/posts'
 import { useDispatch} from 'react-redux';
 
 const Navbar = (props) => {

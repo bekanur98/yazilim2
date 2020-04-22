@@ -1,7 +1,7 @@
 import React from 'react'; 
 import { connect } from 'react-redux';
 import LastPosts from './LastPosts';
-import { setPosts, setPostByTitle } from '../../../actions/index';
+import { setPosts, setPostByTitle } from '../../../actions/posts';
 
 class LastPostsContainer extends React.Component{ 
     componentDidMount() {

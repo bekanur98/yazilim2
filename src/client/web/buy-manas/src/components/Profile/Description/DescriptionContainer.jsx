@@ -1,6 +1,7 @@
 import React from 'react';
 import Description from './Description';
-import { setUserData, toggleModalWindowEditProfile, toggleIsFetching } from '../../../actions/index';
+import { toggleModalWindowEditProfile } from '../../../actions/login';
+import { setUserData, toggleIsFetching} from '../../../actions/users';
 import { connect } from 'react-redux';
 
 

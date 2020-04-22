@@ -4,6 +4,8 @@ import { useTranslation } from 'react-i18next';
 import Modal from '../../common/Modal/Modal';
 import { getLocale } from '../../../i18next';
 import { NavLink } from 'react-router-dom';
+import { Field, reduxForm } from 'redux-form';
+import { Input } from '../../common/FormsControls/FormsControls';
 
 const Description = (props) => {
     const { t } = useTranslation();
@@ -36,17 +38,18 @@ const Description = (props) => {
                 <Modal onClose={props.toggleModalWindowEditProfile}>
                     <form action="GET">
 
-                        <input type="text" placeholder={t('yourName')} value={props.name} />
-                        <input type="text" placeholder={t('yourEmail')}  value={props.email} />
-                        <input type="text" placeholder={t('yourUsername')} value={props.username} />
-                        <select id="faculties" name="faculties">
+                        <Field component={Input} name="name" type="text" placeholder={t('yourName')} value={props.name} />
+                        <Field component={Input} name="email" type="text" placeholder={t('yourEmail')}  value={props.email} />
+                        <Field component={Input} name="username" type="text" placeholder={t('yourUsername')} value={props.username} />
+                        <Field component='select' className={styles.editFaculty} id="faculties" name="faculties">
                             {
                                 props.faculties.map(f => {
                                     return <option>{f[facultyName]}</option>
                                 })
                             }
-                        </select>
-                        <input type="phone" placeholder={t('yourNumber')} value={props.phone} />
+                        </Field>
+                        <Field component={Input} type="phone" placeholder={t('yourNumber')} value={props.phone} />
+                        <input type="file" placeholder='Выберите изображение'/>
                         <button> {t('saveChanges')} </button>
                     </form>
                 </Modal>
@@ -56,4 +59,4 @@ const Description = (props) => {
     )
 }
 
-export default Description;
+export default reduxForm({form: 'editProfile'})(Description);

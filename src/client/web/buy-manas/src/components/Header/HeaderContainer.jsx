@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from './Header';
-import { setAuthUserData, toggleModalWindowAuth, toggleModalLoginAuth, login, logout, register, logWithLocalStorage } from '../../actions/index'
+import { setAuthUserData, toggleModalWindowAuth, toggleModalLoginAuth, login, logout, register, logWithLocalStorage } from '../../actions/login'
 import { connect } from 'react-redux';
 
 class HeaderContainer extends React.Component { 

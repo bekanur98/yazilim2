@@ -1,7 +1,7 @@
 import React from 'react'; 
 import { connect } from 'react-redux';
 import MyPosts from './MyPosts';
-import { setUserData } from '../../../actions/index';
+import { setUserData } from '../../../actions/users';
 
 
 class MyPostsContainer extends React.Component{

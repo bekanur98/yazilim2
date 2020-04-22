@@ -68,9 +68,9 @@ const NewPost = (props) => {
                     </div>
                 </div> 
 
-                <div className="newFaculty">
-                    <p className="blockName">Выберите факультет</p>
-                    <div className="inputs">
+                <div className={styles.newFaculty}>
+                    <p className={styles.blockName}>Выберите факультет</p>
+                    <div className={styles.inputs}>
                         <Field component='select' name='faculty' className={styles.newPostSelect} onChange={item => changeFaculty(item)} >
                             <option></option>
                             { props.faculties.map(item => <option key={item.id} value={item.id} > {item.facultyNameRu} </option>) }
@@ -79,9 +79,9 @@ const NewPost = (props) => {
                 </div>
                                 
                 {state.faculty
-                    ? <div className="newDep">
-                        <p className="blockName">Выберите департамент</p>
-                        <div className="inputs">
+                    ? <div className={styles.newDep}>
+                        <p className={styles.blockName}>Выберите департамент</p>
+                        <div className={styles.inputs}>
                             <Field component='select' name='department' className={styles.newPostSelect}>
                                 {state.department.map(item => <option key={item.id} value={item.id} > {item.dep_name_ru} </option>)}
                             </Field>

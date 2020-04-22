@@ -7,7 +7,7 @@ import Modal from '../common/Modal/Modal';
 import LoginForm from './LoginForm/LoginForm';
 import RegisterForm from './RegisterForm/RegisterForm';
 import {useDispatch} from 'react-redux';
-import { setPostByTitle } from '../../actions/index';
+import { setPostByTitle } from '../../actions/posts';
 
 const Header = (props) => {
     const dispatch = useDispatch();
