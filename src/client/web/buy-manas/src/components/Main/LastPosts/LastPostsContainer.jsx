@@ -3,12 +3,13 @@ import { connect } from 'react-redux';
 import LastPosts from './LastPosts';
 import { setPosts, setPostByTitle } from '../../../actions/index';
 
-class LastPostsContainer extends React.Component{
+class LastPostsContainer extends React.Component{ 
     componentDidMount() {
-        this.props.setPosts();
-    }
+        this.props.setPosts(); 
+
+    } 
     render(){
-        return <LastPosts {...this.props} />
+        return <LastPosts {...this.props} loadMore={this.loadMore} state={this.state}/>
     }
 }
 
