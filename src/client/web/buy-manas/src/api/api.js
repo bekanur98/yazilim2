@@ -42,7 +42,6 @@ export const postersApi = {
         })
     },
     newPost(newPostData, r) {
-        debugger
         return instance.post(`posters`, {
             "title": newPostData.title,
             "description": newPostData.description,
@@ -84,7 +83,6 @@ export const authApi = {
         return instance.get(`users/${userId}`)
     },
     register(formData) {
-        debugger
         return instance.post(`users`, {
             "username": formData.username,
             "password": formData.regPassword,
