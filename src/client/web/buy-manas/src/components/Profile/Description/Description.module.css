@@ -5,10 +5,14 @@
     grid-gap: 20px;
     padding: 20px;  
 }
-
+.avatarBlock{
+    width: 210px;
+    height: 210px;
+    border-radius: 10px;
+    overflow: hidden;
+}
 .avatar{
     width: 100%;
-    border-radius: 10px;
 }
 
 
@@ -89,4 +93,8 @@
 
 button{
     cursor: pointer;
+}
+
+.successSubmit{
+    color: green;
 }
