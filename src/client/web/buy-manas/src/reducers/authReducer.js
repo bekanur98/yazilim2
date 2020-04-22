@@ -23,6 +23,18 @@ const authReducer = (state = initialState, action) => {
                 wannaLogin: !state.wannaLogin
             }
         }
+        case 'EDIT_PROFILE':{
+            return{
+                ...state,
+                ...action.profileData
+            }
+        }
+        case 'NEW_AVATAR':{
+            return{
+                ...state,
+                avatar: action.avatar
+            }
+        }
         default:
             return state;
     } 
