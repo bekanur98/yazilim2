@@ -5,14 +5,41 @@ import Modal from '../../common/Modal/Modal';
 import { getLocale } from '../../../i18next';
 import { NavLink } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
-import { Input } from '../../common/FormsControls/FormsControls';
+import { Input, Phone } from '../../common/FormsControls/FormsControls';
+import { emailValid } from '../../../utils/validators/validators'
+import { IMAGES_URL } from '../../../constants';
 
 const Description = (props) => {
     const { t } = useTranslation();
     const facultyName = 'facultyName' + getLocale().charAt(0).toUpperCase() + getLocale().slice(1);
+    
+    const uploadImage = e => {
+        if(e.target.files.length){
+            props.newAvatar(e.target.files[0]);
+        }  
+    } 
+    const submit = (values) => {
+        debugger
+        let obj = { 
+            name: values.name ? values.name :  props.name,
+            email: values.email ? values.email :  props.email,
+            phone: values.phone && values.phone !== '+996' ? values.phone :  props.phone,
+            faculty: values.faculty ? `/api/faculties/${values.faculty}` :  `/api/faculties/${props.faculty.id}`,
+            avatar: props.avatar,
+            currentAvatar: props.myAvatar.url ? props.myAvatar[0].url : props.avatar 
+        }
+        props.editProfile(props.id, obj); 
+        debugger
+    }
+
     return (
         <div className={styles.descriptionWrapper}>
-            <img className={styles.avatar} src={require('../../../assets/images/avatar.jpg')} alt="avatar" />
+            <div className={styles.avatarBlock}>
+                {props.myAvatar[0]
+                    ? <img className={styles.avatar} src={IMAGES_URL + props.myAvatar[0].url} alt="avatar" />
+                    : <img className={styles.avatar} src={require('../../../assets/images/avatar.jpg')} alt="avatar" />
+                }    
+            </div>
             <div className={styles.about}>
                 <div className={styles.names}>
                     <p className={styles.name}> {props.name} </p>
@@ -36,21 +63,20 @@ const Description = (props) => {
             {
                 props.isModalOpen &&
                 <Modal onClose={props.toggleModalWindowEditProfile}>
-                    <form action="GET">
-
-                        <Field component={Input} name="name" type="text" placeholder={t('yourName')} value={props.name} />
-                        <Field component={Input} name="email" type="text" placeholder={t('yourEmail')}  value={props.email} />
-                        <Field component={Input} name="username" type="text" placeholder={t('yourUsername')} value={props.username} />
-                        <Field component='select' className={styles.editFaculty} id="faculties" name="faculties">
+                    <form onSubmit={props.handleSubmit(submit)}>
+                        <Field component={Input} name="name" type="text" placeholder={t('yourName')} value={props.name}/>
+                        <Field component={Input} name="email" type="text" placeholder={t('yourEmail')}  value={props.email} validate={[emailValid]}/>
+                        <Field component='select' name="faculty" className={styles.editFaculty} id="faculties">
                             {
                                 props.faculties.map(f => {
-                                    return <option>{f[facultyName]}</option>
+                                    return <option key={f.id} value={f.id}>{f[facultyName]}</option>
                                 })
                             }
                         </Field>
-                        <Field component={Input} type="phone" placeholder={t('yourNumber')} value={props.phone} />
-                        <input type="file" placeholder='Выберите изображение'/>
+                        <Field component={Phone} name='phone' type="phone" placeholder={t('yourNumber')} value={props.phone} />
+                        <div className={styles.newAvatar}>Аватар<input onChange={uploadImage} type="file" placeholder='Выберите изображение'/></div>
                         <button> {t('saveChanges')} </button>
+                        { props.error && <div className={styles.successSubmit}>{ props.error }</div> }
                     </form>
                 </Modal>
             }
