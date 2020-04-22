@@ -4,10 +4,6 @@ import { stopSubmit } from 'redux-form'
 
 // ACTION CREATORS
 
-export const toggleModalWindowEditProfile = () => ({
-    type: 'TOGGLE_MODAL_WINDOW_EDIT_PROFILE'
-})
-
 export const toggleModalWindowAuth = () => ({
     type: 'TOGGLE_WINDOW_MODAL_AUTH'
 })
