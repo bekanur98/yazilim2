@@ -1,5 +1,6 @@
 import { postersApi } from "../api/api"
 import { stopSubmit } from 'redux-form'
+import { toggleIsFetching } from "./users"
 
 
 // ACTION CREATORS
@@ -54,9 +55,11 @@ export const setPostByTitle = (title) => (dispatch) => {
 }
 
 export const setPosts = () => (dispatch) => {
+    dispatch(toggleIsFetching(true));
     postersApi.getPosts()
         .then(response => {
             dispatch(setPostsSuccess(response.data));
+            dispatch(toggleIsFetching(false));
         });
 }
 
