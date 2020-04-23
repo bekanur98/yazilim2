@@ -6,32 +6,31 @@ import { getLocale } from '../../../i18next';
 import { NavLink } from 'react-router-dom';
 import { Field, reduxForm } from 'redux-form';
 import { Input, Phone } from '../../common/FormsControls/FormsControls';
-import { emailValid } from '../../../utils/validators/validators'
+import { emailValid, } from '../../../utils/validators/validators'
 import { IMAGES_URL } from '../../../constants';
+import Preloader from '../../common/Preloader/Preloader';
 
 const Description = (props) => {
     const { t } = useTranslation();
-    const facultyName = 'facultyName' + getLocale().charAt(0).toUpperCase() + getLocale().slice(1);
-    
+    const facultyName = 'facultyName' + getLocale().charAt(0).toUpperCase() + getLocale().slice(1); 
     const uploadImage = e => {
         if(e.target.files.length){
             props.newAvatar(e.target.files[0]);
         }  
     } 
     const submit = (values) => {
-        debugger
         let obj = { 
             name: values.name ? values.name :  props.name,
             email: values.email ? values.email :  props.email,
             phone: values.phone && values.phone !== '+996' ? values.phone :  props.phone,
             faculty: values.faculty ? `/api/faculties/${values.faculty}` :  `/api/faculties/${props.faculty.id}`,
-            avatar: props.avatar,
-            currentAvatar: props.myAvatar.url ? props.myAvatar[0].url : props.avatar 
+            avatar: props.avatar
         }
         props.editProfile(props.id, obj); 
-        debugger
     }
-
+    if(!props.faculty || !props.myAvatar || !props.username || !props.name){
+        return <Preloader />
+    }
     return (
         <div className={styles.descriptionWrapper}>
             <div className={styles.avatarBlock}>
@@ -46,7 +45,7 @@ const Description = (props) => {
                     <p className={styles.username}> @{props.username} </p>
                 </div>
                 <div className={styles.iDontKnow}>
-                    <div className={styles.faculty}> <img src={require('../../../assets/images/5.png')} alt="Faculty" /> </div>
+                    <div className={styles.faculty}><img src={require(`../../../assets/images/${props.faculty.id}.png`)} alt="Faculty" /> </div>
                     <div className={styles.postLength}>
                         <p> {props.posters.length ? props.posters.length : 0 } </p>
                         <span> posts </span> 
@@ -67,11 +66,8 @@ const Description = (props) => {
                         <Field component={Input} name="name" type="text" placeholder={t('yourName')} value={props.name}/>
                         <Field component={Input} name="email" type="text" placeholder={t('yourEmail')}  value={props.email} validate={[emailValid]}/>
                         <Field component='select' name="faculty" className={styles.editFaculty} id="faculties">
-                            {
-                                props.faculties.map(f => {
-                                    return <option key={f.id} value={f.id}>{f[facultyName]}</option>
-                                })
-                            }
+                            <option></option>
+                            {props.faculties.map(f => <option key={f.id} value={f.id}>{f[facultyName]}</option>)}
                         </Field>
                         <Field component={Phone} name='phone' type="phone" placeholder={t('yourNumber')} value={props.phone} />
                         <div className={styles.newAvatar}>Аватар<input onChange={uploadImage} type="file" placeholder='Выберите изображение'/></div>
