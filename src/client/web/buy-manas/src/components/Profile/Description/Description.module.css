@@ -6,10 +6,13 @@
     padding: 20px;  
 }
 .avatarBlock{
+    display: flex;
+    align-items: center;
     width: 210px;
     height: 210px;
     border-radius: 10px;
     overflow: hidden;
+    border: 1px solid #bebebe;
 }
 .avatar{
     width: 100%;
