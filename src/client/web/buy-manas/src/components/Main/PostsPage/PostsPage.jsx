@@ -9,7 +9,8 @@ import { Input } from '../../common/FormsControls/FormsControls';
 
 const PostsPage = (props) => {
     const { t } = useTranslation();
-
+    let userReq = `/index.php/api/users/${props.userId}`
+    let objR
     const p = props.post;
 
     if (!p) {
@@ -25,6 +26,24 @@ const PostsPage = (props) => {
         }
         props.newComment(obj)
     }
+    let handleLike = () =>{
+        if (props.ratings && props.ratings.author.includes(userReq)){
+            let authors = props.ratings.author.filter(auth => {return auth!==userReq})
+            objR = {
+                id: props.ratings.id,
+                authors: authors, 
+                rating : props.ratings.rating - 1
+            }
+        }
+        else if(props.ratings && !props.ratings.author.includes(userReq)){
+            objR ={
+                id: props.ratings.id,
+                authors : [ ...props.ratings.author, userReq ],
+                rating: props.ratings.rating + 1
+            }
+        }
+        props.isAuth?props.likeThePost(userReq, p.id, objR ): props.toggleModalWindowAuth()
+    }
     return (
         <div className={styles.postWrapper}>
             <div className={styles.forFlexDisplay}>
@@ -35,10 +54,19 @@ const PostsPage = (props) => {
                             ? <img src={IMAGES_URL + p.images[0].url} alt="Post image" />
                             : <p>Нет фотографии</p>}
                     </div>
-                    <div>
-                        <p>Дата публикации: {p.publishedAt}</p>
-                        <p>Рейтинг: {p.rating}</p>
-                        <p className={styles.cost}>Цена: {p.cost != null ? p.cost + ' сом' : t('contract')}</p>
+                    <div className={styles.miniDiv}>
+                        <div>
+                            <p>Дата публикации: {p.publishedAt}</p>
+                            {props.ratings && <p>Рейтинг: {props.ratings.rating}</p>}
+                            <p className={styles.cost}>Цена: {p.cost != null ? p.cost + ' сом' : t('contract')}</p>
+                        </div>
+                        <div className={styles.like}>
+                            <input type="image" onClick={ handleLike } width = '50px' 
+                                        src={props.ratings&&props.ratings.author.includes(`/index.php/api/users/${props.userId}`)?
+                                            require('../../../assets/images/like.png'): require('../../../assets/images/dislike.png')} 
+                                        alt="ОК">
+                            </input>
+                        </div>
                     </div>
                     <div className={styles.descrBlock}>
                         <p className={styles.descrItem}>{p.description}</p>

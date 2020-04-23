@@ -25,6 +25,11 @@ export const setOnePost = (postData) => ({
     comments: postData.comments
 })
 
+export const setLike = (ratingData) => ({
+    type: 'SET_LIKE',
+    ratings: ratingData,
+})
+
 export const newPostSuccess = (newPostData) => ({
     type: 'NEW_POST',
     newPostData
@@ -64,6 +69,21 @@ export const getOnePost = (postId) => (dispatch) => {
     postersApi.getOnePost(postId)
         .then(r => {
             dispatch(setOnePost(r.data))
+        })
+}
+
+export const getRating = (postId) => (dispatch) => {
+    postersApi.getRating(postId)
+        .then(r => {
+            dispatch(setLike(r.data))
+        })
+}
+
+export const likeThePost = (userReq, postId, obj) => (dispatch) => {
+        postersApi.likeThePost(userReq, postId, obj)
+        .then(r2 => {
+            postersApi.getRating(postId)
+            .then(r3 => {dispatch(setLike(r3.data))})
         })
 }
 

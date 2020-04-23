@@ -6,7 +6,8 @@ let initialState = {
     forPostPage: null,
     currentImage: null,
     comments: [],
-    postsOfFaculty: []
+    postsOfFaculty: [],
+    ratings: [0]
 };
 
 const postsReducer = (state = initialState, action) => {
@@ -22,6 +23,12 @@ const postsReducer = (state = initialState, action) => {
                 ...state,
                 forPostPage: { ...action.postData },
                 comments: [...action.comments]
+            }
+        }
+        case 'SET_LIKE': {
+            return {
+                ...state,
+                ratings: [ ...action.ratings ]
             }
         }
         case 'SET_POSTS_BY_TITLE': {

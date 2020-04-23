@@ -58,6 +58,27 @@ export const postersApi = {
     getPosts() {
         return instance.get(`posters`)
     },
+    getRating(posterId) {
+        return instance.get(`ratings`, { params: { 'poster.id': posterId } })
+    },
+
+    likeThePost(userReq, posterId, obj=false) {
+        if(obj){
+            return instance.put(`ratings/${obj.id}`, {
+                "author": obj.authors,
+                "poster": [
+                    `/index.php/api/posters/${posterId}`
+                ],
+                "rating": obj.rating
+              })
+        }    
+
+        return instance.post(`ratings`, {
+            "author": [ userReq ],
+            "poster": [`/index.php/api/posters/${posterId}`],
+            "rating": 1
+        })
+    },
     getOnePost(postId) {
         return instance.get(`posters/${postId}`)
     },

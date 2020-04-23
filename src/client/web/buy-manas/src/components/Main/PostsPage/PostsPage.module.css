@@ -7,6 +7,11 @@
     padding: 20px;
 }
 
+.miniDiv{
+    display: flex;
+    justify-content: space-between;
+}
+
 .aboutPost .postImg{
     display: flex;
     justify-content: center;
@@ -52,6 +57,10 @@ hr{
 .aboutAuthor .authorsFaculty {
     padding: 10px;
     /* border-bottom: 1px solid rgb(37, 36, 36); */
+}
+
+.like{
+    padding-top: 50px;
 }
 
 .aboutAuthor .username{
