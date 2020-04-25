@@ -5,24 +5,29 @@ import { NavLink } from 'react-router-dom';
 import Preloader from '../../common/Preloader/Preloader';
 
 
-const MyPosts = (props) => {
-
-
-
+const MyPosts = (props) => { 
     const LastPostsArray = [];
+    console.log(props)
 
-    props.posts.sort((a, b) => {
-        return new Date(b.publishedAt) - new Date(a.publishedAt);
-    }).map(p => {
-        LastPostsArray.push(p);
-    });
-    if (props.isFetching) {
-        return <Preloader />
+    if (props.posts2) {
+        props.posts2.sort((a, b) => {
+            return new Date(b.publishedAt) - new Date(a.publishedAt);
+        }).map(p => {
+            LastPostsArray.push(p);
+        });
     }
     return (
         <div className={styles.myPostsWrapper}>
             <h3>Мои посты</h3>
             <div className={styles.myPosts}>
+
+                {props.post
+                    && props.posts.sort((a, b) => {
+                        return new Date(b.publishedAt) - new Date(a.publishedAt);
+                    }).map(p => {
+                        LastPostsArray.push(p);
+                    })
+                }
 
                 {LastPostsArray.length
                     ? LastPostsArray.map(l => <NavLink to={`posts/${l.id}`}>
