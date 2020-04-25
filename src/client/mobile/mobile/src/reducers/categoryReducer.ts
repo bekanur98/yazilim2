@@ -1,9 +1,10 @@
 // reducers/countryReducer
 import {} from "../types";
-import {CATEGORY_GET, CATEGORY_SET} from "../constants";
+import {DEPARTMENT_SET, CATEGORY_SET} from "../constants";
 
 const initialCategoryState = {
     categoryList: [] as any,
+    departmentList: undefined as any,
 };
 
 const categoryReducer = (state= initialCategoryState, action: any) => {
@@ -13,6 +14,11 @@ const categoryReducer = (state= initialCategoryState, action: any) => {
                 ...state,
                 categoryList: action.payload
             };
+        case DEPARTMENT_SET:
+            return {
+                ...state,
+                departmentList: action.payload
+            }
         default:
             return state;
     }

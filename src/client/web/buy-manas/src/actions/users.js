@@ -44,36 +44,25 @@ export const setUserData = (userId) => (dispatch) => {
 
 
 export const editProfile = (userId, profileData) => (dispatch) => {
-    debugger
     if (profileData.avatar) {
-        debugger
         usersApi.newAvatar(userId, profileData.avatar)
             .then(r => {
-                debugger
-                if (r.data.url) {
-                    debugger
-                    usersApi.editProfile(userId, profileData, r)
+                if (r.data.images[0].url) {
+                    usersApi.editProfile(userId, profileData)
                         .then(r => {
-                            debugger
                             if (r.status === 200) {
                                 dispatch(editProfileSuccess(r.data));
                                 dispatch(stopSubmit('editProfile', { _error: 'Изменения сохранены' }));
-                                dispatch(toggleModalWindowEditProfile(false))
-                                debugger
                             }
                         })
                 }
             })
     } else {
-        debugger
         usersApi.editProfile(userId, profileData)
             .then(r => {
-                debugger
                 if (r.status === 200) {
                     dispatch(editProfileSuccess(r.data));
                     dispatch(stopSubmit('editProfile', { _error: 'Изменения сохранены' }));
-                    dispatch(toggleModalWindowEditProfile(false));
-                    debugger
                 }
             })
     }

@@ -22,7 +22,7 @@ const mapStateToProps = (state) => {
         id: state.auth.id,
         username: state.auth.username,
         email: state.auth.email,
-        posters: state.auth.posters,
+        posters: state.profilePage.posters,
         phone: state.auth.phone,
         faculty: state.auth.faculty,
         isModalOpen: state.profilePage.isModalOpen,

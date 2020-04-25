@@ -1,5 +1,6 @@
-import {  authApi} from "../api/api"
+import { authApi } from "../api/api"
 import { stopSubmit } from 'redux-form'
+import Cookies from 'universal-cookie';
 
 
 // ACTION CREATORS
@@ -16,30 +17,57 @@ export const setAuthUserData = (payload, isAuth) => ({
     payload: { ...payload, isAuth }
 });
 
+export const usernamePass = (id, username, pass) => ({
+    type: 'USERNAME_PASS',
+    payload: { id, username, pass }
+});
+
 // REDUX-THUNKS
 
-export const forLocalStorage = (loginData) => (dispatch) => {
-    localStorage.setItem('myLoginData', JSON.stringify(loginData))
-    let myData = localStorage.getItem('myLoginData')
-    myData = JSON.parse(myData)
-    dispatch(setAuthUserData(myData, true))
+// export const forLocalStorage = (loginData) => (dispatch) => {
+//     localStorage.setItem('myLoginData', JSON.stringify(loginData))
+//     let myData = localStorage.getItem('myLoginData')
+//     myData = JSON.parse(myData)
+//     dispatch(setAuthUserData(myData, true))
+// }
+
+// export const logWithLocalStorage = (r) => (dispatch) => {
+//     authApi.login(r.id)
+//         .then(response => {
+//             dispatch(forLocalStorage(response.data))
+//         })
+// }
+let cookies = new Cookies();
+
+export const forCookie = (id, username, password) => (dispatch) => {
+
+    cookies.set('id', id, { path: '/' })
+    cookies.set('username', username, { path: '/' })
+    cookies.set('password', password, { path: '/' })
+    let data0 = cookies.get('id')
+    let data1 = cookies.get('username')
+    let data2 = cookies.get('password')
+    dispatch(usernamePass(data0, data1, data2))
+}
+export const logWithCookie = (id) => (dispatch) => {
+    if (id) {
+        authApi.login(id)
+            .then(res => {
+                dispatch(forCookie(res.data.id, res.data.username, res.data.password))
+                dispatch(setAuthUserData(res.data, true))
+            })
+    }
 }
 
-export const logWithLocalStorage = (r) => (dispatch) => {
-    authApi.login(r.id)
-        .then(response => {
-            dispatch(forLocalStorage(response.data))
-        })
-}
 
-
-export const login = (formData) => (dispatch) => {
-    authApi.checkUser(formData)
+export const login = (username, password) => (dispatch) => {
+    authApi.checkUser(username)
         .then(r => {
-            if (r.data.length && formData.logPassword == r.data[0].password) {
+            if (r.data.length && password == r.data[0].password) {
                 authApi.login(r.data[0].id)
                     .then(response => {
-                        dispatch(forLocalStorage(response.data))
+                        dispatch(setAuthUserData(response.data, true))
+                        dispatch(forCookie(response.data.id, response.data.username, response.data.password))
                         dispatch(toggleModalWindowAuth());
                     })
             } else {
@@ -50,7 +78,9 @@ export const login = (formData) => (dispatch) => {
 
 export const logout = () => (dispatch) => {
     dispatch(setAuthUserData(undefined, false));
-    localStorage.removeItem('myLoginData');
+    cookies.remove('id');
+    cookies.remove('username');
+    cookies.remove('password');
 }
 
 export const register = (formData) => (dispatch) => {
@@ -65,7 +95,7 @@ export const register = (formData) => (dispatch) => {
                         if (r.status === 201) {
                             dispatch(setAuthUserData(r.data, true))
                             dispatch(toggleModalWindowAuth());
-                            dispatch(forLocalStorage(r.data))
+                            dispatch(forCookie(r.data.id, r.data.username, r.data.password))
                         } else {
                             alert('Что-то пошло не так')
                         }

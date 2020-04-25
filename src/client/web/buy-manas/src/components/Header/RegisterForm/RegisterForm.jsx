@@ -10,7 +10,6 @@ const RegisterForm = (props) => {
     const { t } = useTranslation();
     const facultyName = 'facultyName' + getLocale().charAt(0).toUpperCase() + getLocale().slice(1);
     const maxLength30 = maxLengthCreator(30);
-    const maxLength13 = maxLengthCreator(13);
     const minLength8 = minLengthCreator(8); 
     return (
         <form onSubmit={props.handleSubmit}>

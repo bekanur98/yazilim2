@@ -18,6 +18,8 @@ export const CATEGORY_GET = 'CATEGORY_GET';
 
 export const CATEGORY_SET = 'CATEGORY_SET';
 
+export const DEPARTMENT_SET = 'DEPARTMENT_SET';
+
 export const API_URL = 'http://buymanasapi.ru.xsph.ru/index.php/api/';
 
 export const PAGE_COUNTER_CHANGE = 'PAGE_COUNTER_CHANGE';

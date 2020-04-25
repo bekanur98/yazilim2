@@ -25,6 +25,7 @@ const PostsPage = (props) => {
             poster: `/api/posters/${props.postId}`
         }
         props.newComment(obj)
+        value.newComment = '';
     }
     let handleLike = () =>{
         if (props.ratings && props.ratings.author.includes(userReq)){

@@ -9,8 +9,8 @@ import { getLocale } from '../../i18next';
 
 
 const NewPost = (props) => {
-    const facultyName = 'facultyName' + getLocale().charAt(0).toUpperCase() + getLocale().slice(1);
-    const depName = 'dep_name_' + getLocale().charAt(0).toLowerCase() + getLocale().slice(1);
+    // const facultyName = 'facultyName' + getLocale().charAt(0).toUpperCase() + getLocale().slice(1);
+    // const depName = 'dep_name_' + getLocale().charAt(0).toLowerCase() + getLocale().slice(1);
     let date = new Date(); 
     const uploadImage = e => {
         if(e.target.files.length){

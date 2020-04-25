@@ -14,7 +14,6 @@ export const usersApi = {
     newAvatar(userId, avatar) {
         const formData = new FormData();
         formData.append("file", avatar)
-        debugger
         return instance.post(`images`, formData, {
             headers: {
                 'Content-Type': 'multipart/form-data'
@@ -25,8 +24,7 @@ export const usersApi = {
             })
         })
     },
-    editProfile(userId, profileData, r) {
-        debugger
+    editProfile(userId, profileData) {
         return instance.put(`users/${userId}`, {
             "name": profileData.name,
             "email": profileData.email,
@@ -125,8 +123,8 @@ export const postersApi = {
 
 
 export const authApi = {
-    checkUser(formData) {
-        return instance.get(`users`, { params: { 'username': formData.username } })
+    checkUser(username) {
+        return instance.get(`users`, { params: { 'username': username } })
     },
     login(userId) {
         return instance.get(`users/${userId}`)

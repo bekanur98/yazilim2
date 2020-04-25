@@ -20,7 +20,7 @@ const Header = (props) => {
         props.register(formData) 
     }
     const onLoginSubmit = (formData) =>{
-        props.login(formData)
+        props.login(formData.username, formData.logPassword)
     }
 
     return (

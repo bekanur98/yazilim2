@@ -6,7 +6,9 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {StyleSheet, Image, Alert, FlatList} from 'react-native';
 import ImagePicker from 'react-native-image-picker'
-import {View, Button, Text, Item, Picker, Label, Input, 
+
+import Picker from 'react-native-picker';
+import {View, Button, Text, Item, Label, Input, 
     Form, Container, Textarea
 } from 'native-base';
 import {PageProps} from '../../types';
@@ -21,6 +23,7 @@ import axios from 'axios';
 export interface Props extends PageProps {
     user: any;
     categoryList: any[];
+    departmentList: any[];
     setCategoryList: (categoryList: any) => void;
 }
 
@@ -55,12 +58,9 @@ class PostPage extends React.Component<Props, State> {
             facultyName: 'facultyName'+ locale,
             valid: false
         };
-        console.log(this.props.user.id)
     }
 
     handleChoosePhoto = () => {
-        const x = new Date() ;
-        console.log(x.toISOString())
         const options = {
             noData: true
         }
@@ -191,7 +191,29 @@ class PostPage extends React.Component<Props, State> {
                             />
                         </Item>
                         <Text style={{marginTop:25, marginLeft:10}} note>Факультет</Text>
-                        <Picker
+                        {
+                        Picker.init({
+                            pickerData: this.props.departmentList,
+                            selectedValue: [59],
+                            onPickerConfirm: (data:any) => {
+                                console.log(data);
+                            },
+                            onPickerCancel: (data:any) => {
+                                console.log(data);
+                            },
+                            onPickerSelect: (data:any) => {
+                                console.log(data);
+                            }
+                        })}
+                        {Picker.show()
+                        }
+                        
+                        
+                        
+                        
+                        
+                        
+                        {/* <Picker
                             placeholder='Факультет'
                             placeholderStyle={{ color: "#bfc6ea" }}
                             placeholderIconColor="#007aff"
@@ -214,7 +236,7 @@ class PostPage extends React.Component<Props, State> {
                                 }
                             )}
                             
-                        </Picker>
+                        </Picker> */}
                         
                         <Button
                             block
@@ -261,6 +283,7 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state: AppState) => ({
     user: state.userReducer.user,
     categoryList: state.categoryReducer.categoryList,
+    departmentList: state.categoryReducer.departmentList,
 });
 export default connect(
     mapStateToProps,
