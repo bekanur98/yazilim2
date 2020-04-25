@@ -7,7 +7,6 @@ import Preloader from '../../common/Preloader/Preloader';
 
 const MyPosts = (props) => { 
     const LastPostsArray = [];
-    console.log(props)
 
     if (props.posts2) {
         props.posts2.sort((a, b) => {
