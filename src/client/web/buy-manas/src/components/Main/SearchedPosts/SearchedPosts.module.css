@@ -29,7 +29,7 @@
     border: 3px solid #000;
     border-radius: 10%;    
     margin: 0 auto;
-
+    overflow: hidden;
 }
 
 .searchedPostItem .imgBlock img{
