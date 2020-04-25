@@ -7,8 +7,10 @@ import { setPosts } from '../../../actions/posts';
 
 class MyPostsContainer extends React.Component{
     componentDidMount() {
-        this.props.setUserData(this.props.id);
-        this.props.setPosts(this.props.id);
+        if(this.props.id){
+            this.props.setUserData(this.props.id);
+        }
+        this.props.setPosts();
     }
     render(){
         return <MyPosts {...this.props} />
@@ -18,6 +20,7 @@ class MyPostsContainer extends React.Component{
 const mapStateToProps = (state) => {
     return{
         posts: state.profilePage.posters,
+        posts2: state.auth.posters,
         id: state.auth.id,
         isFetching: state.profilePage.isFetching
     }
