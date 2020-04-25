@@ -2,7 +2,7 @@ import actions from "redux-form/lib/actions";
 
 let initialState = {
     posts: [],
-    searchedPost: [],
+    searchedPost: undefined,
     forPostPage: null,
     currentImage: null,
     comments: [],
@@ -40,7 +40,7 @@ const postsReducer = (state = initialState, action) => {
         case 'NOTHING_FOUNDED': {
             return {
                 ...state,
-                searchedPost: actions.searchedPost
+                searchedPost: action.searchedPost
             }
         }
         case 'NEW_POST': {
@@ -54,7 +54,7 @@ const postsReducer = (state = initialState, action) => {
                 ...state,
                 currentImage: action.image
             }
-        } 
+        }
         case 'NEW_COMMENT': {
             return {
                 ...state,
