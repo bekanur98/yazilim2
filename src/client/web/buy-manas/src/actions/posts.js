@@ -36,6 +36,10 @@ export const newCurrentImage = (image) => ({
     image
 })
 
+export const setCurrentPage = (page) => ({
+    type: 'SET_CURRENT_PAGE',
+    currentPage: page
+})
 
 
 // REDUX-THUNKS
