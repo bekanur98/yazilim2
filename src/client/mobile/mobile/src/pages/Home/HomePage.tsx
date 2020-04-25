@@ -16,14 +16,16 @@ import Category from 'react-native-category';
 import RBSheet from 'react-native-raw-bottom-sheet';
 import {API_URL, COLORS} from "../../constants";
 import TopPostCom from "../../components/TopPostCom";
-import {fetchPosters, setCategoryList} from "../../actions";
+import {fetchPosters, setCategoryList, setDepartmentList} from "../../actions";
 import {AppState} from "../../store";
 import LastPostCom from '../../components/LastPostCom';
 
 
 export interface Props extends PageProps {
   categoryList: any[];
+  departmentList: any[];
   setCategoryList: (categoryList: any) => void;
+  setDepartmentList: (departmentList: any) => void;
   posterList: IPoster[];
   fetchPosters: () => void;
 }
@@ -64,9 +66,24 @@ class HomePage extends React.Component<Props, State> {
       const itemWdt = Math.floor((Dimensions.get('window').width-60)/60)
       this.setState({categoryHorizontalList: this.props.categoryList.slice(0,itemWdt-1)})
     }
+    if(!this.props.departmentList){
+       this.getDepartmentList();
+    }
     // if(this.props.posterList.length){
         await this.props.fetchPosters();
     // }
+  }
+
+  async getDepartmentList(){
+    try{
+      const response = await axios.get(`${API_URL}departments`)
+      if(response.data){
+        this.props.setDepartmentList(response.data);
+      }
+    }
+    catch(error){
+      console.log(error)
+    }
   }
 
   async getCategoryList(){
@@ -252,13 +269,15 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state: AppState) => ({
   categoryList: state.categoryReducer.categoryList,
+  departmentList: state.categoryReducer.departmentList,
   posterList: state.posterReducer.posterList
 });
 
 //@ts-ignore
 const mapDispatchToProps = dispatch => ({
     fetchPosters: () => dispatch(fetchPosters()),
-    setCategoryList: (categoryList: any) => dispatch(setCategoryList(categoryList))
+    setCategoryList: (categoryList: any) => dispatch(setCategoryList(categoryList)),
+    setDepartmentList: (departmentList: any) => dispatch(setDepartmentList(departmentList)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);
