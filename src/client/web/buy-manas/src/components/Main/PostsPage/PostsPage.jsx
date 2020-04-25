@@ -24,6 +24,7 @@ const PostsPage = (props) => {
             poster: `/api/posters/${props.postId}`
         }
         props.newComment(obj)
+        value.newComment = '';
     }
     return (
         <div className={styles.postWrapper}>
