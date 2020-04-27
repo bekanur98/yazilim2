@@ -53,8 +53,8 @@ export const departmentsApi = {
 
 
 export const postersApi = {
-    getPosts() {
-        return instance.get(`posters`)
+    getPosts(page = 1) {
+        return instance.get(`posters?page=${page}`)
     },
     getRating(posterId) {
         return instance.get(`ratings`, { params: { 'poster.id': posterId } })
@@ -109,11 +109,11 @@ export const postersApi = {
             "poster": commentData.poster
         })
     },
-    getFacultiesPosts(facultyId) {
-        return instance.get(`posters?department.faculty.id=${facultyId}&page=1`)
+    getFacultiesPosts(facultyId, page = 1) {
+        return instance.get(`posters?department.faculty.id=${facultyId}&page=${page}`)
     },
-    getFacultiesNullPosts() {
-        return instance.get(`posters?exists[department]=false&page=1`)
+    getFacultiesNullPosts(page = 1) {
+        return instance.get(`posters?exists[department]=false&page=${page}`)
     },
     getPostsByTitle(title) {
         return instance.get('posters', { params: { 'title': title } })
