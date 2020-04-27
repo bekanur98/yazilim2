@@ -1,5 +1,3 @@
-import actions from "redux-form/lib/actions";
-
 let initialState = {
     posts: [],
     searchedPost: undefined,
@@ -7,7 +5,8 @@ let initialState = {
     currentImage: null,
     comments: [],
     postsOfFaculty: [],
-    ratings: [0]
+    ratings: [0],
+    currentPage: 1
 };
 
 const postsReducer = (state = initialState, action) => {
@@ -15,7 +14,7 @@ const postsReducer = (state = initialState, action) => {
         case 'SET_POSTS': {
             return {
                 ...state,
-                posts: action.posts
+                posts: [...state.posts, ...action.posts]
             }
         }
         case 'SET_ONE_POST': {
@@ -64,9 +63,15 @@ const postsReducer = (state = initialState, action) => {
         case 'GET_FACULTIES_POSTS': {
             return {
                 ...state,
-                postsOfFaculty: [...action.posts]
+                postsOfFaculty: [...state.postsOfFaculty, ...action.posts]
             }
-        }
+        } 
+        case 'SET_CURRENT_PAGE': {
+            return {
+                ...state,
+                currentPage: action.currentPage
+            }
+        } 
         default:
             return state;
     }
