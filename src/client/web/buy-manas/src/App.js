@@ -12,15 +12,19 @@ import { connect } from 'react-redux';
 import { initializeApp } from './actions/login'
 import { setPosts } from './actions/posts'
 import { compose } from 'redux';
+import Preloader from './components/common/Preloader/Preloader';
 
 class App extends React.Component {
 
-    componentDidMount(){
+    componentDidMount() {
         this.props.setPosts();
         this.props.initializeApp();
-   }
+    }
 
     render() {
+        if (!this.props.initialized) {
+            return <Preloader />
+        }
         return (
             <div className="appWrapper">
                 <HeaderContainer />
@@ -42,6 +46,6 @@ const mapStateToProps = (state) => ({
 
 export default compose(
     withRouter,
-    connect(mapStateToProps, {initializeApp, setPosts})
+    connect(mapStateToProps, { initializeApp, setPosts })
 )
-(App);
+    (App);
