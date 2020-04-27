@@ -40,7 +40,7 @@ export const forCookie = (id, username, password) => (dispatch) => {
 }
 export const logWithCookie = (id) => (dispatch) => {
     if (id) {
-        return authApi.login(id)
+        authApi.login(id)
             .then(res => {
                 dispatch(forCookie(res.data.id, res.data.username, res.data.password))
                 dispatch(setAuthUserData(res.data, true))

@@ -13,18 +13,22 @@ import { initializeApp } from './actions/login'
 import { setPosts } from './actions/posts'
 import { compose } from 'redux';
 import Preloader from './components/common/Preloader/Preloader';
+import Cookies from 'universal-cookie';
 
 class App extends React.Component {
 
     componentDidMount() {
+        // let cookies = new Cookies();
         this.props.setPosts();
-        this.props.initializeApp();
+        // if(cookies.get('id')){
+        //     this.props.initializeApp();
+        // }
     }
 
     render() {
-        if (!this.props.initialized) {
-            return <Preloader />
-        }
+        // if (!this.props.initialized) {
+        //     return <Preloader />
+        // }
         return (
             <div className="appWrapper">
                 <HeaderContainer />
