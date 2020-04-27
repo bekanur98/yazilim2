@@ -22,21 +22,10 @@ export const usernamePass = (id, username, pass) => ({
     payload: { id, username, pass }
 });
 
-// REDUX-THUNKS
+export const initializedSuccess = () => ({ type: 'INITIALIZED_SUCCESS' });
 
-// export const forLocalStorage = (loginData) => (dispatch) => {
-//     localStorage.setItem('myLoginData', JSON.stringify(loginData))
-//     let myData = localStorage.getItem('myLoginData')
-//     myData = JSON.parse(myData)
-//     dispatch(setAuthUserData(myData, true))
-// }
+// REDUX-THUNKS 
 
-// export const logWithLocalStorage = (r) => (dispatch) => {
-//     authApi.login(r.id)
-//         .then(response => {
-//             dispatch(forLocalStorage(response.data))
-//         })
-// }
 let cookies = new Cookies();
 
 export const forCookie = (id, username, password) => (dispatch) => {
@@ -51,7 +40,7 @@ export const forCookie = (id, username, password) => (dispatch) => {
 }
 export const logWithCookie = (id) => (dispatch) => {
     if (id) {
-        authApi.login(id)
+        return authApi.login(id)
             .then(res => {
                 dispatch(forCookie(res.data.id, res.data.username, res.data.password))
                 dispatch(setAuthUserData(res.data, true))
@@ -86,7 +75,7 @@ export const logout = () => (dispatch) => {
 export const register = (formData) => (dispatch) => {
     authApi.checkUser(formData)
         .then(r => {
-            if (r.data.length) {
+            if (r.status === 400) {
                 dispatch(stopSubmit('register', { _error: 'Такое имя пользователя уже существует' }));
             }
             else {
@@ -103,3 +92,12 @@ export const register = (formData) => (dispatch) => {
             }
         })
 }
+
+
+export const initializeApp = () => (dispatch) => {
+    let promise = dispatch(logWithCookie(cookies.get('id')))
+    promise.then(() => {
+        dispatch(initializedSuccess())
+    });
+
+} 
