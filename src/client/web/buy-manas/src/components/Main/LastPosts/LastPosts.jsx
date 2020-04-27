@@ -6,11 +6,11 @@ import "slick-carousel/slick/slick-theme.css";
 import { IMAGES_URL } from '../../../constants';
 import { NavLink } from 'react-router-dom';
 import Preloader from '../../common/Preloader/Preloader';
-import InfiniteScroll from "react-infinite-scroller";
+
 const LastPosts = (props) => {
+
     const { t } = useTranslation();
 
-    // cicle for top 10 posts 
     const LastPostsArray = [];
     props.posts.sort((a, b) => {
         return new Date(b.publishedAt) - new Date(a.publishedAt);

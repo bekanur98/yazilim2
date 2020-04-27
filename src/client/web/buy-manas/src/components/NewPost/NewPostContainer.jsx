@@ -4,12 +4,7 @@ import NewPost from './NewPost';
 import { newCurrentImage, newPostImage, setPosts } from '../../actions/posts'; 
 import {  setDepartments, setFaculties} from './../../actions/faculties';
 
-class NewPostContainer extends React.Component {
-    componentDidMount(){
-        this.props.setPosts();
-        this.props.setDepartments();
-        this.props.setFaculties();
-    }
+class NewPostContainer extends React.Component { 
 
     render() {
         return <NewPost {...this.props} />
