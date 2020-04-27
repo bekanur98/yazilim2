@@ -5,6 +5,7 @@ import postsReducer from './postsReducer'
 import authReducer from './authReducer'
 import profileReducer from './profileReducer'
 import { reducer as formReducer } from 'redux-form';
+import appReducer from './appReducer'
 
 
 
@@ -14,5 +15,6 @@ export default combineReducers({
   postsData: postsReducer,
   auth: authReducer,
   profilePage: profileReducer,
-  form: formReducer
+  form: formReducer,
+  app: appReducer
 })
