@@ -11,8 +11,7 @@ class LastPostsContainer extends React.Component {
     }
 
     componentDidMount() {
-        this.props.setPosts();
-        document.addEventListener('scroll', this.trackScrolling);
+        document.addEventListener('scroll', this.trackScrolling)
     }
 
     componentWillUnmount() {
@@ -22,28 +21,25 @@ class LastPostsContainer extends React.Component {
     trackScrolling = () => {
         const wrappedElement = document.getElementById('root');
         if (this.isBottom(wrappedElement)) {
-            console.log('header bottom reached');
+            this.props.setCurrentPage(this.props.currentPage + 1);
+            this.props.setPosts(this.props.currentPage);
             document.removeEventListener('scroll', this.trackScrolling);
         }
     };
-
-    // componentDidMount() {
-    //     this.props.setPosts();
-    // }
-
-    render(){
+    render() {
         return <LastPosts {...this.props} loadMore={this.loadMore} state={this.state} nextPage={this.nextPage} />
     }
 }
 
 const mapStateToProps = (state) => {
-    return{
+    return {
         posts: state.postsData.posts,
         searchedPosts: state.postsData.searchedPosts,
-        currentPage: state.postsData.currentPage
+        currentPage: state.postsData.currentPage,
+        isFetching: state.profilePage.isFetching
     }
 };
 
-export default connect(mapStateToProps, {setPosts, setPostByTitle, toggleIsFetching, setCurrentPage})(LastPostsContainer);
+export default connect(mapStateToProps, { setPosts, setPostByTitle, toggleIsFetching, setCurrentPage })(LastPostsContainer);
 
 
