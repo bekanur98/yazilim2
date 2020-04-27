@@ -29,7 +29,6 @@ const NewPost = (props) => {
         value.title = '';
         value.description = '';
         value.cost = ''; 
-
     };
 
     const [state, setState] = useState({
@@ -89,11 +88,12 @@ const NewPost = (props) => {
                     </div>
                     : null}
                 <div className={styles.newCost}>
-                    <p className={styles.blockName}>Цена <sup>*</sup></p>                
+                    <p className={styles.blockName}>Цена</p>                
                     <div className={styles.inputs}>
-                        <Field component={Input} name='cost' type='number' placeholder='Цена' validate={[required]} />
+                        <Field component={Input} name='cost' type='number' placeholder='Договорная' />
                     </div>
                 </div> 
+                {props.isFetching ? <span>Публикация объявления...</span> : null}
                 { props.error && <div className={styles.successSubmit}>{ props.error }</div> }
                 <div className={styles.submit}>
                     <button>Опубликовать</button>
