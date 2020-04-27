@@ -63,9 +63,9 @@ export const setPostByTitle = (title) => (dispatch) => {
     }
 }
 
-export const setPosts = () => (dispatch) => {
+export const setPosts = (page) => (dispatch) => {
     dispatch(toggleIsFetching(true));
-    postersApi.getPosts()
+    postersApi.getPosts(page)
         .then(response => {
             dispatch(setPostsSuccess(response.data));
             dispatch(toggleIsFetching(false));
@@ -87,14 +87,16 @@ export const getRating = (postId) => (dispatch) => {
 }
 
 export const likeThePost = (userReq, postId, obj) => (dispatch) => {
-        postersApi.likeThePost(userReq, postId, obj)
+    postersApi.likeThePost(userReq, postId, obj)
         .then(r2 => {
             postersApi.getRating(postId)
-            .then(r3 => {dispatch(setLike(r3.data))})
+                .then(r3 => { dispatch(setLike(r3.data)) })
         })
 }
 
 export const newPostImage = (newPostData) => (dispatch) => {
+    dispatch(toggleIsFetching(true))
+
     if (newPostData.images) {
         postersApi.newPostImage(newPostData.images)
             .then(r => {
@@ -104,6 +106,7 @@ export const newPostImage = (newPostData) => (dispatch) => {
                             if (r.status === 201) {
                                 dispatch(newPostSuccess(r.data));
                                 dispatch(stopSubmit('newPost', { _error: 'Объявление опубликовано' }));
+                                dispatch(toggleIsFetching(false))
                                 dispatch(newCurrentImage(null));
                             }
                         })
@@ -116,6 +119,7 @@ export const newPostImage = (newPostData) => (dispatch) => {
                     dispatch(newPostSuccess(r.data));
                     dispatch(stopSubmit('newPost', { _error: 'Объявление опубликовано' }));
                     dispatch(newCurrentImage(null));
+                    dispatch(toggleIsFetching(false))
                 }
             })
     }
