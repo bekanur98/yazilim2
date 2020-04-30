@@ -7,28 +7,31 @@ import Profile from './components/Profile/Profile';
 import { Route, withRouter } from 'react-router-dom';
 import FacultiesPostsContainer from './components/FacultiesPosts/FacultiesPostsContainer';
 import PostsPageContainer from './components/Main/PostsPage/PostsPageContainer';
-import NewPostContainer from './components/NewPost/NewPostContainer';
+import NewPostContainer from './components/Profile/Description/NewPost/NewPostContainer';
 import { connect } from 'react-redux';
 import { initializeApp } from './actions/login'
 import { setPosts } from './actions/posts'
 import { compose } from 'redux';
 import Preloader from './components/common/Preloader/Preloader';
 import Cookies from 'universal-cookie';
+import FavoritesContainer from './components/Profile/Description/Favorites/FavoritesContainer';
+import { clearFacultyPosts } from './actions/faculties';
+
+let cookies = new Cookies();
 
 class App extends React.Component {
 
     componentDidMount() {
-        // let cookies = new Cookies();
+        if(cookies.get('id')){
+            this.props.initializeApp();
+        }
         this.props.setPosts();
-        // if(cookies.get('id')){
-        //     this.props.initializeApp();
-        // }
     }
 
     render() {
-        // if (!this.props.initialized) {
-        //     return <Preloader />
-        // }
+        if (cookies.get('id') && !this.props.initialized) {
+            return <Preloader />
+        }
         return (
             <div className="appWrapper">
                 <HeaderContainer />
@@ -38,6 +41,7 @@ class App extends React.Component {
                 <Route path={'/facultiesPosts/:facultyId/posts/:postsId'} render={() => <PostsPageContainer />} />
                 <Route path={'/posts/:postsId'} render={() => <PostsPageContainer />} />
                 <Route path={'/newPost'} render={() => <NewPostContainer />} />
+                <Route path={'/favoritePosts'} render={() => <FavoritesContainer />} />
                 <Footer />
             </div>
         );
@@ -45,11 +49,12 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-    initialized: state.app.initialized
+    initialized: state.app.initialized,
+    allPosts: state.postsData.posts,
+    myPosts: state.profilePage.posters
 })
 
 export default compose(
     withRouter,
-    connect(mapStateToProps, { initializeApp, setPosts })
-)
-    (App);
+    connect(mapStateToProps, { initializeApp, setPosts, clearFacultyPosts })
+)(App);
