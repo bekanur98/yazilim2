@@ -2,7 +2,7 @@ import React from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { getLocale } from '../../../i18next';
 import { Input, Phone } from '../../common/FormsControls/FormsControls'
-import { maxLengthCreator, minLengthCreator, required, emailValid, matchInput } from '../../../utils/validators/validators'
+import { maxLengthCreator, minLengthCreator, required, emailValid, regMatchInput } from '../../../utils/validators/validators'
 import { useTranslation } from 'react-i18next';
 import styles from '../Header.module.css';
 
@@ -22,9 +22,9 @@ const RegisterForm = (props) => {
                 {props.faculties.map(f => <option key={f.id} value={f.id}>{f[facultyName]}</option>)}
             </Field>
             <Field component={Input} name='regPassword' type="password" placeholder={t('password')} validate={[required, minLength8]} />
-            <Field component={Input} name='confirmPassword' type="password" placeholder={t('password')} validate={[required, matchInput]} />
+            <Field component={Input} name='confirmPassword' type="password" placeholder={t('password')} validate={[required, regMatchInput]} />
             { props.error && <div className={styles.wrongData}>{ props.error }</div> }
-            <button> {t('signUp')} </button>
+            <button> {props.isFetching ? 'Загрузка...' : t('signUp')} </button>
             <p className={styles.signUp}>
                 Есть аккаунт?
                 <span className={styles.clickableLink} onClick={props.toggleModalLoginAuth}>

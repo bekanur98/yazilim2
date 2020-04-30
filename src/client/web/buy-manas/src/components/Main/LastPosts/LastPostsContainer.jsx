@@ -5,7 +5,12 @@ import { setPosts, setPostByTitle, setCurrentPage } from '../../../actions/posts
 import { toggleIsFetching } from '../../../actions/users';
 
 class LastPostsContainer extends React.Component {
-
+    constructor(props) {
+        super(props);
+        this.state = {
+            hasMore: true
+        }
+    }
     isBottom(el) {
         return el.getBoundingClientRect().bottom <= window.innerHeight;
     }
@@ -23,11 +28,12 @@ class LastPostsContainer extends React.Component {
         if (this.isBottom(wrappedElement)) {
             this.props.setCurrentPage(this.props.currentPage + 1);
             this.props.setPosts(this.props.currentPage);
+            this.setState({ hasMore: false })
             document.removeEventListener('scroll', this.trackScrolling);
         }
     };
     render() {
-        return <LastPosts {...this.props} loadMore={this.loadMore} state={this.state} nextPage={this.nextPage} />
+        return <LastPosts {...this.props} hasMore={this.state.hasMore} />
     }
 }
 

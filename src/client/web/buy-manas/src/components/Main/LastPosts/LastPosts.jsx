@@ -10,7 +10,6 @@ import Preloader from '../../common/Preloader/Preloader';
 const LastPosts = (props) => {
 
     const { t } = useTranslation();
-
     const LastPostsArray = [];
     props.posts.sort((a, b) => {
         return new Date(b.publishedAt) - new Date(a.publishedAt);
@@ -43,6 +42,7 @@ const LastPosts = (props) => {
                     ))} 
 
             </div>
+            {props.hasMore && <div className='loader'>Loading...</div>}
         </div>
     );
 }

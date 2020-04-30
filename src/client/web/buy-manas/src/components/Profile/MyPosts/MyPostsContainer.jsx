@@ -7,6 +7,12 @@ import Cookies from 'universal-cookie';
 
 
 class MyPostsContainer extends React.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            hasMore: this.props.posts.length >= 30 ? true : false
+        }
+    }
     isBottom(el) {
         return el.getBoundingClientRect().bottom <= window.innerHeight;
     }
@@ -27,12 +33,13 @@ class MyPostsContainer extends React.Component {
         if (this.isBottom(wrappedElement)) {
             this.props.setCurrentPage(this.props.currentPage + 1);
             this.props.setPosts(this.props.currentPage);
+            this.setState({hasMore: false})
             document.removeEventListener('scroll', this.trackScrolling);
         }
     };
 
     render() {
-        return <MyPosts {...this.props} />
+        return <MyPosts {...this.props} hasMore={this.state.hasMore}/>
     }
 }
 

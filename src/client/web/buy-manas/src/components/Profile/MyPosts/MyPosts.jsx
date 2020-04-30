@@ -18,9 +18,6 @@ const MyPosts = (props) => {
         <div className={styles.myPostsWrapper}>
             <h3>Мои посты</h3>
             <div className={styles.myPosts}>
-
-                {props.isFetching ? <Preloader /> : null}
-
                 {LastPostsArray.length
                     ? LastPostsArray.map(l => <NavLink to={`posts/${l.id}`}>
                         <div className={styles.myPostItem} key={l.id}>
@@ -36,6 +33,7 @@ const MyPosts = (props) => {
                     : <p className={styles.nullPosts}>Пока нет постов((</p>
                 }
             </div>
+            {props.hasMore && props.posts.length && <div className='loader'>Loading...</div>}
         </div>
     )
 }

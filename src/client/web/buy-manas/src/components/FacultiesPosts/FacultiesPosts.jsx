@@ -41,6 +41,7 @@ const FacultiesPosts = (props) => {
 
                 }
             </div>
+            {props.hasMore && props.posts.length && <div className='loader'>Loading...</div>}
         </div>
     )
 }

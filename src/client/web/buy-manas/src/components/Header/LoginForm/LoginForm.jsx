@@ -13,7 +13,7 @@ const LoginForm = (props) => {
             <Field component={Input} type="password" placeholder={t('password')} name='logPassword' />
             <p className={styles.forgotPass}>{t('forgotPassword')}</p>
             { props.error && <div className={styles.wrongData}>{ props.error }</div> }
-            <button disabled={props.pristine || props.submitting}> {t('login')} </button>
+            <button disabled={props.pristine || props.submitting}> {props.isFetching ? 'Загрузка...' : t('login')} </button>
             <p className={styles.signUp}>
                 {t('or ')} 
                 <span className={styles.clickableLink} onClick={props.toggleModalLoginAuth}>
