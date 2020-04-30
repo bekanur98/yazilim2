@@ -19,11 +19,19 @@ const TopPosts = (props) => {
         slidesToScroll: 1
     };
 
-    const topPostsArray = [];
-    props.posts.sort((a, b) => b.rating - a.rating).map(p => {
+    const topPostsArray = [],
+          postsWithRating = [];
+          
+    for (let i = 0; i < props.posts.length; i++) {
+        if(props.posts[i].ratings.length){
+            postsWithRating.push(props.posts[i])
+        }
+    }
+    postsWithRating.sort((a, b) => b.ratings.rating - a.ratings.rating).map(p => {
         if (topPostsArray.length <= 9)
             topPostsArray.push(p);
     })
+    // console.log(props.posts[0].ratings[0].rating, topPostsArray)
  
     return (
         <div className={styles.topPostsWrapper}>
