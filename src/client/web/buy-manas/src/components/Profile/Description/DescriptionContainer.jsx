@@ -1,6 +1,6 @@
 import React from 'react';
 import Description from './Description';
-import { setUserData, toggleIsFetching, newAvatar, editProfile, toggleModalWindowEditProfile} from '../../../actions/users';
+import { setUserData, toggleIsFetching, newAvatar, editProfile, editPassword, toggleModalWindowEditProfile, toggleModalWindowEditPassword} from '../../../actions/users';
 import { setFaculties, setDepartments } from '../../../actions/faculties';
 import { connect } from 'react-redux';
 
@@ -24,15 +24,29 @@ const mapStateToProps = (state) => {
         name: state.auth.name,
         id: state.auth.id,
         username: state.auth.username,
+        password: state.auth.password,
         email: state.auth.email,
         posters: state.profilePage.posters,
         phone: state.auth.phone,
         faculty: state.auth.faculty,
-        isModalOpen: state.profilePage.isModalOpen,
+        editProfileModalOpen: state.profilePage.editProfileModalOpen,
+        editPasswordModalOpen: state.profilePage.editPasswordModalOpen,
         isFetching: state.profilePage.isFetching, 
         faculties: state.categoriesBlock.faculties
     }
 }
  
 
-export default connect(mapStateToProps, {setUserData, toggleModalWindowEditProfile, toggleIsFetching, newAvatar, editProfile, setFaculties, setDepartments})(DescriptionContainer);
+export default connect(mapStateToProps,
+    {
+        setUserData,
+        toggleModalWindowEditProfile,
+        toggleModalWindowEditPassword,
+        toggleIsFetching,
+        newAvatar,
+        editProfile,
+        editPassword,
+        setFaculties,
+        setDepartments
+    }
+)(DescriptionContainer);
