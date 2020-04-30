@@ -1,17 +1,35 @@
 import React, { useState } from 'react';
 import styles from './NewPost.module.css';
 import { Field, reduxForm } from 'redux-form';
-import { Input, Textarea } from '../common/FormsControls/FormsControls';
-import { required } from '../../utils/validators/validators';
+import { Input, Textarea } from '../../../common/FormsControls/FormsControls';
+import { required, maxLengthCreator } from '../../../../utils/validators/validators';
 import { compose } from 'redux';
-import { withAuthRedirect } from '../../hoc/withAuthRedirect';
-import { getLocale } from '../../i18next'; 
+import { withAuthRedirect } from '../../../../hoc/withAuthRedirect';
+import { getLocale } from '../../../../i18next'; 
 
 
 const NewPost = (props) => {
     // const facultyName = 'facultyName' + getLocale().charAt(0).toUpperCase() + getLocale().slice(1);
     // const depName = 'dep_name_' + getLocale().charAt(0).toLowerCase() + getLocale().slice(1);
+
+    const [state, setState] = useState({
+        faculty: null,
+        department: null,
+        departmentList: [...props.departments]
+    }); 
+
+    const changeFaculty = (item) => { 
+        setState({
+                faculty: parseInt(item.target.value), 
+                department: state.departmentList.filter( i => i.faculty.id == parseInt(item.target.value) ),
+                departmentList: [...props.departments] 
+            })
+    }   
+
+    const maxLength40 = maxLengthCreator(30);
+    
     let date = new Date(); 
+
     const uploadImage = e => {
         if(e.target.files.length){
             props.newCurrentImage(e.target.files[0]);
@@ -31,19 +49,6 @@ const NewPost = (props) => {
         value.cost = ''; 
     };
 
-    const [state, setState] = useState({
-        faculty: null,
-        department: null,
-        departmentList: [...props.departments]
-    }); 
-
-    const changeFaculty = (item) => { 
-        setState({
-                faculty: parseInt(item.target.value), 
-                department: state.departmentList.filter( i => i.faculty.id == parseInt(item.target.value) ),
-                departmentList: [...props.departments] 
-            })
-    }   
 
     return(
         <div className={styles.newPostWrapper}>
@@ -56,7 +61,7 @@ const NewPost = (props) => {
                 <div className={styles.newTitle}>
                     <p className={styles.blockName}>Название <sup>*</sup> </p>                
                     <div className={styles.inputs}>
-                        <Field component={Input} name='title' type='text' placeholder='Название' validate={[required]} />
+                        <Field component={Input} name='title' type='text' placeholder='Название' validate={[required, maxLength40]} />
                     </div>
                 </div>
 
@@ -93,7 +98,7 @@ const NewPost = (props) => {
                         <Field component={Input} name='cost' type='number' placeholder='Договорная' />
                     </div>
                 </div> 
-                {props.isFetching ? <span>Публикация объявления...</span> : null}
+                {props.isFetching ? <div className={styles.postingPost}>Загрузка...</div> : null}
                 { props.error && <div className={styles.successSubmit}>{ props.error }</div> }
                 <div className={styles.submit}>
                     <button>Опубликовать</button>
