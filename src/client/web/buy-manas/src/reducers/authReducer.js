@@ -35,6 +35,12 @@ const authReducer = (state = initialState, action) => {
                 ...action.profileData
             }
         }
+        case 'EDIT_PASSWORD':{
+            return{
+                ...state,
+                password: action.password
+            }
+        }
         case 'NEW_AVATAR':{
             return{
                 ...state,
