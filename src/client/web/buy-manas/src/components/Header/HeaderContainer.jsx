@@ -1,16 +1,9 @@
 import React from 'react';
 import Header from './Header';
-import { setAuthUserData, toggleModalWindowAuth, toggleModalLoginAuth, login, logout, register, logWithCookie } from '../../actions/login'
+import { setAuthUserData, toggleModalWindowAuth, toggleModalLoginAuth, login, logout, register } from '../../actions/login'
 import { connect } from 'react-redux';
-import Cookies from 'universal-cookie';
 
-class HeaderContainer extends React.Component { 
-    componentDidMount(){ 
-        let cookies = new Cookies();  
-        if(cookies.get('id')){
-            this.props.logWithCookie(cookies.get('id'));
-        }
-    }
+class HeaderContainer extends React.Component {  
     render() {
         return <Header {...this.props} />
     }
@@ -23,6 +16,7 @@ const mapStateToProps = (state) => ({
     faculties: state.categoriesBlock.faculties,
     username: state.auth.username,
     password: state.auth.password,
+    isFetching: state.profilePage.isFetching
 }); 
 
-export default connect(mapStateToProps, {setAuthUserData, toggleModalWindowAuth, toggleModalLoginAuth, login, logout, register, logWithCookie})(HeaderContainer);
+export default connect(mapStateToProps, {setAuthUserData, toggleModalWindowAuth, toggleModalLoginAuth, login, logout, register})(HeaderContainer);
