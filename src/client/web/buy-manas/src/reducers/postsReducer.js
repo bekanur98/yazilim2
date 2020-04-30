@@ -1,11 +1,11 @@
 let initialState = {
     posts: [],
-    searchedPost: undefined,
-    forPostPage: null,
-    currentImage: null,
-    comments: [],
     postsOfFaculty: [],
-    ratings: [0],
+    searchedPost: undefined,
+    comments: [],
+    forPostPage: null,
+    ratings: [],
+    currentImage: null,
     currentPage: 1
 };
 
@@ -14,7 +14,7 @@ const postsReducer = (state = initialState, action) => {
         case 'SET_POSTS': {
             return {
                 ...state,
-                posts: [...state.posts, ...action.posts]
+                posts: [...action.posts]
             }
         }
         case 'SET_ONE_POST': {
@@ -42,12 +42,12 @@ const postsReducer = (state = initialState, action) => {
                 searchedPost: action.searchedPost
             }
         }
-        case 'NEW_POST': {
-            return {
-                ...state,
-                posts: [...state.posts, action.newPostData]
-            }
-        }
+        // case 'NEW_POST': {
+        //     return {
+        //         ...state,
+        //         posts: [...state.posts, {...action.newPostData, images: [{ ...action.newPostData.images} ]}]
+        //     }
+        // }
         case 'NEW_CURRENT_IMAGE': {
             return {
                 ...state,
@@ -70,6 +70,13 @@ const postsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 currentPage: action.currentPage
+            }
+        } 
+        
+        case 'CLEAR_FACULTY_POSTS': {
+            return {
+                ...state,
+                postsOfFaculty: []
             }
         } 
         default:
