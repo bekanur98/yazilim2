@@ -9,13 +9,15 @@ import { Input } from '../../common/FormsControls/FormsControls';
 
 const PostsPage = (props) => {
     const { t } = useTranslation();
+
     let userReq = `/index.php/api/users/${props.userId}`
     let objR
-    const p = props.post;
 
+    const p = props.post;
     if (!p) {
         return <Preloader />
     }
+    
     let date = new Date();
     let submit = (value) => {
         let obj = {
@@ -27,23 +29,23 @@ const PostsPage = (props) => {
         props.newComment(obj)
         value.newComment = '';
     }
-    let handleLike = () =>{
-        if (props.ratings && props.ratings.author.includes(userReq)){
-            let authors = props.ratings.author.filter(auth => {return auth!==userReq})
+    let handleLike = () => {
+        if (props.ratings && props.ratings.author.includes(userReq)) {
+            let authors = props.ratings.author.filter(auth => { return auth !== userReq })
             objR = {
                 id: props.ratings.id,
-                authors: authors, 
-                rating : props.ratings.rating - 1
+                authors: authors,
+                rating: props.ratings.rating - 1
             }
         }
-        else if(props.ratings && !props.ratings.author.includes(userReq)){
-            objR ={
+        else if (props.ratings && !props.ratings.author.includes(userReq)) {
+            objR = {
                 id: props.ratings.id,
-                authors : [ ...props.ratings.author, userReq ],
+                authors: [...props.ratings.author, userReq],
                 rating: props.ratings.rating + 1
             }
         }
-        props.isAuth?props.likeThePost(userReq, p.id, objR ): props.toggleModalWindowAuth()
+        props.isAuth ? props.likeThePost(userReq, p.id, objR) : props.toggleModalWindowAuth()
     }
     return (
         <div className={styles.postWrapper}>
@@ -61,13 +63,17 @@ const PostsPage = (props) => {
                             {props.ratings && <p>Рейтинг: {props.ratings.rating}</p>}
                             <p className={styles.cost}>Цена: {p.cost != null ? p.cost + ' сом' : t('contract')}</p>
                         </div>
-                        <div className={styles.like}>
-                            <input type="image" onClick={ handleLike } width = '50px' 
-                                        src={props.ratings&&props.ratings.author.includes(`/index.php/api/users/${props.userId}`)?
-                                            require('../../../assets/images/like.png'): require('../../../assets/images/dislike.png')} 
-                                        alt="ОК">
-                            </input>
-                        </div>
+                        {p.author.id != props.userId &&
+                            <div className={styles.like}>
+                                <input type="image" onClick={handleLike} width='50px'
+                                    src={props.ratings && props.ratings.author.includes(`/index.php/api/users/${props.userId}`) 
+                                            ? require('../../../assets/images/like.png') 
+                                            : require('../../../assets/images/dislike.png')
+                                        }
+                                    alt="ОК">
+                                </input>
+                            </div>
+                        }
                     </div>
                     <div className={styles.descrBlock}>
                         <p className={styles.descrItem}>{p.description}</p>
@@ -97,11 +103,11 @@ const PostsPage = (props) => {
                 <div className={styles.comments}>
                     <div className={styles.newComment}>
                         <form onSubmit={props.handleSubmit(submit)}>
-                            {props.isAuth 
+                            {props.isAuth
                                 ? <><Field component={Input} name='newComment' type='text' placeholder='Ваш Комментарий' /><button>Отправить</button></>
                                 : <p className={styles.blockComment}>Зарегистрируйтесь или войдите, чтобы оставить комментарий</p>
                             }
-                            
+
                         </form>
                     </div>
                     <div className={styles.commentsOfPost}>
