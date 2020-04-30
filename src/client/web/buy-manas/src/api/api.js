@@ -1,7 +1,7 @@
 import * as axios from 'axios';
 
 const instance = axios.create({
-    baseURL: 'http://buymanasapi.ru.xsph.ru/index.php/api/'
+    baseURL: 'http://buymanasapi.ru.xsph.ru/index.php/api/', 
 })
 
 
@@ -32,6 +32,11 @@ export const usersApi = {
             "faculty": profileData.faculty
         })
     },
+    editPassword(userId, passwordData) {
+        return instance.put(`users/${userId}`, {
+            "password": passwordData.confNewPassword
+        })
+    }
 }
 
 
@@ -59,26 +64,25 @@ export const postersApi = {
     getRating(posterId) {
         return instance.get(`ratings`, { params: { 'poster.id': posterId } })
     },
-
-    likeThePost(userReq, posterId, obj=false) {
-        if(obj){
+    likeThePost(userReq, posterId, obj = false) {
+        if (obj) {
             return instance.put(`ratings/${obj.id}`, {
                 "author": obj.authors,
                 "poster": [
                     `/index.php/api/posters/${posterId}`
                 ],
                 "rating": obj.rating
-              })
-        }    
+            })
+        }
 
         return instance.post(`ratings`, {
-            "author": [ userReq ],
+            "author": [userReq],
             "poster": [`/index.php/api/posters/${posterId}`],
             "rating": 1
         })
     },
     getOnePost(postId) {
-        return instance.get(`posters/${postId}`)
+    return instance.get(`posters/${postId}`)
     },
     newPostImage(images) {
         const formData = new FormData();
@@ -117,6 +121,9 @@ export const postersApi = {
     },
     getPostsByTitle(title) {
         return instance.get('posters', { params: { 'title': title } })
+    },
+    getFavoritePosts(userId, page = 1) {
+        return instance.get(`ratings?author.id=${userId}&page=${page}`)
     }
 }
 
