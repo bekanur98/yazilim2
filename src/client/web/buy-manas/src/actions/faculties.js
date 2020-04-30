@@ -18,6 +18,12 @@ export const getFacultiesPostsSuccess = (posts) => ({
     posts
 })
 
+export const clearFacultyPosts = () => ({
+    type: 'CLEAR_FACULTY_POSTS' 
+})
+
+
+
 
 // REDUX-THUNKS
 
@@ -40,11 +46,11 @@ export const getFacultiesPosts = (facultyId, page) => (dispatch) => {
         postersApi.getFacultiesNullPosts(page)
             .then(r => {
                 dispatch(getFacultiesPostsSuccess(r.data))
-            })
+    })
     } else {
         postersApi.getFacultiesPosts(facultyId, page)
             .then(r => {
                 dispatch(getFacultiesPostsSuccess(r.data))
-            })
+    })
     }
 }
