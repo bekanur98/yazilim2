@@ -54,11 +54,9 @@ const Header = (props) => {
             {
                 props.isModalOpen &&
                 <Modal onClose={props.toggleModalWindowAuth}>
-                    {
-                        props.wannaLogin ?
-                            <LoginForm toggleModalLoginAuth={props.toggleModalLoginAuth} onSubmit={onLoginSubmit} />
-                            :
-                            <RegisterForm toggleModalLoginAuth={props.toggleModalLoginAuth} onSubmit={onRegisterSubmit} faculties={props.faculties} />
+                    {props.wannaLogin 
+                        ? <LoginForm toggleModalLoginAuth={props.toggleModalLoginAuth} onSubmit={onLoginSubmit} isFetching={props.isFetching} />
+                        : <RegisterForm toggleModalLoginAuth={props.toggleModalLoginAuth} onSubmit={onRegisterSubmit} faculties={props.faculties} isFetching={props.isFetching} />
                     }
                 </Modal>
             }
