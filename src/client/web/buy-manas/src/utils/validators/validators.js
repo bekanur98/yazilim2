@@ -22,5 +22,15 @@ export const emailValid = (value) => {
     }
 }
 
-export const matchInput = (input, allInputs) => input === allInputs.regPassword ? undefined : 'Пароль не совпадает';
+
+export const regMatchInput = (input, allInputs) => input === allInputs.regPassword ? undefined : 'Пароль не совпадает';
+
+export const checkOldPass = (oldPassword) => (value) => {
+    if (value !== oldPassword) return `Неправильно введен пароль`
+
+    return undefined
+}
+export const newPassMatchInput = (input, allInputs) => input === allInputs.newPassword ? undefined : 'Пароль не совпадает';
+
+export const newCannotBeOld = (input, allInputs) => input !== allInputs.oldPassword ? undefined : 'Новый пароль не может совпадать со старым';
 
