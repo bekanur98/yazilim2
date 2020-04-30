@@ -67,7 +67,9 @@
     justify-content: center;
     align-items: center;
 }
-.addPostBtn, .editProfile{ 
+.someButtons .addPostBtn,
+.someButtons .favoritePosts,
+ .editProfile{ 
     width: 90%;
     height: 20%;
     margin: 0 auto;
@@ -76,11 +78,12 @@
     background: #174b81;
     color: #fff;
 } 
-.addPostBtn{
+.someButtons .addPostBtn, .someButtons .favoritePosts{
     font-size: 18px;
     font-weight: 400;
     letter-spacing: 1px;
     width: 60%;
+    margin-top: 20px;
 }
 .phoneNumber{ 
     width: 40%;
