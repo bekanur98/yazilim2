@@ -20,6 +20,12 @@ export const editProfileSuccess = (profileData) => ({
     profileData
 })
 
+export const editPasswordSuccess = (password) => ({
+    type: 'EDIT_PASSWORD',
+    password
+})
+
+
 
 export const newAvatar = (avatar) => ({
     type: 'NEW_AVATAR',
@@ -29,6 +35,9 @@ export const newAvatar = (avatar) => ({
 
 export const toggleModalWindowEditProfile = () => ({
     type: 'TOGGLE_MODAL_WINDOW_EDIT_PROFILE'
+})
+export const toggleModalWindowEditPassword = () => ({
+    type: 'TOGGLE_MODAL_WINDOW_EDIT_PASSWORD'
 })
 
 // REDUX-THUNKS
@@ -44,6 +53,7 @@ export const setUserData = (userId) => (dispatch) => {
 
 
 export const editProfile = (userId, profileData) => (dispatch) => {
+    dispatch(toggleIsFetching(true));
     if (profileData.avatar) {
         usersApi.newAvatar(userId, profileData.avatar)
             .then(r => {
@@ -51,19 +61,39 @@ export const editProfile = (userId, profileData) => (dispatch) => {
                     usersApi.editProfile(userId, profileData)
                         .then(r => {
                             if (r.status === 200) {
+                                dispatch(toggleModalWindowEditProfile())
                                 dispatch(editProfileSuccess(r.data));
-                                dispatch(stopSubmit('editProfile', { _error: 'Изменения сохранены' }));
+                                dispatch(toggleIsFetching(false));
                             }
                         })
+                } else {
+                    dispatch(stopSubmit('editProfile', { _error: 'Произошла непредвиденная ошибка' }))
                 }
             })
     } else {
         usersApi.editProfile(userId, profileData)
             .then(r => {
                 if (r.status === 200) {
+                    dispatch(toggleModalWindowEditProfile())
                     dispatch(editProfileSuccess(r.data));
-                    dispatch(stopSubmit('editProfile', { _error: 'Изменения сохранены' }));
+                    dispatch(toggleIsFetching(false));
+                } else {
+                    dispatch(stopSubmit('editProfile', { _error: 'Произошла непредвиденная ошибка' }))
                 }
             })
     }
+}
+
+export const editPassword = (userId, passwordData) => (dispatch) => {
+    dispatch(toggleIsFetching(true));
+    usersApi.editPassword(userId, passwordData)
+        .then(r => {
+            if (r.status === 200) {
+                dispatch(toggleModalWindowEditPassword())
+                dispatch(editPasswordSuccess(r.data.password));
+                dispatch(toggleIsFetching(false));
+            } else{
+                dispatch(stopSubmit('editPassword', { _error: 'Произошла непредвиденная ошибка' }));
+            }
+        })
 }
