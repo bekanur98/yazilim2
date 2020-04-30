@@ -1,6 +1,7 @@
 import { authApi } from "../api/api"
 import { stopSubmit } from 'redux-form'
 import Cookies from 'universal-cookie';
+import { toggleIsFetching } from "./users";
 
 
 // ACTION CREATORS
@@ -17,9 +18,9 @@ export const setAuthUserData = (payload, isAuth) => ({
     payload: { ...payload, isAuth }
 });
 
-export const usernamePass = (id, username, pass) => ({
+export const usernamePass = (id, username, password) => ({
     type: 'USERNAME_PASS',
-    payload: { id, username, pass }
+    payload: { id, username, password }
 });
 
 export const initializedSuccess = () => ({ type: 'INITIALIZED_SUCCESS' });
@@ -40,7 +41,7 @@ export const forCookie = (id, username, password) => (dispatch) => {
 }
 export const logWithCookie = (id) => (dispatch) => {
     if (id) {
-        authApi.login(id)
+        return authApi.login(id)
             .then(res => {
                 dispatch(forCookie(res.data.id, res.data.username, res.data.password))
                 dispatch(setAuthUserData(res.data, true))
@@ -50,6 +51,7 @@ export const logWithCookie = (id) => (dispatch) => {
 
 
 export const login = (username, password) => (dispatch) => {
+    dispatch(toggleIsFetching(true));
     authApi.checkUser(username)
         .then(r => {
             if (r.data.length && password == r.data[0].password) {
@@ -58,9 +60,11 @@ export const login = (username, password) => (dispatch) => {
                         dispatch(setAuthUserData(response.data, true))
                         dispatch(forCookie(response.data.id, response.data.username, response.data.password))
                         dispatch(toggleModalWindowAuth());
+                        dispatch(toggleIsFetching(false));
                     })
             } else {
                 dispatch(stopSubmit('login', { _error: 'Неправильный логин или пароль' }));
+                dispatch(toggleIsFetching(false));
             };
         })
 }
@@ -73,10 +77,12 @@ export const logout = () => (dispatch) => {
 }
 
 export const register = (formData) => (dispatch) => {
+    dispatch(toggleIsFetching(true));
     authApi.checkUser(formData)
         .then(r => {
             if (r.status === 400) {
                 dispatch(stopSubmit('register', { _error: 'Такое имя пользователя уже существует' }));
+                dispatch(toggleIsFetching(false));
             }
             else {
                 authApi.register(formData)
@@ -85,8 +91,10 @@ export const register = (formData) => (dispatch) => {
                             dispatch(setAuthUserData(r.data, true))
                             dispatch(toggleModalWindowAuth());
                             dispatch(forCookie(r.data.id, r.data.username, r.data.password))
+                            dispatch(toggleIsFetching(false));
                         } else {
                             alert('Что-то пошло не так')
+                            dispatch(toggleIsFetching(false));
                         }
                     })
             }
