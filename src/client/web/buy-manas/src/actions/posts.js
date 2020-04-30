@@ -31,10 +31,10 @@ export const setLike = (ratingData) => ({
     ratings: ratingData,
 })
 
-export const newPostSuccess = (newPostData) => ({
-    type: 'NEW_POST',
-    newPostData
-})
+// export const newPostSuccess = (newPostData) => ({
+//     type: 'NEW_POST',
+//     newPostData
+// })
 
 export const newCurrentImage = (image) => ({
     type: 'NEW_CURRENT_IMAGE',
@@ -44,6 +44,11 @@ export const newCurrentImage = (image) => ({
 export const setCurrentPage = (page) => ({
     type: 'SET_CURRENT_PAGE',
     currentPage: page
+})
+
+export const setFavoritePostsSuccess = (favoritePosts) => ({
+    type: 'SET_FAVORITE_POSTS',
+    favoritePosts
 })
 
 
@@ -90,7 +95,9 @@ export const likeThePost = (userReq, postId, obj) => (dispatch) => {
     postersApi.likeThePost(userReq, postId, obj)
         .then(r2 => {
             postersApi.getRating(postId)
-                .then(r3 => { dispatch(setLike(r3.data)) })
+                .then(r3 => {
+                    dispatch(setLike(r3.data))
+                })
         })
 }
 
@@ -104,10 +111,11 @@ export const newPostImage = (newPostData) => (dispatch) => {
                     postersApi.newPost(newPostData, r)
                         .then(r => {
                             if (r.status === 201) {
-                                dispatch(newPostSuccess(r.data));
+                                // dispatch(newPostSuccess(r.data));
                                 dispatch(stopSubmit('newPost', { _error: 'Объявление опубликовано' }));
                                 dispatch(toggleIsFetching(false))
                                 dispatch(newCurrentImage(null));
+                                dispatch(setPosts());
                             }
                         })
                 }
@@ -116,11 +124,19 @@ export const newPostImage = (newPostData) => (dispatch) => {
         postersApi.newPost(newPostData)
             .then(r => {
                 if (r.status === 201) {
-                    dispatch(newPostSuccess(r.data));
+                    // dispatch(newPostSuccess(r.data));
                     dispatch(stopSubmit('newPost', { _error: 'Объявление опубликовано' }));
                     dispatch(newCurrentImage(null));
                     dispatch(toggleIsFetching(false))
+                    dispatch(setPosts());
                 }
             })
     }
+}
+
+export const setFavoritePosts = (userId, page) => (dispatch) => {
+    postersApi.getFavoritePosts(userId, page)
+        .then(r => {
+            dispatch(setFavoritePostsSuccess(r.data))
+        })
 }
