@@ -43,3 +43,11 @@
 .preloader img{
     width: 80%; 
 }
+
+
+.loader{
+    width: 100%;
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+}
