@@ -39,7 +39,7 @@ const Header = (props) => {
             <div>
 
                 {props.isAuth
-                    ? <div className={styles.username}><NavLink to='/profile'> {props.username} </NavLink> - <button onClick={props.logout}>logout</button></div>
+                    ? <div className={styles.username}><NavLink to='/profile'> {props.username} </NavLink> - <button onClick={props.logout}>{t('logout')}</button></div>
                     : <button className={styles.auth} onClick={props.toggleModalWindowAuth}>{t('auth')}</button>
                 }
 

@@ -14,7 +14,7 @@ const FacultiesPosts = (props) => {
         });
     return (
         <div className={styles.facultyPostsWrapper}>
-            <h3>ПОСТЫЫ</h3>
+            <h3>{t('posts')}</h3>
 
             <div className={styles.facultyPosts} >
                 {
@@ -31,17 +31,17 @@ const FacultiesPosts = (props) => {
                                 <div className={styles.descriptionBlock}>
                                     <p className={styles.postTitle}>{p.title}</p>
                                     <p className={styles.description}>{p.description}</p>
-                                    <p className={styles.cost}> {p.cost != null ? p.cost + ' сом' : t('contract')}</p>
+                                    <p className={styles.cost}> {p.cost != null ? p.cost + t(' som') : t('contract')}</p>
 
                                 </div>
 
                             </div>
                         </NavLink>)
-                        : <p className={styles.nullPosts}>Пока нет постов((</p>
+                        : <p className={styles.nullPosts}>{t('noPostsNow')}</p>
 
                 }
             </div>
-            {props.hasMore && props.posts.length && <div className='loader'>Loading...</div>}
+            {props.hasMore && props.posts.length && <div className='loader'>{t('loading')}</div>}
         </div>
     )
 }

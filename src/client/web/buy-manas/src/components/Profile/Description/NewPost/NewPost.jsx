@@ -6,11 +6,13 @@ import { required, maxLengthCreator } from '../../../../utils/validators/validat
 import { compose } from 'redux';
 import { withAuthRedirect } from '../../../../hoc/withAuthRedirect';
 import { getLocale } from '../../../../i18next'; 
+import { useTranslation } from 'react-i18next';
 
 
 const NewPost = (props) => {
-    // const facultyName = 'facultyName' + getLocale().charAt(0).toUpperCase() + getLocale().slice(1);
-    // const depName = 'dep_name_' + getLocale().charAt(0).toLowerCase() + getLocale().slice(1);
+    const facultyName = 'facultyName' + getLocale().charAt(0).toUpperCase() + getLocale().slice(1);
+    const depName = 'dep_name_' + getLocale().charAt(0).toLowerCase() + getLocale().slice(1);
+    const {t} = useTranslation();
 
     const [state, setState] = useState({
         faculty: null,
@@ -44,8 +46,8 @@ const NewPost = (props) => {
             images: props.image
         }
         props.newPostImage(obj);
-        value.title = '';
-        value.description = '';
+        value.title = ' ';
+        value.description = ' ';
         value.cost = ''; 
     };
 
@@ -54,54 +56,54 @@ const NewPost = (props) => {
         <div className={styles.newPostWrapper}>
             <form onSubmit={props.handleSubmit(submit)}>
                 <div className={styles.newImage}>
-                    <p className={styles.blockName}>Загрузите фотографии</p>                
+                    <p className={styles.blockName}>{t('loadPics')}</p>                
                     <div className={styles.inputs}><input onChange={uploadImage} type='file'/></div>
                 </div>
 
                 <div className={styles.newTitle}>
-                    <p className={styles.blockName}>Название <sup>*</sup> </p>                
+                    <p className={styles.blockName}>{t('NameOfPost')}<sup>*</sup> </p>                
                     <div className={styles.inputs}>
-                        <Field component={Input} name='title' type='text' placeholder='Название' validate={[required, maxLength40]} />
+                        <Field component={Input} name='title' type='text' placeholder={t('NameOfPost')} validate={[required, maxLength40]} />
                     </div>
                 </div>
 
                 <div className={styles.newDescr}>
-                    <p className={styles.blockName}>Описание <sup>*</sup></p>                
+                    <p className={styles.blockName}>{t('Description')} <sup>*</sup></p>                
                     <div className={styles.inputs}>
-                        <Field component={Textarea} name='description' type='text' placeholder='Описание' validate={[required]} />
+                        <Field component={Textarea} name='description' type='text' placeholder={t('Description')} validate={[required]} />
                     </div>
                 </div> 
 
                 <div className={styles.newFaculty}>
-                    <p className={styles.blockName}>Выберите факультет</p>
+                    <p className={styles.blockName}>{t('chooseFac')}</p>
                     <div className={styles.inputs}>
                         <Field component='select' name='faculty' className={styles.newPostSelect} onChange={item => changeFaculty(item)} >
                             <option></option>
-                            { props.faculties.map(item => <option key={item.id} value={item.id} > {item.facultyNameRu} </option>) }
+                            { props.faculties.map(f => <option key={f.id} value={f.id} > {f[facultyName]} </option>) }
                         </Field>
                     </div>
                 </div>
                                 
                 {state.faculty
                     ? <div className={styles.newDep}>
-                        <p className={styles.blockName}>Выберите департамент</p>
+                        <p className={styles.blockName}>{t('chooseDep')}</p>
                         <div className={styles.inputs}>
                             <Field component='select' name='department' className={styles.newPostSelect}>
-                                {state.department.map(item => <option key={item.id} value={item.id} > {item.dep_name_ru} </option>)}
+                                {state.department.map(item => <option key={item.id} value={item.id} > {item[depName]} </option>)}
                             </Field>
                         </div>
                     </div>
                     : null}
                 <div className={styles.newCost}>
-                    <p className={styles.blockName}>Цена</p>                
+                    <p className={styles.blockName}>{t('cost')}</p>                
                     <div className={styles.inputs}>
-                        <Field component={Input} name='cost' type='number' placeholder='Договорная' />
+                        <Field component={Input} name='cost' type='number' placeholder={t('contract')} />
                     </div>
                 </div> 
-                {props.isFetching ? <div className={styles.postingPost}>Загрузка...</div> : null}
+                {/* { props.isFetching && <div className={styles.postingPost}>Загрузка...</div> } */}
                 { props.error && <div className={styles.successSubmit}>{ props.error }</div> }
                 <div className={styles.submit}>
-                    <button>Опубликовать</button>
+                    <button>{props.isFetching ? t('Loading') : t('Post')}</button>
                 </div>
             </form>
         </div>  

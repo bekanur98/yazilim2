@@ -22,13 +22,13 @@ const RegisterForm = (props) => {
                 {props.faculties.map(f => <option key={f.id} value={f.id}>{f[facultyName]}</option>)}
             </Field>
             <Field component={Input} name='regPassword' type="password" placeholder={t('password')} validate={[required, minLength8]} />
-            <Field component={Input} name='confirmPassword' type="password" placeholder={t('password')} validate={[required, regMatchInput]} />
+            <Field component={Input} name='confirmPassword' type="password" placeholder={t('confirmPass')} validate={[required, regMatchInput]} />
             { props.error && <div className={styles.wrongData}>{ props.error }</div> }
-            <button> {props.isFetching ? 'Загрузка...' : t('signUp')} </button>
+            <button> {props.isFetching ? t('loading') : t('signUp')} </button>
             <p className={styles.signUp}>
-                Есть аккаунт?
+                {t('haveAcc')}
                 <span className={styles.clickableLink} onClick={props.toggleModalLoginAuth}>
-                    Вход
+                    {t('login')}
                 </span>
             </p>
         </form>

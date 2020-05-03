@@ -35,14 +35,14 @@ const LastPosts = (props) => {
                                     }
                                 </div>
 
-                                <p className={styles.cost}> {p.cost != null ? p.cost + ' сом' : t('contract')}</p>
+                                <p className={styles.cost}> {p.cost != null ? p.cost + t(' som') : t('contract')}</p>
                                 <p className={styles.postTitle}>{p.title}</p>
                             </div>
                         </NavLink>
                     ))} 
 
             </div>
-            {props.hasMore && <div className='loader'>Loading...</div>}
+            {props.hasMore && <div className='loader'>{t('loading')}</div>}
         </div>
     );
 }

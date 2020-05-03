@@ -21,14 +21,14 @@ const Favorites = (props) => {
                         <div className={styles.descriptionBlock}>
                             <p className={styles.postTitle}>{p.poster[0].title}</p>
                             {/* <p className={styles.description}>{p.poster[0].description}</p> */}
-                            <p className={styles.cost}> {p.poster[0].cost != null ? p.poster[0].cost + ' сом' : t('contract')}</p>
+                            <p className={styles.cost}> {p.poster[0].cost != null ? p.poster[0].cost + t(' som') : t('contract')}</p>
                         </div>
 
                     </div>
                 </NavLink>)
-                : <p className={styles.nullPosts}>Пока нет постов((</p>
+                : <p className={styles.nullPosts}>{t('noPostsNow')}</p>
             }
-            {props.hasMore && props.favoritePosts.length && <div className='loader'>Loading...</div>}
+            {props.hasMore && props.favoritePosts.length && <div className='loader'>{t('loading')}</div>}
         </div>
     )
 }

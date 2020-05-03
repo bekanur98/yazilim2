@@ -11,24 +11,17 @@ const EditPasswordModal = (props) => {
     const checkPass = checkOldPass(props.password);
     const minLength8 = minLengthCreator(8);
 
-    const submit = (values) => {
-        // let obj = { 
-        //     name: values.name ? values.name :  props.name,
-        //     email: values.email ? values.email :  props.email,
-        //     phone: values.phone && values.phone !== '+996' ? values.phone :  props.phone,
-        //     faculty: values.faculty ? `/api/faculties/${values.faculty}` :  `/api/faculties/${props.faculty.id}`,
-        //     avatar: props.avatar
-        // }
+    const submit = (values) => { 
         props.editPassword(props.id, values);
     }
     return (
         <div>
             <Modal onClose={props.toggleModalWindowEditPassword}>
                 <form onSubmit={props.handleSubmit(submit)}>
-                    <Field component={Input} name="oldPassword" type="password" placeholder={'Ваш старый пароль'} validate={[required, checkPass]} />
-                    <Field component={Input} name="newPassword" type="password" placeholder={'Ваш новый пароль'} validate={[required, minLength8]} />
-                    <Field component={Input} name="confNewPassword" type="password" placeholder={'Подтвердите новый пароль'} validate={[required, newPassMatchInput, newCannotBeOld]} />
-                    <button> {props.isFetching ? <span>Загрузка...</span> : t('saveChanges')} </button>
+                    <Field component={Input} name="oldPassword" type="password" placeholder={t('yourOldPass')} validate={[required, checkPass]} />
+                    <Field component={Input} name="newPassword" type="password" placeholder={t('yourNewPass')} validate={[required, minLength8]} />
+                    <Field component={Input} name="confNewPassword" type="password" placeholder={t('confirmNewPass')} validate={[required, newPassMatchInput, newCannotBeOld]} />
+                    <button> {props.isFetching ? <span>{t('loading')}</span> : t('saveChanges')} </button>
                     {props.error && <div className={styles.successSubmit}>{props.error}</div>}
                 </form>
             </Modal>

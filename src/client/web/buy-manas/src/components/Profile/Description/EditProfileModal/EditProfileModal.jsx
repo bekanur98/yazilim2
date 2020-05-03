@@ -37,8 +37,8 @@ const EditProfileModal = (props) => {
                         {props.faculties.map(f => <option key={f.id} value={f.id}>{f[facultyName]}</option>)}
                     </Field>
                     <Field component={Phone} name='phone' type="phone" placeholder={t('yourNumber')} value={props.phone} />
-                    <div className={styles.newAvatar}>Аватар<input onChange={uploadImage} type="file" placeholder='Выберите изображение' /></div>
-                    <button> {props.isFetching ? <span>Загрузка...</span> : t('saveChanges')} </button>
+                    <div className={styles.newAvatar}>{t('Avatar')}<input onChange={uploadImage} type="file" /></div>
+                    <button> {props.isFetching ? <span>{t('loading')}</span> : t('saveChanges')} </button>
                     {props.error && <div className={styles.successSubmit}>{props.error}</div>}
                 </form>
             </Modal>

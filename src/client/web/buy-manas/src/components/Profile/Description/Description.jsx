@@ -20,7 +20,6 @@ const Description = (props) => {
     for (let i = 0; i < ratingArr.length; i++) {
         total += ratingArr[i]
     }
-    console.log('total', total)
     if (!props.username || !props.name) {
         return <Preloader />
     }
@@ -47,18 +46,18 @@ const Description = (props) => {
                     </div>
                     <div className={styles.postLength}>
                         <p> {props.posters.length ? props.posters.length : 0} </p>
-                        <span> posts </span>
+                        <span> {t('postsLength')} </span>
                     </div>
                     <div className={styles.rating}>
                         <p> {total} </p>
-                        <span> rating </span>
+                        <span> {t('rating')} </span>
                     </div>
                 </div>
             </div>
             <div className={styles.someButtons}>
                 <NavLink to={'/newPost'}> <button className={styles.addPostBtn}> {t('Sell')} </button></NavLink>
-                <NavLink to={'/favoritePosts'}> <button className={styles.favoritePosts}> Избранные </button></NavLink>
-                <button className={styles.favoritePosts} onClick={props.toggleModalWindowEditPassword}> Изменить пароль </button>
+                <NavLink to={'/favoritePosts'}> <button className={styles.favoritePosts}> {t('Favorites')} </button></NavLink>
+                <button className={styles.favoritePosts} onClick={props.toggleModalWindowEditPassword}> {t('changePass')} </button>
             </div>
             <button className={styles.editProfile} onClick={props.toggleModalWindowEditProfile}> {t('editProfile')} </button>
             <div className={styles.phoneNumber}> {props.phone} </div>

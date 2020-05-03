@@ -31,7 +31,6 @@ const TopPosts = (props) => {
         if (topPostsArray.length <= 9)
             topPostsArray.push(p);
     })
-    // console.log(props.posts[0].ratings[0].rating, topPostsArray)
  
     return (
         <div className={styles.topPostsWrapper}>
@@ -52,7 +51,7 @@ const TopPosts = (props) => {
                                     }
                                 </div>
 
-                                <p className={styles.cost}> {p.cost != null ? p.cost + ' сом' : t('contract')}</p>
+                                <p className={styles.cost}> {p.cost != null ? p.cost + t(' som') : t('contract')}</p>
                                 <p className={styles.postTitle}>{p.title}</p>
                             </div>
                         </NavLink>)
