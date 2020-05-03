@@ -7,6 +7,7 @@ import { compose } from 'redux';
 import { withAuthRedirect } from '../../../../hoc/withAuthRedirect';
 import { getLocale } from '../../../../i18next'; 
 import { useTranslation } from 'react-i18next';
+import { Redirect } from 'react-router-dom';
 
 
 const NewPost = (props) => {
@@ -51,7 +52,7 @@ const NewPost = (props) => {
         value.cost = ''; 
     };
 
-
+    console.log(props.error)
     return(
         <div className={styles.newPostWrapper}>
             <form onSubmit={props.handleSubmit(submit)}>
@@ -100,10 +101,10 @@ const NewPost = (props) => {
                         <Field component={Input} name='cost' type='number' placeholder={t('contract')} />
                     </div>
                 </div> 
-                {/* { props.isFetching && <div className={styles.postingPost}>Загрузка...</div> } */}
-                { props.error && <div className={styles.successSubmit}>{ props.error }</div> }
+                { props.isFetching && <div className={styles.postingPost}>{t('Loading')}</div> }
+                { props.error && <Redirect to='/profile/#' /> }
                 <div className={styles.submit}>
-                    <button>{props.isFetching ? t('Loading') : t('Post')}</button>
+                    <button>{t('Post')}</button>
                 </div>
             </form>
         </div>  
