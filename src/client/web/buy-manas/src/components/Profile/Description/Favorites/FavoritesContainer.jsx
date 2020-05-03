@@ -29,6 +29,7 @@ class FavoritesContainer extends React.Component {
     }; 
 
     componentDidMount(){
+        this.props.setCurrentPage(1);
         this.props.setFavoritePosts(this.props.userId);
         document.addEventListener('scroll', this.trackScrolling)
 }

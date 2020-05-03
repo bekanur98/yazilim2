@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import MyPosts from './MyPosts';
-import { setUserData, toggleIsFetching } from '../../../actions/users';
+import { setUserData} from '../../../actions/users';
 import { setPosts, setCurrentPage } from '../../../actions/posts';
 import Cookies from 'universal-cookie';
 
@@ -21,7 +21,7 @@ class MyPostsContainer extends React.Component {
         let cookies = new Cookies();  
         document.addEventListener('scroll', this.trackScrolling)
         this.props.setUserData(cookies.get('id'));
-
+        this.props.setCurrentPage(1);
     }
 
     componentWillUnmount() {
@@ -47,12 +47,11 @@ const mapStateToProps = (state) => {
     return {
         posts: state.profilePage.posters,
         id: state.auth.id,
-        isFetching: state.profilePage.isFetching,
         currentPage: state.postsData.currentPage
     }
 };
 
 
-export default connect(mapStateToProps, { setUserData, toggleIsFetching, setPosts, setCurrentPage })(MyPostsContainer);
+export default connect(mapStateToProps, { setUserData, setPosts, setCurrentPage })(MyPostsContainer);
 
 

@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import LastPosts from './LastPosts';
 import { setPosts, setPostByTitle, setCurrentPage } from '../../../actions/posts';
-import { toggleIsFetching } from '../../../actions/users';
 
 class LastPostsContainer extends React.Component {
     constructor(props) {
@@ -17,6 +16,7 @@ class LastPostsContainer extends React.Component {
 
     componentDidMount() {
         document.addEventListener('scroll', this.trackScrolling)
+        this.props.setCurrentPage(1);
     }
 
     componentWillUnmount() {
@@ -41,11 +41,10 @@ const mapStateToProps = (state) => {
     return {
         posts: state.postsData.posts,
         searchedPosts: state.postsData.searchedPosts,
-        currentPage: state.postsData.currentPage,
-        isFetching: state.profilePage.isFetching
+        currentPage: state.postsData.currentPage
     }
 };
 
-export default connect(mapStateToProps, { setPosts, setPostByTitle, toggleIsFetching, setCurrentPage })(LastPostsContainer);
+export default connect(mapStateToProps, { setPosts, setPostByTitle, setCurrentPage })(LastPostsContainer);
 
 

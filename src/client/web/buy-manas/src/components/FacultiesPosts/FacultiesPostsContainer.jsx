@@ -37,6 +37,7 @@ class FacultiesPostsContainer extends React.Component{
     }; 
 
     componentDidMount(){ 
+        this.props.setCurrentPage(1);
         this.props.clearFacultyPosts();
         const facultyId = this.props.match.params.facultyId;
         this.props.getFacultiesPosts(facultyId)
