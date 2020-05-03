@@ -1,21 +1,21 @@
+import FavoritesContainer from './components/Profile/Description/Favorites/FavoritesContainer';
+import FacultiesPostsContainer from './components/FacultiesPosts/FacultiesPostsContainer';
+import NewPostContainer from './components/Profile/Description/NewPost/NewPostContainer';
+import { clearFacultyPosts, setFaculties, setDepartments } from './actions/faculties';
+import PostsPageContainer from './components/Main/PostsPage/PostsPageContainer';
+import HeaderContainer from './components/Header/HeaderContainer'
+import Preloader from './components/common/Preloader/Preloader';
+import { setPosts, setAllPosts } from './actions/posts'
+import { Route, withRouter } from 'react-router-dom';
+import Profile from './components/Profile/Profile';
+import Footer from './components/Footer/Footer';
+import { initializeApp } from './actions/login'
+import Main from './components/Main/Main';
+import Cookies from 'universal-cookie';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
 import React from 'react';
 import './App.css';
-import HeaderContainer from './components/Header/HeaderContainer'
-import Footer from './components/Footer/Footer';
-import Main from './components/Main/Main';
-import Profile from './components/Profile/Profile';
-import { Route, withRouter } from 'react-router-dom';
-import FacultiesPostsContainer from './components/FacultiesPosts/FacultiesPostsContainer';
-import PostsPageContainer from './components/Main/PostsPage/PostsPageContainer';
-import NewPostContainer from './components/Profile/Description/NewPost/NewPostContainer';
-import { connect } from 'react-redux';
-import { initializeApp } from './actions/login'
-import { setPosts } from './actions/posts'
-import { compose } from 'redux';
-import Preloader from './components/common/Preloader/Preloader';
-import Cookies from 'universal-cookie';
-import FavoritesContainer from './components/Profile/Description/Favorites/FavoritesContainer';
-import { clearFacultyPosts } from './actions/faculties';
 
 let cookies = new Cookies();
 
@@ -26,6 +26,9 @@ class App extends React.Component {
             this.props.initializeApp();
         }
         this.props.setPosts();
+        this.props.setFaculties();
+        this.props.setDepartments();        
+        this.props.setAllPosts();
     }
 
     render() {
@@ -56,5 +59,5 @@ const mapStateToProps = (state) => ({
 
 export default compose(
     withRouter,
-    connect(mapStateToProps, { initializeApp, setPosts, clearFacultyPosts })
+    connect(mapStateToProps, { initializeApp, setPosts, clearFacultyPosts, setFaculties, setDepartments, setAllPosts })
 )(App);
