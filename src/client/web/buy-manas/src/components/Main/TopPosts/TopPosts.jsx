@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './TopPosts.module.css'
 import { useTranslation } from 'react-i18next';
 import "slick-carousel/slick/slick.css";
@@ -20,18 +20,24 @@ const TopPosts = (props) => {
     };
 
     const topPostsArray = [],
-          postsWithRating = [];
-          
-    for (let i = 0; i < props.posts.length; i++) {
-        if(props.posts[i].ratings.length){
-            postsWithRating.push(props.posts[i])
+        postsWithRating = [];
+ 
+    function takeNsort() {
+        for (let i = 0; i < props.allPosts.length; i++) {
+            if (props.allPosts[i].ratings.length && props.allPosts[i].ratings[0].rating !== 0) {
+                postsWithRating.push(props.allPosts[i])
+            }
         }
     }
-    postsWithRating.sort((a, b) => b.ratings.rating - a.ratings.rating).map(p => {
+    takeNsort();
+    
+    postsWithRating.sort((a, b) => b.ratings[0].rating - a.ratings[0].rating).map(p => {
         if (topPostsArray.length <= 9)
             topPostsArray.push(p);
-    })
- 
+    }) 
+    if(!topPostsArray.length){
+        return <Preloader />
+    }
     return (
         <div className={styles.topPostsWrapper}>
             <h3>{t('postsTop')}</h3>
@@ -43,15 +49,15 @@ const TopPosts = (props) => {
                             <div className={styles.topPostItem} key={p.id}>
                                 <div className={styles.imgBlock}>
                                     {p.images
-                                    ? p.images.length ?
-                                        <img src={IMAGES_URL + p.images[0].url} alt="categoryIcon" />
-                                        :
-                                        <img src={require('../../../assets/images/logo.png')} alt="categoryIcon" />
-                                    : <Preloader />
+                                        ? p.images.length ?
+                                            <img src={IMAGES_URL + p.images[0].url} alt="categoryIcon" />
+                                            :
+                                            <img src={require('../../../assets/images/logo.png')} alt="categoryIcon" />
+                                        : <Preloader />
                                     }
                                 </div>
 
-                                <p className={styles.cost}> {p.cost != null ? p.cost + t(' som') : t('contract')}</p>
+                                <p className={styles.cost}> {p.cost != null ? p.cost + t('som') : t('contract')}</p>
                                 <p className={styles.postTitle}>{p.title}</p>
                             </div>
                         </NavLink>)

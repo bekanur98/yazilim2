@@ -35,7 +35,7 @@ const LastPosts = (props) => {
                                     }
                                 </div>
 
-                                <p className={styles.cost}> {p.cost != null ? p.cost + t(' som') : t('contract')}</p>
+                                <p className={styles.cost}> {p.cost != null ? p.cost + t('som') : t('contract')}</p>
                                 <p className={styles.postTitle}>{p.title}</p>
                             </div>
                         </NavLink>
