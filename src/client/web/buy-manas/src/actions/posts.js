@@ -1,6 +1,5 @@
 import { postersApi } from "../api/api"
-import { stopSubmit } from 'redux-form'
-import { toggleIsFetching } from "./users"
+import { stopSubmit } from 'redux-form' 
 
 
 // ACTION CREATORS
@@ -18,6 +17,11 @@ export const setPostsByTitleFailure = () => ({
 export const setPostsSuccess = posts => ({
     type: 'SET_POSTS',
     posts
+})
+
+export const setAllPostsSuccess = allPosts => ({
+    type: 'SET_ALL_POSTS',
+    allPosts
 })
 
 export const setOnePost = (postData) => ({
@@ -51,6 +55,15 @@ export const setFavoritePostsSuccess = (favoritePosts) => ({
     favoritePosts
 })
 
+export const toggleIsPosting = (isPosting) => ({
+    type: 'SET_IS_POSTING',
+    isPosting
+})
+
+export const toggleIsGettingPost = (isGettingPosts) => ({
+    type: 'SET_IS_GETTING_POST',
+    isGettingPosts
+})
 
 // REDUX-THUNKS
 
@@ -69,12 +82,28 @@ export const setPostByTitle = (title) => (dispatch) => {
 }
 
 export const setPosts = (page) => (dispatch) => {
-    dispatch(toggleIsFetching(true));
     postersApi.getPosts(page)
         .then(response => {
             dispatch(setPostsSuccess(response.data));
-            dispatch(toggleIsFetching(false));
         });
+}
+
+export const setAllPosts = () => (dispatch) => {
+    dispatch(toggleIsGettingPost(true))
+    let posts = []
+    async function proccessGettingPosts(array) {
+        for (let item of array) {
+            await postersApi.getPosts(item)
+                .then(response => {
+                    posts.push(...response.data)
+                });
+            if (posts.length > 30) {
+                dispatch(setAllPostsSuccess(posts));
+            }
+        }  
+        dispatch(toggleIsGettingPost(false))
+    }
+    proccessGettingPosts([1, 2, 3, 4, 5]);
 }
 
 export const getOnePost = (postId) => (dispatch) => {
@@ -102,34 +131,31 @@ export const likeThePost = (userReq, postId, obj) => (dispatch) => {
 }
 
 export const newPostImage = (newPostData) => (dispatch) => {
-    dispatch(toggleIsFetching(true))
 
     if (newPostData.images) {
+        dispatch(toggleIsPosting(true))
         postersApi.newPostImage(newPostData.images)
             .then(r => {
                 if (r.data.url) {
                     postersApi.newPost(newPostData, r)
                         .then(r => {
+                            dispatch(toggleIsPosting(false))
+                            dispatch(setPosts());
                             if (r.status === 201) {
-                                // dispatch(newPostSuccess(r.data));
-                                dispatch(stopSubmit('newPost', { _error: 'Объявление опубликовано' }));
-                                dispatch(toggleIsFetching(false))
+                                dispatch(stopSubmit('newPost', {_error: 'Объявление опубликовано' }));
                                 dispatch(newCurrentImage(null));
-                                dispatch(setPosts());
                             }
                         })
                 }
             })
     } else {
+        dispatch(toggleIsPosting(true))
         postersApi.newPost(newPostData)
             .then(r => {
-                if (r.status === 201) {
-                    // dispatch(newPostSuccess(r.data));
-                    dispatch(stopSubmit('newPost', { _error: 'Объявление опубликовано' }));
-                    dispatch(newCurrentImage(null));
-                    dispatch(toggleIsFetching(false))
-                    dispatch(setPosts());
-                }
+                dispatch(toggleIsPosting(false))
+                dispatch(newCurrentImage(null));
+                dispatch(stopSubmit('newPost', {_error: 'Объявление опубликовано' }));
+                dispatch(setPosts()); 
             })
     }
 }
