@@ -3,7 +3,8 @@ const initialState = {
     favoritePosts: [], 
     editProfileModalOpen: false,
     editPasswordModalOpen: false,
-    isFetching: true
+    isFetching: false,
+    isPosting: false,
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -28,6 +29,9 @@ const profileReducer = (state = initialState, action) => {
         } 
         case 'SET_IS_FETCHING':{
             return { ...state, isFetching: action.isFetching }
+        } 
+        case 'SET_IS_POSTING':{
+            return { ...state, isPosting: action.isPosting }
         }
         case 'SET_FAVORITE_POSTS':{
             return { 
