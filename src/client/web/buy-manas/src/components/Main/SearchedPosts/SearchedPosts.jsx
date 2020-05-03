@@ -40,7 +40,7 @@ const SearchedPosts = (props) => {
                             <div className={styles.descriptionBlock}>
                                 <p className={styles.postTitle}>{p.title}</p>
                                 <p className={styles.description}>{p.description}</p>
-                                <p className={styles.cost}> {p.cost != null ? p.cost + t(' som') : t('contract')}</p>
+                                <p className={styles.cost}> {p.cost != null ? p.cost + t('som') : t('contract')}</p>
                             </div>
                         </div>
                     </NavLink>)

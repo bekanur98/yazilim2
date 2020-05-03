@@ -15,6 +15,7 @@ export const toggleIsFetching = (isFetching) => ({
     isFetching
 })
 
+
 export const editProfileSuccess = (profileData) => ({
     type: 'EDIT_PROFILE',
     profileData
@@ -43,11 +44,9 @@ export const toggleModalWindowEditPassword = () => ({
 // REDUX-THUNKS
 
 export const setUserData = (userId) => (dispatch) => {
-    dispatch(toggleIsFetching(true));
     usersApi.getUser(userId)
         .then(response => {
             dispatch(setUserDataSuccess(response.data));
-            dispatch(toggleIsFetching(false));
         });
 }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import Description from './Description';
-import { setUserData, toggleIsFetching, newAvatar, editProfile, editPassword, toggleModalWindowEditProfile, toggleModalWindowEditPassword} from '../../../actions/users';
+import { setUserData, newAvatar, editProfile, editPassword, toggleModalWindowEditProfile, toggleModalWindowEditPassword} from '../../../actions/users';
 import { setFaculties, setDepartments } from '../../../actions/faculties';
 import { connect } from 'react-redux';
 
@@ -42,7 +42,6 @@ export default connect(mapStateToProps,
         setUserData,
         toggleModalWindowEditProfile,
         toggleModalWindowEditPassword,
-        toggleIsFetching,
         newAvatar,
         editProfile,
         editPassword,

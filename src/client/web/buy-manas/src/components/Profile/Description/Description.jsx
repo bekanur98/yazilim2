@@ -60,8 +60,7 @@ const Description = (props) => {
                 <button className={styles.favoritePosts} onClick={props.toggleModalWindowEditPassword}> {t('changePass')} </button>
             </div>
             <button className={styles.editProfile} onClick={props.toggleModalWindowEditProfile}> {t('editProfile')} </button>
-            <div className={styles.phoneNumber}> {props.phone} </div>
-            <div>id: {props.id}</div>
+            <div className={styles.phoneNumber}> {props.phone} </div> 
 
             {
                 props.editProfileModalOpen &&

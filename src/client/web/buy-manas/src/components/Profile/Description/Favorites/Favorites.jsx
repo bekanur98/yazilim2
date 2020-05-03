@@ -20,8 +20,7 @@ const Favorites = (props) => {
                         </div>
                         <div className={styles.descriptionBlock}>
                             <p className={styles.postTitle}>{p.poster[0].title}</p>
-                            {/* <p className={styles.description}>{p.poster[0].description}</p> */}
-                            <p className={styles.cost}> {p.poster[0].cost != null ? p.poster[0].cost + t(' som') : t('contract')}</p>
+                            <p className={styles.cost}> {p.poster[0].cost != null ? p.poster[0].cost + t('som') : t('contract')}</p>
                         </div>
 
                     </div>

@@ -16,7 +16,8 @@ const mapStateToProps = (state) => ({
     image: state.postsData.currentImage,
     departments: state.categoriesBlock.departments,
     faculties: state.categoriesBlock.faculties,
-    isFetching: state.profilePage.isFetching
+    isFetching: state.profilePage.isFetching,
+    isPosting: state.profilePage.isPosting
 });
 
 export default connect(mapStateToProps, {newPostImage, newCurrentImage, setPosts, setDepartments, setFaculties})(NewPostContainer);
