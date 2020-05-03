@@ -1,11 +1,13 @@
 let initialState = {
     posts: [],
+    allPosts: [],
     postsOfFaculty: [],
     searchedPost: undefined,
     comments: [],
     forPostPage: null,
     ratings: [],
     currentImage: null,
+    isGettingPosts: true,
     currentPage: 1
 };
 
@@ -15,6 +17,15 @@ const postsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 posts: [...action.posts]
+            }
+        }
+        case 'SET_IS_GETTING_POST':{
+            return { ...state, isGettingPosts: action.isGettingPosts }
+        }
+        case 'SET_ALL_POSTS': {
+            return {
+                ...state,
+                allPosts: [...action.allPosts]
             }
         }
         case 'SET_ONE_POST': {
@@ -41,13 +52,7 @@ const postsReducer = (state = initialState, action) => {
                 ...state,
                 searchedPost: action.searchedPost
             }
-        }
-        // case 'NEW_POST': {
-        //     return {
-        //         ...state,
-        //         posts: [...state.posts, {...action.newPostData, images: [{ ...action.newPostData.images} ]}]
-        //     }
-        // }
+        } 
         case 'NEW_CURRENT_IMAGE': {
             return {
                 ...state,
