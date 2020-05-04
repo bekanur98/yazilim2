@@ -102,7 +102,7 @@ const NewPost = (props) => {
                     </div>
                 </div> 
                 { props.isFetching && <div className={styles.postingPost}>{t('Loading')}</div> }
-                { props.error && <Redirect to='/profile/#' /> }
+                { props.error && <Redirect to='/profile' /> }
                 <div className={styles.submit}>
                     <button>{t('Post')}</button>
                 </div>
